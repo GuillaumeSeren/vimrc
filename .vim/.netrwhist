@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/shaman/.config/awesome/debian'
-let g:netrw_dirhist_2='/home/shaman/workspace_prg/prg_dev'
-let g:netrw_dirhist_3='/home/shaman/src/cours/c_les_finesses_dun_language_redoutable'
-let g:netrw_dirhist_4='/home/shaman/src/libxvmc/libxvmc-1.0.7/debian'
-let g:netrw_dirhist_5='/home/shaman/src'
-let g:netrw_dirhist_6='/home/shaman/src/workspace_free/dpkg/dpkg-1.16.8.1/po'
