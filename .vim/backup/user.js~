@@ -1,0 +1,4 @@
+# Mozilla User Preferences
+
+// Add List-ID Header
+user_pref("mailnews.customHeaders", "List-ID");

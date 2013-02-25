@@ -1,0 +1,20 @@
+# reportbug preferences file
+# character encoding: UTF-8
+# Version of reportbug this preferences file was written by
+reportbug_version "6.3"
+# default operating mode: one of: novice, standard, advanced, expert
+mode novice
+# default user interface
+ui gtk2
+# offline setting - comment out to be online
+#offline
+# name and email setting (if non-default)
+realname "Guillaume Seren"
+email "guillaumseren@gmail.com"
+# If nothing else works, remove the # at the beginning
+# of the following three lines:
+#no-cc
+#header "X-Debbugs-CC: guillaumseren@gmail.com"
+#smtphost reportbug.debian.org
+# You can add other settings after this line.  See
+# /etc/reportbug.conf for a full listing of options.

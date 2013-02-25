@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+#define MAX 100
+#define FAUX 0
+#define VRAI 1
+
+void trier(int [], int) ;
+
+void main()
+{
+	int *tab, nb, i ;
+	printf("Combien de nombres à trier : " );
+	scanf("%d", &nb);
+	tab = malloc(nb*sizeof(int));
+	if( tab == NULL )
+	{
+		printf("Mémoire insufisante !\n");
+	}
+	else
+	{
+		for( i=0 ; i<nb ; i++ )
+		{
+			/*	Saisie des valeurs */
+			printf("Entrez la %d valeur \n", i);
+			scanf("%d", &tab[i]);
+		}
+		printf("Fin de la saisie de nombres \n");
+		trier(tab, nb);
+		/* Affichage des valeurs après le tri */
+		for( i=0 ; i<nb ; i++ )
+		{
+			printf("Valeur n°%d : %d \n", i, tab[i]);
+		}
+		free(tab);
+
+	}
+}
+
+void trier(int *tab, int n)
+{
+	int permut, x, i;
+	int *ptr;
+
+	printf("Appel de la fonction trier, nb=%d \n", n);
+	do
+	{
+		permut = FAUX; /* Pas de permutation */
+		printf("permut = %d \n", permut);
+		for( ptr=tab+1 ; ptr-tab<n ; ptr++ )
+		{
+			if( *(ptr-1)>*ptr )
+			{
+				printf("i = %d \n", *ptr);
+				printf("n = %d \n", n);
+				printf("tab[%d] = %d \n", ptr, *ptr);
+				x = *(ptr-1); /* Echange */
+				*(ptr-1) = *ptr;
+				*ptr = x;
+				permut = VRAI; /* il y a eu permutation */
+				printf("permut = %d \n", permut);
+			}
+		}
+
+	} while (permut); /* Tant qu'il y a eu permutation */
+}
+
