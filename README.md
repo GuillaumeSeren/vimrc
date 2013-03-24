@@ -13,3 +13,6 @@ My_Snippets				: Snippets de code personnalisés.
 TagLists				: Code Browsing, navigation par tags.
 Snippy					: Librairie de snippet.
 
+Notes
+=====
+(Work in Progress)
