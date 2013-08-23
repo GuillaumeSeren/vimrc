@@ -4,6 +4,7 @@ This is my vim configuration, I will add more description later.
 
 Plugins
 =======
+VUNDLE					: Gestion des sources de module vim.
 VCS						: Gestion de sources (Git, Svn, Mercurial, etc ..).
 SingleCompile			: Compilation de sources (F9 compile / F10 Compile-Run). 
 Project					: Gestion d'un projet/arborescence/etc.
