@@ -18,3 +18,11 @@ Snippy					: Librairie de snippet.
 Notes
 =====
 (Work in Progress)
+
+TODO
+====
+-Clean vimrc.
+-Check use lua plugin.
+-Check et maj plugin.
+-Pathogen ?
+-Make a small cheat-sheet, with a shortcut (plugin) to show it.
