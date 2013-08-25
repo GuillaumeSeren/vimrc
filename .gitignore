@@ -1,1 +1,3 @@
-.vim/backup/
+.vim/backup/*
+.vim/bundle/*
+.vim/tags/*
