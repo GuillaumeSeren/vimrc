@@ -72,7 +72,7 @@ set nocompatible
 let mapleader = ","
 " }}}
 
-" AutoLoad vimrc {{{ :
+" AutoRe Load vimrc {{{ :
 " ==========
 " Auto apply modification to vimrc
 if has("autocmd")
@@ -825,7 +825,7 @@ colorscheme solarized
 if &diff
     "colorscheme evening
     "colorscheme darkblue
-    colorscheme blue
+    colorscheme solarized
     "colorscheme wombat256mod
 endif
 " }}}
@@ -863,6 +863,9 @@ endif
 set wildmenu
 " Afficher une liste lors de complétion de commandes/fichiers :
 set wildmode=list:full
+" Allow completion on filenames right after a '='.
+" Uber-useful when editing bash scripts
+set isfname-==
 " }}}
 
 " ========
@@ -888,6 +891,11 @@ set ruler
 " ======
 " Affiche toujours les diffs en vertical
 set diffopt=vertical
+
+" Split {{{ :
+" Set the split below the active region.
+set splitbelow
+" }}}
 
 " ========
 " SEARCH :
@@ -936,28 +944,28 @@ set pastetoggle=<F5>
 " Indiquer le nombre de modification lorsqu'il y en a plus de 0 suite à une commande
 set report=0
 
+" BACKUP {{{ :
 " ========
-" BACKUP :
-" ========
-" Crée des fichiers ~ un peu partout ...
-set backup
-
-" sauvegarder les fichier ~ dans ~/.vim/backup avec création du répertoire si celui-ci n'existe pas
-if filewritable(expand("~/.vim/backup")) == 2
-    set backupdir=$HOME/.vim/backup
-else
-    if has("unix") || has("win32unix")
-        call system("mkdir -p $HOME/.vim/backup")
-        set backupdir=$HOME/.vim/backup
-    endif
-endif
-
 " Modif tmp
 set swapfile
 " Modif tmp
 "set dir=~/.vimrc/backup
 set directory=~/.vim/backup
 
+" Backups with persistent undos
+set backup
+let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
+if ! isdirectory(g:dotvim_backups)
+    call mkdir(g:dotvim_backups, "p")
+endif
+exec "set backupdir=" . g:dotvim_backups
+if has('persistent_undo')
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+    exec "set undodir=" . g:dotvim_backups
+endif
+" }}}
 
 " ===============
 " LINE WRAPPING :
@@ -1026,9 +1034,14 @@ call matchadd('author', 'author\|@author', 100)
 set listchars=tab:··,trail:¤,extends:>,precedes:<
 set list
 
+" Title {{{ :
+" This is nice if you have something
+" that reset the title of you term at
+" each command, othersize it's annoying ...
+set title
+" }}}
 
-" ===============
-" SPELL CHECKER :
+" SPELL CHECKER {{{ :
 " ===============
 " En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
 " Chiant pour programmer, mais améliorable avec des dico 
@@ -1041,14 +1054,15 @@ set spelllang=fr,en
 " @TODO: Remap the mapping of the spell checker
 " @TOOD: Support auto detection of the sentence language,
 "        so it can support multi language fr / us / en / etc (jpn)
-"
-" ======
-" SHOW :
-" ======
-" Toujours laisser des lignes visibles (içi 3) au dessus/en dessous du curseur quand on
-" atteint le début ou la fin de l'écran :
-set scrolloff=3
+" }}}
 
+" SHOW {{{ :
+" ======
+" Keep 3 line before / after cursor.
+set scrolloff=3
+" }}}
+
+" CURSOR {{{ :
 " ===================
 " SHOW CURRENT LINE :
 " ===================
@@ -1072,6 +1086,7 @@ set guicursor+=i:blinkwait10
 
 " Format json selection
 map <Leader>j !python -m json.tool<CR>
+" }}}
 
 " ====================
 " SHOW LINEWRAPPING :
@@ -1164,6 +1179,41 @@ function! TabNewWithCwD(newpath)
     endif
 endfunction
 command! -nargs=1 -complete=file TabNew :call TabNewWithCwD("<args>")
+" }}}
+
+" Man {{{ :
+" Man page for work under cursor
+"nnoremap K :Man <cword> <CR>
+" }}}
+
+" {{{ Custom functions
+" Remove trailing whitespace
+function! CleanWhiteSpace()
+    let l = line(".")
+    let c = col(".")
+    :%s/\s\+$//e
+    let last_search_removed_from_history = histdel('s', -1)
+    call cursor(l, c)
+endfunction()
+command! -nargs=0 CleanWhiteSpace :call CleanWhiteSpace()
+" Convert DOS line endings to UNIX line endings
+function! FromDos()
+    %s/\r//e
+endfunction
+command! FromDos call FromDos()
+" Automatically give executable permissions if file begins with #! and
+" contains '/bin/' in the path
+function! MakeScriptExecuteable()
+    if getline(1) =~ "^#!.*/bin/"
+        silent !chmod +x <afile>
+    endif
+endfunction
+" Used to create missing directories before writing a
+" buffer
+function! MkdirP()
+    :!mkdir -p %:h
+endfunction
+command! MkdirP call MkdirP()
 " }}}
 
 " SHEBANG {{{ :
