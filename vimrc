@@ -1,29 +1,10 @@
 " My VIMRC File :
 " ---------------
-" @AUTHOR : http://guillaumeseren.com
-" @LICENSE: www.opensource.org/licenses/bsd-license.php
+" @AUTHOR  : Guillaume Seren
+" @WEBSITE : http://guillaumeseren.com
+" @LICENSE : www.opensource.org/licenses/bsd-license.php
+" @Link    : https://github.com/GuillaumeSeren/vimrc
 " ---------------
-
-" TODO-LIST {{{:
-" ===========
-"@TODO: Code Beautifer to reformat xml
-"@TODO: Better diff coloring.
-"@TODO: Desactivate arrow.
-"@TODO: Add q for fast quit man page.
-"@TODO: Add shortcut to follow link, man / class.
-"@TODO: Coloring the 80 char if there is one.
-" }}}
-
-" Folding {{{ :
-" I like some folding ideas from : 
-" http://dougblack.io/words/a-good-vimrc.html#colors
-set foldmethod=marker
-"set foldmethod=indent
-" Then we want it to close every fold by default so that we have this high level
-" view when we open our vimrc.
-set foldlevel=0
-" }}}
-
 
 " Summary {{{ : 
 " =========== 
@@ -53,69 +34,44 @@ set foldlevel=0
 "   - shortcut(s)
 " }}}
 
+" TODO-LIST {{{:
+" ===========
+"@TODO: Desactivate arrow.
+"@TODO: Add shortcut to follow link, man / class.
+" }}}
+
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
+
+" REMAP KEYBOARD for bépo {{{ :
+" ==========
+" I use kind ofdvorak-fr the «bépo» layout on my keyboard.
+source ~/.vim/vimrc.bepo
+" remap number for direct access
+source ~/.vim/vimrc.num
+" }}}
+
 " Startup config {{{ : 
 " ===========
 " We can export some config in modular files like : 
 " source ~/.vim/startup/yaml.vim
 " Change the default mode of vim.
 " @TODO: really need ?
-set nocompatible
-" }}}
+if has('vim_starting')
+    set nocompatible               " Be iMproved
 
-
-" REMAP LEADER KEY {{{ :
-" ===========
-" Change default leader key
-" NOT WORKING
-" Note the required backslash.
-"let mapleader = "\<space>"
-let mapleader = ","
-" }}}
-
-" AutoRe Load vimrc {{{ :
-" ==========
-" Auto apply modification to vimrc
-if has("autocmd")
-    autocmd! bufwritepost .vimrc source ~/.vimrc
-    "autocmd! BufWritePost vimrc.bepo source ~/.vim/vimrc.bepo
+    " Required:
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-" }}}
-
-" REMAP KEYBOARD for bépo {{{ :
-" ==========
-" Permettre l'utilisation de la touche backspace dans tous les cas :
-set backspace=2
-" I use kind ofdvorak-fr the «bépo» layout on my keyboard.
-source ~/.vim/vimrc.bepo
-" remap number for direct access
-source ~/.vim/vimrc.num
-" Show command (usefull for leader) :
-set showcmd
-" }}}
-
-" SHORTCUTS {{{ :
-" ==========
-" @todo add global copy / paste with a shortcut 
-" Permet de sauvegarder par ctrl + s
-:nmap <c-s> :w<CR>
-" Fonctionne aussi en mode edition
-:imap <c-s> <Esc>:w<CR>a
-:imap <c-s> <Esc><c-s>
-
-" Completion avec ctrl + space
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-            \ "\<lt>C-n>" :
-            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
 " }}}
 
 " NeoBundle conf {{{ : 
 " ==========
 " 20131206: Add NeoBundle
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#rc(expand('~/.vim/bundle/'))
+"set runtimepath+=~/.vim/bundle/neobundle.vim/
+"call neobundle#rc(expand('~/.vim/bundle/'))
+" 13-10-2014: NeoBundle change call to begin
+call neobundle#begin(expand('~/.vim/bundle/'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 " My Bundles here:
@@ -315,9 +271,10 @@ let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
 "let g:syntastic_php_phpcs_args='--tab-width=0'
 "set tabstop=8
 "let g:syntastic_php_phpcs_args=" --standard=PSR2 "
-let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
+"let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
+let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=/home/gseren/src/pro/bd/git_tool_gseren/hooks/bd_standart.xml"
 "let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PEAR"
-let g:syntastic_phpcs_conf='--standard=Drupal --extensions=php,module,inc,install,test,profile,theme'
+"let g:syntastic_phpcs_conf='--standard=Drupal --extensions=php,module,inc,install,test,profile,theme'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_enable_signs             = 1
@@ -565,16 +522,27 @@ NeoBundle 'sk1418/HowMuch.git'
 "============== EasyTags :     ================
 " Automated tag file generation and syntax highlighting of tags in Vim
 " https://github.com/xolox/vim-easytags
+"@FIXME: Fix the generation process :
+" - Provide a command to generate a tag in a project.
+" - Use specific tag file by project.
+" - Load / Reload only tag file selected by the pwd value project name ?
+" - In theory the base tag file should be provided by a call from the VCS.
+" - 
 "NeoBundle 'xolox/vim-easytags.git'
 "@TODO: Fix easytags call to be lighter
 " EasyTags setup
 "let g:easytags_file = '~/.vim/tags/generic'
 " Set tags generic for vim
-set tags='~/.vim/tags'
+"set tags='~/.vim/tags/'
 "let g:easytags_autorecurse = 1
 "let g:easytags_include_members = 1
 "let g:easytags_dynamic_file = 2
+" Refresh Tags on write file
+"let g:easytags_events = ['BufWritePost']
+" Updtate highlight
 "let g:easytags_auto_update = 0
+"@TODO: Add async call to avoid freezing vim.
+"let g:eastags_async = 1
 "============== VimSession :     ================
 " Extended session management for Vim (:mksession on steroids)
 " https://github.com/xolox/vim-session
@@ -762,10 +730,63 @@ NeoBundle "JulesWang/css.vim"
 "==============  :     ================
 "Bundle 'file:///Users/gmarik/path/to/plugin'
 
-"===========================================
-" Installation check.
-NeoBundleCheck
+call neobundle#end()
+ " Required:
+ filetype plugin indent on
 
+ " If there are uninstalled bundles found on startup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck
+" }}}
+
+" Folding {{{ :
+" I like some folding ideas from : 
+" http://dougblack.io/words/a-good-vimrc.html#colors
+set foldmethod=marker
+"set foldmethod=indent
+" Then we want it to close every fold by default so that we have this high level
+" view when we open our vimrc.
+set foldlevel=0
+" }}}
+
+" KEYBOARD CUSTOM {{{ :
+" ===========
+" Change default leader key
+" NOT WORKING
+" Note the required backslash.
+"let mapleader = "\<space>"
+let mapleader = ","
+" Show command (usefull for leader) :
+set showcmd
+" Permettre l'utilisation de la touche backspace dans tous les cas :
+set backspace=2
+" }}}
+
+" AutoReLoad vimrc {{{ :
+" ==========
+" Auto apply modification to vimrc
+if has("autocmd")
+    autocmd! bufwritepost .vimrc source ~/.vimrc
+    "autocmd! BufWritePost vimrc.bepo source ~/.vim/vimrc.bepo
+endif
+" }}}
+
+" SHORTCUTS {{{ :
+" ==========
+" @todo add global copy / paste with a shortcut 
+" Permet de sauvegarder par ctrl + s
+:nmap <c-s> :w<CR>
+" Fonctionne aussi en mode edition
+:imap <c-s> <Esc>:w<CR>a
+:imap <c-s> <Esc><c-s>
+
+" Completion avec ctrl + space
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+            \ "\<lt>C-n>" :
+            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
 " }}}
 
 " INDENTING {{{ :
@@ -897,8 +918,7 @@ set diffopt=vertical
 set splitbelow
 " }}}
 
-" ========
-" SEARCH :
+" SEARCH {{{ :
 " ========
 " Recherche en minuscule -> indépendante de la casse, 
 " une majuscule -> stricte
@@ -912,6 +932,7 @@ set incsearch
 
 " Met en évidence TOUS les résultats d'une recherche, A consommer avec modération
 set hlsearch
+" }}}
 
 " Déplacer le curseur quand on écrit un (){}[] (attention il ne s'agit pas du highlight
 set showmatch
@@ -919,24 +940,27 @@ set showmatch
 " Affiche le nombre de lignes sélectionnées en mode visuel ou la touche/commande qu'on vient de taper en mode commande
 set showcmd
 
-" =======
-" MOUSE :
+" MOUSE {{{ :
 " =======
 " Utilise la souris pour les terminaux qui le peuvent (tous ?)
 " pratique si on est habitué à coller sous la souris et pas sous le curseur, 
 " attention fonctionnement inhabituel
 set mouse=a
+" }}}
 
+" PASTE / NOPASTE {{{ :
 " =======
-" PASTE :
-" =======
-" A utiliser en live, paste désactive l'indentation automatique (entre autre) et nopaste le contraire
+"@TODO: Not certain if really needed
+" A utiliser en live, paste désactive l'indentation automatique
+" (entre autre) et nopaste le contraire
 set nopaste
 
 " On peut passer rapidement du mode paste au mode nopaste avec un raccourcis,
 " builtin sur les versions récentes de vim >= 7, 
 " sinon il faudrait créer une fonction :
-set pastetoggle=<F5>
+" 20141009: Disable the switch I did not use it.
+"set pastetoggle=<F5>
+" }}}
 
 " =========
 " COMMAND :
@@ -967,8 +991,7 @@ if has('persistent_undo')
 endif
 " }}}
 
-" ===============
-" LINE WRAPPING :
+" LINE WRAPPING {{{ :
 " ===============
 " Laisse les lignes déborder de l'écran si besoin
 "set nowrap
@@ -977,8 +1000,9 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 set linebreak
-
+" Size of the linewrapping
 set textwidth=80
+" }}}
 
 " HighLight 81 col {{{ :
 "===========================================================================================================================================
@@ -1030,9 +1054,11 @@ call matchadd('author', 'author\|@author', 100)
 " }}}
 
 
+" Show Special Char {{{ :
 " show tabs / nbsp / trailing spaces
 set listchars=tab:··,trail:¤,extends:>,precedes:<
 set list
+" }}}
 
 " Title {{{ :
 " This is nice if you have something
