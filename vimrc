@@ -6,8 +6,8 @@
 " @Link    : https://github.com/GuillaumeSeren/vimrc
 " ---------------
 
-" Summary {{{ : 
-" =========== 
+" Summary {{{ :
+" ===========
 " Let's try to split this file into several clear part
 " 1 - startup
 " 2 - keyboard layout
@@ -15,8 +15,8 @@
 "   - text color
 "   - encoding
 "   - line-wrap
-"   - 
-"   - 
+"   -
+"   -
 " 4 - status bar
 " 5 - state bar
 " 6 - specific features
@@ -51,9 +51,9 @@ source ~/.vim/vimrc.bepo
 source ~/.vim/vimrc.num
 " }}}
 
-" Startup config {{{ : 
+" Startup config {{{ :
 " ===========
-" We can export some config in modular files like : 
+" We can export some config in modular files like :
 " source ~/.vim/startup/yaml.vim
 " Change the default mode of vim.
 " @TODO: really need ?
@@ -65,8 +65,19 @@ if has('vim_starting')
 endif
 " }}}
 
-" NeoBundle conf {{{ : 
+" NeoBundle conf {{{ :
 " ==========
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+
+" Check if bundle dir is available for new install
+if !filereadable(neobundle_readme)
+    echo "Installing NeoBundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+endif
+
+
 " 20131206: Add NeoBundle
 "set runtimepath+=~/.vim/bundle/neobundle.vim/
 "call neobundle#rc(expand('~/.vim/bundle/'))
@@ -86,7 +97,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "============== VimProc :     ================
 " Recommended to install
 " original repos on github
-" After install, turn shell ~/.vim/bundle/vimproc, 
+" After install, turn shell ~/.vim/bundle/vimproc,
 " (n,g)make -f your_machines_makefile
 NeoBundle 'Shougo/vimproc', {
             \ 'build'       : {
@@ -96,12 +107,492 @@ NeoBundle 'Shougo/vimproc', {
             \     'unix'    : 'make -f make_unix.mak',
             \    },
             \ }
-"=============================================
 "============== Unite :       ================
 " Unite and create user interfaces
 " http://www.vim.org/scripts/script.php?script_id=3396
 " https://github.com/Shougo/unite.vim
 NeoBundle 'Shougo/unite.vim.git'
+"============== NeoComplete :     ================
+" @TODO: Complete infos
+NeoBundle 'Shougo/neocomplete'
+"============== NeoSnippet :     ================
+" @TODO: Complete infos
+NeoBundle 'Shougo/neosnippet'
+"============== Unite Plugin : OUTLINE =========
+" https://github.com/h1mesuke/unite-outline
+" outline source for unite.vim
+" http://d.hatena.ne.jp/h1mesuke/20101107/p1
+" Call it with :unite outline
+NeoBundle 'h1mesuke/unite-outline'
+"===============================================
+" https://github.com/ujihisa/unite-colorscheme
+" A unite.vim plugin
+NeoBundle 'ujihisa/unite-colorscheme'
+"============== SYNTASTIC  : ===============
+" Syntax checking hacks for vim
+" https://github.com/scrooloose/syntastic
+NeoBundle 'scrooloose/syntastic.git'
+"============== DBEXT :       ==============
+" vim-scripts/dbext.vim
+" Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL,
+" DBI,..)
+" http://www.vim.org/scripts/script.php?script_id=356
+" https://github.com/vim-scripts/dbext.vim
+" help : ':h dbext-tutorial'
+NeoBundle 'vim-scripts/dbext.vim'
+"============== GUNDO :       ==============
+" Gundo.vim is Vim plugin to visualize your Vim undo tree.
+" sjl / gundo.vim
+" A git mirror of gundo.vim
+" http://sjl.bitbucket.org/gundo.vim/
+NeoBundle 'sjl/gundo.vim.git'
+"===========================================
+" Extended search commands and maps for Vim
+" https://github.com/dahu/SearchParty
+"NeoBundle 'dahu/SearchParty'
+"============== SHABERU : ==================
+" supermomonga/shaberu.vim
+" めっちゃしゃべる
+" https://github.com/supermomonga/shaberu.vim
+" Shaberu.vim is the wrapper of speech synethis. You can make your vim speak
+" easily with Shaberu.vim.
+NeoBundle 'supermomonga/shaberu.vim'
+"=============== VIM WIKI :    ==============
+" Personal Wiki for Vim
+" https://github.com/vimwiki/vimwiki
+NeoBundle 'vimwiki/vimwiki'
+" Key bindings
+" see :h vimwiki-mappings
+"
+" normal mode:
+" <Leader>ww -- Open default wiki index file.
+" <Leader>wt -- Open default wiki index file in a new tab.
+" <Leader>ws -- Select and open wiki index file.
+" <Leader>wd -- Delete wiki file you are in.
+" <Leader>wr -- Rename wiki file you are in.
+" <Enter> -- Folow/Create wiki link
+" <Shift-Enter> -- Split and folow/create wiki link
+" <Ctrl-Enter> -- Vertical split and folow/create wiki link
+" <Backspace> -- Go back to parent(previous) wiki link
+" <Tab> -- Find next wiki link
+" <Shift-Tab> -- Find previous wiki link
+"===========================================
+"=============== TABULAR : =================
+" https://github.com/godlygeek/tabular
+" Vim script for text filtering and alignment
+" one  : 1
+" two  : 2
+" tree : 3
+" select text in visual mode, then hit : Tabularize /:
+" change the : with the needed char to align
+NeoBundle 'godlygeek/tabular'
+"===========================================
+"============= YouCompleteMe : ================
+"A code-completion engine for Vim
+"http://valloric.github.io/YouCompleteMe/
+"https://github.com/Valloric/YouCompleteMe
+"NeoBundle 'Valloric/YouCompleteMe'
+"============== VimShell :     ================
+" Powerful shell implemented by vim.
+" https://github.com/Shougo/vimshell.vim
+NeoBundle 'Shougo/vimshell.vim.git'
+"============== VimFiler :     ================
+" vimfiler.vim
+" Powerful file explorer implemented by Vim script
+" https://github.com/Shougo/vimfiler.vim
+NeoBundle 'Shougo/vimfiler.vim'
+"============== Fugitive :     ================
+" fugitive.vim: a Git wrapper so awesome, it should be illegal
+" https://github.com/tpope/vim-fugitive
+NeoBundle 'tpope/vim-fugitive'
+"============== Surround :     ================
+" surround.vim: quoting/parenthesizing made simple
+" https://github.com/tpope/vim-surround
+NeoBundle 'tpope/vim-surround'
+"============== SpeedDating :     ================
+" speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
+" https://github.com/tpope/vim-speeddating
+NeoBundle 'tpope/vim-speeddating.git'
+"============== UniPaired :     ================
+" key combos for 'pairs' of things. Mostly previous/next type stuff
+" https://github.com/tpope/vim-unimpaired
+NeoBundle 'tpope/vim-unimpaired'
+"============== Rails :     ================
+" rails.vim: Ruby on Rails power tools
+" https://github.com/tpope/vim-rails
+NeoBundle 'tpope/vim-rails.git'
+"============== Vinegar :     ================
+" vinegar.vim: combine with netrw to create a delicious salad dressing
+" https://github.com/tpope/vim-vinegar
+NeoBundle 'tpope/vim-vinegar.git'
+"============== Repeat :     ================
+" repeat.vim: enable repeating supported plugin maps with "."
+" http://www.vim.org/scripts/script.php?script_id=2136
+" https://github.com/tpope/vim-repeat
+NeoBundle 'tpope/vim-repeat'
+"============== RagTag :      ================
+" ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
+" http://www.vim.org/scripts/script.php?script_id=1896
+" https://github.com/tpope/vim-ragtag
+NeoBundle 'tpope/vim-ragtag'
+" CTRL+X /       Close the last open HTML tag
+" CTRL+X SPACE   Create open/close HTML tags from the typed word
+" CTRL+X CR      The same as CTRL+X SPACE but puts a newspace in between
+" CTRL+X !       Insert HTML doctype
+" CTRL+X @       Insert CSS stylesheet
+" CTRL+X #       Insert meta content-type meta tag
+" CTRL+X $       Load JavaScript document
+"
+" For the following mappings, suppose that
+" you have typed "foo".
+"
+" Mapping        Result
+" ---------      -----------
+" CTRL+X =       foo<%= | %>
+" CTRL+X +       <%= foo| %>
+" CTRL+X -       foo<% | %>
+" CTRL+X _       <% foo| %>
+" CTRL+X '       foo<%# | %>
+" CTRL+X "       <%# foo| %>
+"============== vim-eunuch : ====================
+" tpope/vim-eunuch
+" eunuch.vim: helpers for UNIX
+" http://www.vim.org/scripts/script.php?script_id=4300
+" https://github.com/tpope/vim-eunuch
+NeoBundle 'tpope/vim-eunuch'
+
+"============== sparkup : =======================
+" A parser for a condensed HTML format
+" Deprecated: car requiert Python
+" https://github.com/rstacruz/sparkup
+" NeoBundle 'rstacruz/sparkup'
+"============== EasyMotion :     ================
+" Vim motions on speed!
+" https://github.com/Lokaltog/vim-easymotion
+NeoBundle 'Lokaltog/vim-easymotion'
+"============== Stupid-EasyMotion :     ================
+" A dumbed down version of EasyMotion
+" that aids navigation on the current line
+" We use the global leader
+" <Leader><Leader>w  - make every word a target
+" <Leader><Leader>W  - make every space separated word a target
+" <Leader><Leader>fx - make every character x in the line a target
+NeoBundle 'joequery/Stupid-EasyMotion'
+"=======================================================
+"============== ACK.VIM ================================
+" https://github.com/mileszs/ack.vim
+" Vim plugin for the Perl module / CLI script 'ack'
+NeoBundle 'mileszs/ack.vim'
+"========================================================
+"============== AG.VIM ================================
+" https://github.com/rking/ag.vim
+" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
+" CLI script 'ack'
+NeoBundle 'rking/ag.vim'
+"========================================================
+" https://github.com/fabi1cazenave/suckless.vim
+" This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
+" manager in Vim.
+NeoBundle 'fabi1cazenave/suckless.vim'
+"============== TagBar :     ================
+" Vim plugin that displays tags in a window, ordered by class etc.
+" https://github.com/majutsushi/tagbar
+NeoBundle 'majutsushi/tagbar'
+"============== BashSupport :     ================
+" BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
+" https://github.com/vim-scripts/bash-support.vim
+"NeoBundle 'vim-scripts/bash-support.vim'
+"============== vDebug :     ================
+" On remplace Xdebug par Vdebug apparement plus performant
+" http://www.vim.org/scripts/script.php?script_id=4170
+" https://github.com/joonty/vdebug
+" Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
+NeoBundle 'joonty/vdebug.git'
+"============== EasyAlign :     ================
+" A simple Vim alignment plugin
+" https://github.com/junegunn/vim-easy-align
+"NeoBundle 'junegunn/vim-easy-align'
+"============== Startify :     ================
+" A fancy start screen for Vim.
+" https://github.com/mhinz/vim-startify
+"NeoBundle 'mhinz/vim-startify'
+"============== NerdTree :     ================
+" A tree explorer plugin for vim.
+" https://github.com/scrooloose/nerdtree
+"NeoBundle 'scrooloose/nerdtree'
+"============== NerdCommenter :     ================
+" Vim plugin for intensely orgasmic commenting
+" https://github.com/scrooloose/nerdcommenter
+NeoBundle 'scrooloose/nerdcommenter'
+"============== ChekSyntax :     ================
+" Check a file's syntax when saving a file (php, ruby, tex ...) with vim
+" https://github.com/tomtom/checksyntax_vim
+"NeoBundle 'tomtom/checksyntax_vim'
+"============== Matrix Screensaver :     ================
+" Matrix Screen for VIM
+" https://github.com/uguu-org/vim-matrix-screensaver
+NeoBundle 'uguu-org/vim-matrix-screensaver'
+"============== SearchParty : ================
+" dahu/SearchParty
+" Extended search commands and maps for Vim
+" https://github.com/dahu/SearchParty
+NeoBundle 'dahu/SearchParty'
+" Remap * to #
+nmap # <Plug>SearchPartyVisualFindNext
+" SearchParty
+"
+" Enhanced searches, highlights and matches for Vim
+" Tip
+" If you like SearchParty and want to share the W00t!, I’m grateful for tips
+" or beverages.
+" Visual Searches
+"
+" * Searches for the next occurrence of the currently selected visual
+"   text. <Plug>SearchPartyVisualFindNext
+"
+" # Searches for the prior occurrence of the currently selected visual
+"   text. <Plug>SearchPartyVisualFindPrior
+"
+" & Starts a :substitute using the currently selected visual text.
+"   <Plug>SearchPartyVisualFindSubstitute
+"=============================================
+"============== vim-github-dashboard : =======
+" junegunn/vim-github-dashboard
+" Browse GitHub events in Vim
+" Browse GitHub events (user dashboard, user/repo activity) in Vim.
+NeoBundle 'junegunn/vim-github-dashboard'
+" Commands
+" With authentication
+"
+" :GHDashboard
+" :GHDashboard USER
+" :GHActivity
+" :GHActivity USER
+" :GHActivity USER/REPO
+" Without authentication (60 calls/hour limit, only public
+" activities)
+"
+" :GHDashboard! USER
+" :GHActivity! USER
+" :GHActivity! USER/REPO
+"
+" Navigation
+"
+" Use Tab and Shift-Tab to navigate back and
+" forth through the links.
+"
+" Press Enter key or double-click on a link to
+" open it in the browser.
+"
+" Press R to refresh the window.
+"
+" Press q to close the window.
+"=============================================
+"============== Project :     ================
+" lcd to the root of the project everytime you BufEnter a file inside a project.
+" https://github.com/amiorin/vim-project
+NeoBundle 'amiorin/vim-project'
+"============== VimMisc :     ================
+" Miscellaneous auto-load Vim scripts required by easytags
+" https://github.com/xolox/vim-misc
+NeoBundle 'xolox/vim-misc.git'
+"============== BlockIt :     ================
+" sk1418 / blockit
+" a vim plugin to wrap lines in a block
+" https://github.com/sk1418/blockit
+NeoBundle 'sk1418/blockit.git'
+"============== HowMuch :     ================
+" sk1418 / HowMuch
+" A Vim plugin to calculate visual selected expressions
+" https://github.com/sk1418/HowMuch
+NeoBundle 'sk1418/HowMuch.git'
+"============== EasyTags :     ================
+" Automated tag file generation and syntax highlighting of tags in Vim
+" https://github.com/xolox/vim-easytags
+"@FIXME: Fix the generation process :
+" - Provide a command to generate a tag in a project.
+" - Use specific tag file by project.
+" - Load / Reload only tag file selected by the pwd value project name ?
+" - In theory the base tag file should be provided by a call from the VCS.
+" -
+"NeoBundle 'xolox/vim-easytags.git'
+"@TODO: Fix easytags call to be lighter
+" EasyTags setup
+"let g:easytags_file = '~/.vim/tags/generic'
+" Set tags generic for vim
+"set tags='~/.vim/tags/'
+"let g:easytags_autorecurse = 1
+"let g:easytags_include_members = 1
+"let g:easytags_dynamic_file = 2
+" Refresh Tags on write file
+"let g:easytags_events = ['BufWritePost']
+" Updtate highlight
+"let g:easytags_auto_update = 0
+"@TODO: Add async call to avoid freezing vim.
+"let g:eastags_async = 1
+"============== VimSession :     ================
+" Extended session management for Vim (:mksession on steroids)
+" https://github.com/xolox/vim-session
+NeoBundle 'xolox/vim-session.git'
+"============== VimAirline :     ================
+" lean & mean status/tabline for vim that's light as air
+" https://github.com/bling/vim-airline
+NeoBundle 'bling/vim-airline'
+"============== CtrlP :     ================
+" Fuzzy file, buffer, mru, tag, etc finder.
+" https://github.com/kien/ctrlp.vim
+"NeoBundle 'kien/ctrlp.vim.git'
+"============== CRA :     ================
+" cra.vim
+" Vim plugin to create yearly timesheet
+NeoBundle 'YannMoisan/cra.vim'
+"=========================================
+"============== OLD / DEMO ========
+" Demo :
+" Just for ex of multi repo
+"NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Old :
+" An awesome debugging client for Vim, Xdebug and PHP
+" https://github.com/vim-scripts/Xdebug
+" NeoComplCache : depercated
+" Ultimate auto-completion system for Vim.
+" http://www.vim.org/scripts/script.php?script_id=2620
+" https://github.com/Shougo/neocomplcache.vim
+" NeoBundle 'Shougo/neocomplcache.vim.git'
+" Deprecated : If you use Vim 7.3.885 or above with if_lua feature, you should
+" use neocomplete. It is faster than neocomplcache.
+"===========================================
+"============== VimProc :     ================
+" @TODO: Complete infos
+NeoBundle 'd11wtq/tomorrow-theme-vim'
+" vim-scripts repos
+"===========================================
+
+"=============== CALENDAR : ================
+" A calendar application for Vim
+" https://github.com/itchyny/calendar.vim
+NeoBundle 'itchyny/calendar.vim'
+"===========================================
+"============== COLOR :       ==============
+" Colour schemes for a variety of editors created by Dayle Rees.
+" http://daylerees.github.io
+"NeoBundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
+"===========================================
+" quick setup : http://sjl.bitbucket.org/gundo.vim/#installation
+"let g:gundo_width = 60
+"let g:gundo_preview_height = 40
+"let g:gundo_right = 1
+"nnoremap <F5> :GundoToggle<CR>
+"===========================================
+
+"============== VCSCOMMAND:     ================
+" @TODO: Complete infos
+NeoBundle 'vcscommand.vim'
+"============== VimProc :     ================
+" @TODO: Complete infos
+"NeoBundle 'SuperTab'
+
+"============== ColorSheme :  =============
+" vim-colors-solarized
+" precision colorscheme for the vim text editor
+" http://ethanschoonover.com/solarized
+" https://github.com/altercation/vim-colors-solarized
+NeoBundle 'altercation/vim-colors-solarized.git'
+" morhetz / gruvbox :
+" Retro groove color scheme for Vim
+" https://github.com/morhetz/gruvbox
+NeoBundle 'morhetz/gruvbox.git'
+" zeis / vim-kolor
+" Vim color scheme.
+" https://github.com/zeis/vim-kolor
+NeoBundle 'zeis/vim-kolor.git'
+" junegunn / seoul256.vim
+" a low-contrast Vim color scheme based on Seoul Colors
+NeoBundle 'junegunn/seoul256.vim.git'
+" Moria :
+" A color scheme for GUI supposed to be highly readable
+" http://www.vim.org/scripts/script.php?script_id=1464
+NeoBundle 'vim-scripts/moria'
+" Bad Wolf
+" A Vim color scheme.
+" https://github.com/sjl/badwolf/
+NeoBundle 'sjl/badwolf'
+"============== Molokai :     ================
+" tomasr/molokai
+" Molokai color scheme for Vim
+" https://github.com/tomasr/molokai
+NeoBundle 'tomasr/molokai'
+"============== VimProc :     ================
+" @TODO: Complete infos
+NeoBundle 'Zenburn'
+"============== Vividchalk :     ================
+" vividchalk.vim:
+" a colorscheme strangely reminiscent of Vibrant Ink for a
+" certain OS X editor
+" https://github.com/tpope/vim-vividchalk
+" http://www.vim.org/scripts/script.php?script_id=1891
+NeoBundle 'tpope/vim-vividchalk.git'
+"============== VimProc :     ===============
+" @TODO: Complete infos
+NeoBundle 'darkspectrum'
+"============== ROGUE.VIM     ===============
+" katono/rogue.vim
+" Porting of Rogue-clone II for Vim
+NeoBundle 'katono/rogue.vim'
+"============== Characterize  ===============
+" tpope/vim-characterize
+" characterize.vim:
+" Unicode character metadata
+
+" http://www.vim.org/scripts/script.php?script_id=4410
+NeoBundle 'tpope/vim-characterize'
+"============== PHP :     ================
+" @TODO: Complete infos
+NeoBundle 'php.vim'
+"============== TagList :     ================
+" @TODO: Complete infos
+NeoBundle 'taglist.vim'
+"============== CSS color :   ================
+" Highlight colors in css files
+" NeoBundle 'skammer/vim-css-color'
+" NOT WORKING
+"Highlight colors in css files
+" http://ap.github.io/vim-css-color/
+"NeoBundle 'ap/vim-css-color'
+"=============== CSS VIM : ====================
+" css.vim
+" Cutting-edge vim css syntax file
+" http://www.vim.org
+NeoBundle "JulesWang/css.vim"
+"=============================================
+"============== Bundle old samples ===========
+" non github repos:
+"============== CommandT :     ================
+"Bundle 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (ie. when working on your own plugin)
+"==============  :     ================
+"Bundle 'file:///Users/gmarik/path/to/plugin'
+
+call neobundle#end()
+ " Required:
+ filetype plugin indent on
+
+ " If there are uninstalled bundles found on startup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck
+" }}}
+
+" NeoBundle list {{{ :
+"============== VimProc :     ================
+" Recommended to install
+" original repos on github
+" After install, turn shell ~/.vim/bundle/vimproc,
+" (n,g)make -f your_machines_makefile
+"=============================================
+"============== Unite :       ================
+" Unite and create user interfaces
+" http://www.vim.org/scripts/script.php?script_id=3396
+" https://github.com/Shougo/unite.vim
 " interresting :
 " http://www.reddit.com/r/vim/comments/1fpti5/unitevim_the_plugin_you_didnt_know_you_need/
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
@@ -139,7 +630,7 @@ autocmd FileType unite call s:unite_settings()
 " Function unite_settings()
 " add distinct action to be used in a unite buffer
 function! s:unite_settings()
-    " To keep ? 
+    " To keep ?
     " seem's to overide supertab to not be used in unite,
     " not sure to want it.
     let b:SuperTabDisabled=1
@@ -154,13 +645,12 @@ function! s:unite_settings()
     imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
     " ctrl+t : Open file in a new tab
     imap <silent><buffer><expr> <C-g> unite#do_action('tabopen')
-    " Quit on escape 
+    " Quit on escape
     nmap <buffer> <ESC> <Plug>(unite_exit)
 endfunction
 "=============================================
 "============== NeoComplete :     ================
 " @TODO: Complete infos
-NeoBundle 'Shougo/neocomplete'
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -249,30 +739,26 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 "============== NeoSnippet :     ================
 " @TODO: Complete infos
-NeoBundle 'Shougo/neosnippet'
 "============== Unite Plugin : OUTLINE =========
 " https://github.com/h1mesuke/unite-outline
 " outline source for unite.vim
 " http://d.hatena.ne.jp/h1mesuke/20101107/p1
 " Call it with :unite outline
-NeoBundle 'h1mesuke/unite-outline'
 "===============================================
 " https://github.com/ujihisa/unite-colorscheme
 " A unite.vim plugin
-NeoBundle 'ujihisa/unite-colorscheme'
 "============== SYNTASTIC  : ===============
 " Syntax checking hacks for vim
 " https://github.com/scrooloose/syntastic
 let g:syntastic_always_populate_loc_list = 1
-NeoBundle 'scrooloose/syntastic.git'
 let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
 "let g:syntastic_phpcs_conf               = '--standard=PSR2'
 " from : https://github.com/scrooloose/syntastic/wiki/PHP%3A---phpcs
 "let g:syntastic_php_phpcs_args='--tab-width=0'
 "set tabstop=8
 "let g:syntastic_php_phpcs_args=" --standard=PSR2 "
-"let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
-let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=/home/gseren/src/pro/bd/git_tool_gseren/hooks/bd_standart.xml"
+let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
+"let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=/home/gseren/src/pro/bd/git_tool_gseren/hooks/bd_standart.xml"
 "let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PEAR"
 "let g:syntastic_phpcs_conf='--standard=Drupal --extensions=php,module,inc,install,test,profile,theme'
 let g:syntastic_always_populate_loc_list = 1
@@ -287,7 +773,6 @@ let g:syntastic_aggregate_errors         = 1
 " http://www.vim.org/scripts/script.php?script_id=356
 " https://github.com/vim-scripts/dbext.vim
 " help : ':h dbext-tutorial'
-NeoBundle 'vim-scripts/dbext.vim'
 " Default database (local)
 " MySQL
 let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd='':dbname=mysql'
@@ -297,22 +782,18 @@ let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd='':dbname
 " sjl / gundo.vim
 " A git mirror of gundo.vim
 " http://sjl.bitbucket.org/gundo.vim/
-NeoBundle 'sjl/gundo.vim.git'
 "===========================================
 " Extended search commands and maps for Vim
 " https://github.com/dahu/SearchParty
-"NeoBundle 'dahu/SearchParty'
 "============== SHABERU : ==================
 " supermomonga/shaberu.vim
 " めっちゃしゃべる
 " https://github.com/supermomonga/shaberu.vim
 " Shaberu.vim is the wrapper of speech synethis. You can make your vim speak
 " easily with Shaberu.vim.
-NeoBundle 'supermomonga/shaberu.vim'
 "=============== VIM WIKI :    ==============
 " Personal Wiki for Vim
 " https://github.com/vimwiki/vimwiki
-NeoBundle 'vimwiki/vimwiki'
 " Key bindings
 " see :h vimwiki-mappings
 "
@@ -337,56 +818,44 @@ NeoBundle 'vimwiki/vimwiki'
 " tree : 3
 " select text in visual mode, then hit : Tabularize /:
 " change the : with the needed char to align
-NeoBundle 'godlygeek/tabular'
 "===========================================
 "============= YouCompleteMe : ================
 "A code-completion engine for Vim
 "http://valloric.github.io/YouCompleteMe/
 "https://github.com/Valloric/YouCompleteMe
-"NeoBundle 'Valloric/YouCompleteMe'
 "============== VimShell :     ================
 " Powerful shell implemented by vim.
 " https://github.com/Shougo/vimshell.vim
-NeoBundle 'Shougo/vimshell.vim.git'
 "============== VimFiler :     ================
 " vimfiler.vim
 " Powerful file explorer implemented by Vim script
 " https://github.com/Shougo/vimfiler.vim
-NeoBundle 'Shougo/vimfiler.vim'
 "============== Fugitive :     ================
 " fugitive.vim: a Git wrapper so awesome, it should be illegal
 " https://github.com/tpope/vim-fugitive
-NeoBundle 'tpope/vim-fugitive'
 "============== Surround :     ================
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
-NeoBundle 'tpope/vim-surround'
 "============== SpeedDating :     ================
 " speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
 " https://github.com/tpope/vim-speeddating
-NeoBundle 'tpope/vim-speeddating.git'
 "============== UniPaired :     ================
 " key combos for 'pairs' of things. Mostly previous/next type stuff
 " https://github.com/tpope/vim-unimpaired
-NeoBundle 'tpope/vim-unimpaired'
 "============== Rails :     ================
 " rails.vim: Ruby on Rails power tools
 " https://github.com/tpope/vim-rails
-NeoBundle 'tpope/vim-rails.git'
 "============== Vinegar :     ================
 " vinegar.vim: combine with netrw to create a delicious salad dressing
-" https://github.com/tpope/vim-vinegar 
-NeoBundle 'tpope/vim-vinegar.git'
+" https://github.com/tpope/vim-vinegar
 "============== Repeat :     ================
 " repeat.vim: enable repeating supported plugin maps with "."
 " http://www.vim.org/scripts/script.php?script_id=2136
 " https://github.com/tpope/vim-repeat
-NeoBundle 'tpope/vim-repeat'
 "============== RagTag :      ================
 " ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
 " http://www.vim.org/scripts/script.php?script_id=1896
 " https://github.com/tpope/vim-ragtag
-NeoBundle 'tpope/vim-ragtag'
 " CTRL+X /       Close the last open HTML tag
 " CTRL+X SPACE   Create open/close HTML tags from the typed word
 " CTRL+X CR      The same as CTRL+X SPACE but puts a newspace in between
@@ -394,10 +863,10 @@ NeoBundle 'tpope/vim-ragtag'
 " CTRL+X @       Insert CSS stylesheet
 " CTRL+X #       Insert meta content-type meta tag
 " CTRL+X $       Load JavaScript document
-" 
+"
 " For the following mappings, suppose that
 " you have typed "foo".
-" 
+"
 " Mapping        Result
 " ---------      -----------
 " CTRL+X =       foo<%= | %>
@@ -411,7 +880,6 @@ NeoBundle 'tpope/vim-ragtag'
 " eunuch.vim: helpers for UNIX
 " http://www.vim.org/scripts/script.php?script_id=4300
 " https://github.com/tpope/vim-eunuch
-NeoBundle 'tpope/vim-eunuch'
 
 "============== sparkup : =======================
 " A parser for a condensed HTML format
@@ -421,37 +889,31 @@ NeoBundle 'tpope/vim-eunuch'
 "============== EasyMotion :     ================
 " Vim motions on speed!
 " https://github.com/Lokaltog/vim-easymotion
-NeoBundle 'Lokaltog/vim-easymotion'
 " easymotion key:
 let g:EasyMotion_leader_key = '\'
 "============== Stupid-EasyMotion :     ================
-" A dumbed down version of EasyMotion 
+" A dumbed down version of EasyMotion
 " that aids navigation on the current line
 " We use the global leader
 " <Leader><Leader>w  - make every word a target
 " <Leader><Leader>W  - make every space separated word a target
 " <Leader><Leader>fx - make every character x in the line a target
-NeoBundle 'joequery/Stupid-EasyMotion'
 "=======================================================
 "============== ACK.VIM ================================
 " https://github.com/mileszs/ack.vim
 " Vim plugin for the Perl module / CLI script 'ack'
-NeoBundle 'mileszs/ack.vim'
 "========================================================
 "============== AG.VIM ================================
 " https://github.com/rking/ag.vim
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
 " CLI script 'ack'
-NeoBundle 'rking/ag.vim'
 "========================================================
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
 " manager in Vim.
-NeoBundle 'fabi1cazenave/suckless.vim'
 "============== TagBar :     ================
 " Vim plugin that displays tags in a window, ordered by class etc.
 " https://github.com/majutsushi/tagbar
-NeoBundle 'majutsushi/tagbar'
 "============== BashSupport :     ================
 " BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
 " https://github.com/vim-scripts/bash-support.vim
@@ -461,7 +923,6 @@ NeoBundle 'majutsushi/tagbar'
 " http://www.vim.org/scripts/script.php?script_id=4170
 " https://github.com/joonty/vdebug
 " Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
-NeoBundle 'joonty/vdebug.git'
 "Vdebug tweak
 let g:vdebug_keymap = {
             \    "run"               : "<F5>",
@@ -492,7 +953,6 @@ let g:vdebug_keymap = {
 "============== NerdCommenter :     ================
 " Vim plugin for intensely orgasmic commenting
 " https://github.com/scrooloose/nerdcommenter
-NeoBundle 'scrooloose/nerdcommenter'
 "============== ChekSyntax :     ================
 " Check a file's syntax when saving a file (php, ruby, tex ...) with vim
 " https://github.com/tomtom/checksyntax_vim
@@ -504,21 +964,17 @@ NeoBundle 'scrooloose/nerdcommenter'
 "============== Project :     ================
 " lcd to the root of the project everytime you BufEnter a file inside a project.
 " https://github.com/amiorin/vim-project
-NeoBundle 'amiorin/vim-project'
 "============== VimMisc :     ================
 " Miscellaneous auto-load Vim scripts required by easytags
 " https://github.com/xolox/vim-misc
-NeoBundle 'xolox/vim-misc.git'
 "============== BlockIt :     ================
 " sk1418 / blockit
 " a vim plugin to wrap lines in a block
 " https://github.com/sk1418/blockit
-NeoBundle 'sk1418/blockit.git'
 "============== HowMuch :     ================
 " sk1418 / HowMuch
 " A Vim plugin to calculate visual selected expressions
 " https://github.com/sk1418/HowMuch
-NeoBundle 'sk1418/HowMuch.git'
 "============== EasyTags :     ================
 " Automated tag file generation and syntax highlighting of tags in Vim
 " https://github.com/xolox/vim-easytags
@@ -527,7 +983,7 @@ NeoBundle 'sk1418/HowMuch.git'
 " - Use specific tag file by project.
 " - Load / Reload only tag file selected by the pwd value project name ?
 " - In theory the base tag file should be provided by a call from the VCS.
-" - 
+" -
 "NeoBundle 'xolox/vim-easytags.git'
 "@TODO: Fix easytags call to be lighter
 " EasyTags setup
@@ -546,15 +1002,13 @@ NeoBundle 'sk1418/HowMuch.git'
 "============== VimSession :     ================
 " Extended session management for Vim (:mksession on steroids)
 " https://github.com/xolox/vim-session
-NeoBundle 'xolox/vim-session.git'
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
 "let g:session_autosave_periodic = 1
 
 "============== VimAirline :     ================
 " lean & mean status/tabline for vim that's light as air
-" https://github.com/bling/vim-airline 
-NeoBundle 'bling/vim-airline'
+" https://github.com/bling/vim-airline
 "============== CtrlP :     ================
 " Fuzzy file, buffer, mru, tag, etc finder.
 " https://github.com/kien/ctrlp.vim
@@ -562,7 +1016,6 @@ NeoBundle 'bling/vim-airline'
 "============== CRA :     ================
 " cra.vim
 " Vim plugin to create yearly timesheet
-NeoBundle 'YannMoisan/cra.vim'
 "=========================================
 "============== OLD / DEMO ========
 " Demo :
@@ -577,18 +1030,16 @@ NeoBundle 'YannMoisan/cra.vim'
 " https://github.com/Shougo/neocomplcache.vim
 " NeoBundle 'Shougo/neocomplcache.vim.git'
 " Deprecated : If you use Vim 7.3.885 or above with if_lua feature, you should
-" use neocomplete. It is faster than neocomplcache. 
+" use neocomplete. It is faster than neocomplcache.
 "===========================================
 "============== VimProc :     ================
 " @TODO: Complete infos
-NeoBundle 'd11wtq/tomorrow-theme-vim'
 " vim-scripts repos
 "===========================================
 
 "=============== CALENDAR : ================
 " A calendar application for Vim
 " https://github.com/itchyny/calendar.vim
-NeoBundle 'itchyny/calendar.vim'
 "===========================================
 "============== COLOR :       ==============
 " Colour schemes for a variety of editors created by Dayle Rees.
@@ -614,7 +1065,7 @@ NeoBundle 'itchyny/calendar.vim'
 " =======
 " Coloration syntaxique, indispensable pour ne pas se perdre dans les longs fichiers
 syntax on
-" Syntax : 
+" Syntax :
 " The colors get messed up when I scroll. Vim uses various heuristics to save
 " time when determining the highlighting, and sometimes they cause problems.
 " Look up :h syn-sync for a more detailed explanation.
@@ -628,58 +1079,45 @@ au BufRead,BufNewFile *.twig set syntax=htmldjango
 " precision colorscheme for the vim text editor
 " http://ethanschoonover.com/solarized
 " https://github.com/altercation/vim-colors-solarized
-NeoBundle 'altercation/vim-colors-solarized.git'
 " morhetz / gruvbox :
 " Retro groove color scheme for Vim
 " https://github.com/morhetz/gruvbox
-NeoBundle 'morhetz/gruvbox.git'
 " zeis / vim-kolor
 " Vim color scheme.
 " https://github.com/zeis/vim-kolor
-NeoBundle 'zeis/vim-kolor.git'
 " junegunn / seoul256.vim
 " a low-contrast Vim color scheme based on Seoul Colors
-NeoBundle 'junegunn/seoul256.vim.git'
 " Moria :
-" A color scheme for GUI supposed to be highly readable 
+" A color scheme for GUI supposed to be highly readable
 " http://www.vim.org/scripts/script.php?script_id=1464
-NeoBundle 'vim-scripts/moria'
 " Bad Wolf
 " A Vim color scheme.
 " https://github.com/sjl/badwolf/
-NeoBundle 'sjl/badwolf'
 "============== Molokai :     ================
 " tomasr/molokai
 " Molokai color scheme for Vim
 " https://github.com/tomasr/molokai
-NeoBundle 'tomasr/molokai'
 "============== VimProc :     ================
 " @TODO: Complete infos
-NeoBundle 'Zenburn'
 "============== Vividchalk :     ================
 " vividchalk.vim:
 " a colorscheme strangely reminiscent of Vibrant Ink for a
 " certain OS X editor
 " https://github.com/tpope/vim-vividchalk
 " http://www.vim.org/scripts/script.php?script_id=1891
-NeoBundle 'tpope/vim-vividchalk.git'
 "============== VimProc :     ===============
 " @TODO: Complete infos
-NeoBundle 'darkspectrum'
 "============== ROGUE.VIM     ===============
 " katono/rogue.vim
 " Porting of Rogue-clone II for Vim
-NeoBundle 'katono/rogue.vim'
 "============== Characterize  ===============
 " tpope/vim-characterize
 " characterize.vim:
 " Unicode character metadata
 
 " http://www.vim.org/scripts/script.php?script_id=4410
-NeoBundle 'tpope/vim-characterize'
 "============== PHP :     ================
 " @TODO: Complete infos
-NeoBundle 'php.vim'
 " PHP.vim
 " HighLight sql
 let php_sql_query = 1
@@ -708,7 +1146,6 @@ let php_folding = 3
 
 "============== TagList :     ================
 " @TODO: Complete infos
-NeoBundle 'taglist.vim'
 "============== CSS color :   ================
 " Highlight colors in css files
 " NeoBundle 'skammer/vim-css-color'
@@ -720,7 +1157,6 @@ NeoBundle 'taglist.vim'
 " css.vim
 " Cutting-edge vim css syntax file
 " http://www.vim.org
-NeoBundle "JulesWang/css.vim"
 "=============================================
 "============== Bundle old samples ===========
 " non github repos:
@@ -740,7 +1176,7 @@ call neobundle#end()
 " }}}
 
 " Folding {{{ :
-" I like some folding ideas from : 
+" I like some folding ideas from :
 " http://dougblack.io/words/a-good-vimrc.html#colors
 set foldmethod=marker
 "set foldmethod=indent
@@ -773,7 +1209,7 @@ endif
 
 " SHORTCUTS {{{ :
 " ==========
-" @todo add global copy / paste with a shortcut 
+" @todo add global copy / paste with a shortcut
 " Permet de sauvegarder par ctrl + s
 :nmap <c-s> :w<CR>
 " Fonctionne aussi en mode edition
@@ -837,7 +1273,7 @@ set smartindent
 set background=dark
 let g:solarized_termtrans = 1
 colorscheme solarized
-" Change tabeline display 
+" Change tabeline display
 "hi TabLine      guifg=#333 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
 "hi TabLineSel   guifg=red guibg=green gui=bold ctermfg=red ctermbg=green cterm=bold
 "hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
@@ -920,7 +1356,7 @@ set splitbelow
 
 " SEARCH {{{ :
 " ========
-" Recherche en minuscule -> indépendante de la casse, 
+" Recherche en minuscule -> indépendante de la casse,
 " une majuscule -> stricte
 set smartcase
 
@@ -943,7 +1379,7 @@ set showcmd
 " MOUSE {{{ :
 " =======
 " Utilise la souris pour les terminaux qui le peuvent (tous ?)
-" pratique si on est habitué à coller sous la souris et pas sous le curseur, 
+" pratique si on est habitué à coller sous la souris et pas sous le curseur,
 " attention fonctionnement inhabituel
 set mouse=a
 " }}}
@@ -956,7 +1392,7 @@ set mouse=a
 set nopaste
 
 " On peut passer rapidement du mode paste au mode nopaste avec un raccourcis,
-" builtin sur les versions récentes de vim >= 7, 
+" builtin sur les versions récentes de vim >= 7,
 " sinon il faudrait créer une fonction :
 " 20141009: Disable the switch I did not use it.
 "set pastetoggle=<F5>
@@ -1010,9 +1446,9 @@ set textwidth=80
 " OR ELSE just the 81st column of wide lines...
 "highlight ColorColumn ctermbg=magenta
 "== Set colorcolumn to be enabled when it goes over colum 80.
-"set colorcolumn=+0 
+"set colorcolumn=+0
 "highlight ColorColumn ctermbg=red guibg=red
-" test todo : @TODO TODO todo  
+" test todo : @TODO TODO todo
 "highlight todo ctermbg=green guibg=green
 "match todo /TODO/
 "set OverLength=+0
@@ -1070,11 +1506,11 @@ set title
 " SPELL CHECKER {{{ :
 " ===============
 " En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
-" Chiant pour programmer, mais améliorable avec des dico 
+" Chiant pour programmer, mais améliorable avec des dico
     " perso et par languages
 set spell
 " [s / ]s : saute au prochain / précédant mot avec faute.
-    " z= : affiche la liste de suggestion pour corriger. 
+    " z= : affiche la liste de suggestion pour corriger.
 set spelllang=fr,en
 
 " @TODO: Remap the mapping of the spell checker
@@ -1127,7 +1563,7 @@ map <Leader>j !python -m json.tool<CR>
 " zz permet de centrer l'écran
 " voir stupideasymotion
 set relativenumber
-set number 
+set number
 "}}}
 
 " SHOW NON-BREAKABLE SPACE {{{ :
