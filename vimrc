@@ -338,7 +338,7 @@ NeoBundle 'uguu-org/vim-matrix-screensaver'
 " https://github.com/dahu/SearchParty
 NeoBundle 'dahu/SearchParty'
 " Remap * to #
-nmap # <Plug>SearchPartyVisualFindNext
+nmap * <Plug>SearchPartyVisualFindNext
 " SearchParty
 "
 " Enhanced searches, highlights and matches for Vim
