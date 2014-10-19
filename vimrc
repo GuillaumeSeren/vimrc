@@ -1409,7 +1409,10 @@ set report=0
 " Modif tmp
 set swapfile
 " Modif tmp
-"set dir=~/.vimrc/backup
+let g:dotvim_backup=expand('$HOME') . '/.vim/backup'
+if ! isdirectory(g:dotvim_backup)
+    call mkdir(g:dotvim_backup, "p")
+endif
 set directory=~/.vim/backup
 
 " Backups with persistent undos
