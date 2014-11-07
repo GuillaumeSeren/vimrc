@@ -118,6 +118,10 @@ NeoBundle 'Shougo/neocomplete'
 "============== NeoSnippet :     ================
 " @TODO: Complete infos
 NeoBundle 'Shougo/neosnippet'
+"============== NeoSnippet-snippets ==========
+" Snippet for neosnippet
+NeoBundle 'Shougo/neosnippet-snippets'
+"=============================================
 "============== Unite Plugin : OUTLINE =========
 " https://github.com/h1mesuke/unite-outline
 " outline source for unite.vim
@@ -260,6 +264,11 @@ NeoBundle 'tpope/vim-ragtag'
 " http://www.vim.org/scripts/script.php?script_id=4300
 " https://github.com/tpope/vim-eunuch
 NeoBundle 'tpope/vim-eunuch'
+"============== vim-gitgutter : ====================
+" airblade/vim-gitgutter
+" A Vim plugin which shows a git diff in the gutter (sign column) and
+" stages/reverts hunks.
+NeoBundle 'airblade/vim-gitgutter'
 
 "============== sparkup : =======================
 " A parser for a condensed HTML format
@@ -548,7 +557,10 @@ NeoBundle 'katono/rogue.vim'
 NeoBundle 'tpope/vim-characterize'
 "============== PHP :     ================
 " @TODO: Complete infos
-NeoBundle 'php.vim'
+"NeoBundle 'php.vim'
+" 20141028: Change to new StanAngeloff
+" https://github.com/StanAngeloff/php.vim
+NeoBundle 'StanAngeloff/php.vim'
 "============== TagList :     ================
 " @TODO: Complete infos
 NeoBundle 'taglist.vim'
@@ -563,7 +575,7 @@ NeoBundle 'taglist.vim'
 " css.vim
 " Cutting-edge vim css syntax file
 " http://www.vim.org
-NeoBundle "JulesWang/css.vim"
+"NeoBundle "JulesWang/css.vim"
 "=============================================
 "============== Bundle old samples ===========
 " non github repos:
@@ -697,6 +709,7 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
+
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
@@ -739,7 +752,24 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 "============== NeoSnippet :     ================
 " @TODO: Complete infos
-"============== Unite Plugin : OUTLINE =========
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+"d============== Unite Plugin : OUTLINE =========
 " https://github.com/h1mesuke/unite-outline
 " outline source for unite.vim
 " http://d.hatena.ne.jp/h1mesuke/20101107/p1
@@ -765,6 +795,17 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_enable_signs             = 1
 let g:syntastic_aggregate_errors         = 1
+"
+"function! PhpSyntaxOverride()
+"  hi! def link phpDocTags  phpDefine
+"  hi! def link phpDocParam phpType
+"endfunction
+"
+"augroup phpSyntaxOverride
+"  autocmd!
+"  autocmd FileType php call PhpSyntaxOverride()
+"augroup END
+"
 "===========================================
 "============== DBEXT :       ==============
 " vim-scripts/dbext.vim
@@ -1064,12 +1105,15 @@ let g:session_autosave = 'yes'
 " COLOR :
 " =======
 " Coloration syntaxique, indispensable pour ne pas se perdre dans les longs fichiers
-syntax on
+" syntax on
+" https://github.com/Shougo/vimshell.vim/issues/73
+" Change to syntax enable
+syntax enable
 " Syntax :
 " The colors get messed up when I scroll. Vim uses various heuristics to save
 " time when determining the highlighting, and sometimes they cause problems.
 " Look up :h syn-sync for a more detailed explanation.
-syn sync fromstart
+"syn sync fromstart
 " Coloration syntaxique des fichiers zarb :
 " TWIG :
 au BufRead,BufNewFile *.twig set syntax=htmldjango
@@ -1180,6 +1224,7 @@ call neobundle#end()
 " http://dougblack.io/words/a-good-vimrc.html#colors
 set foldmethod=marker
 "set foldmethod=indent
+"set foldmethod=syntax
 " Then we want it to close every fold by default so that we have this high level
 " view when we open our vimrc.
 set foldlevel=0
@@ -1229,7 +1274,6 @@ imap <C-@> <C-Space>
 " ===========
 " Détection du type de fichier pour l'indentation
 filetype plugin indent on
-syntax enable
 " Do we need to test on autocmd
 if has("autocmd")
     "filetype indent on
@@ -1631,6 +1675,25 @@ function! AutocloseSession()
 endfunction
 noremap <silent> ZZ :call AutocloseSession()<CR>
 " }}}
+
+" Real Vimmer forget the cross
+"@FIXME: Seem's to "break" file explorer.
+no <down> ddp
+no <left> :tabprevious<CR>
+no <right> :tabnext<CR>
+no <up> ddkP
+
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
+
+vno <down> <Nop>
+vno <left> <Nop>
+vno <right> <Nop>
+vno <up> <Nop>
+
+
 
 " OpenTab and lcd to the file {{{:
 " Change local working dir upon tab creation
