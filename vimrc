@@ -561,6 +561,20 @@ NeoBundle 'tpope/vim-characterize'
 " 20141028: Change to new StanAngeloff
 " https://github.com/StanAngeloff/php.vim
 NeoBundle 'StanAngeloff/php.vim'
+"============== Better PHP indent: =======
+" The official VIm indent script for PHP
+" http://www.2072productions.com/to/phpindent.txt
+" https://github.com/2072/PHP-Indenting-for-VIm
+NeoBundle '2072/PHP-Indenting-for-VIm'
+"============== Twig plugin : ============
+" evidens/vim-twig
+" Twig syntax highlighting, snipMate, etc.
+" https://github.com/evidens/vim-twig
+NeoBundle 'evidens/vim-twig'
+"============== Twig Indent : ================
+" Vim script for indentation of html twig file.
+" https://github.com/tokutake/twig-indent
+"NeoBundle 'tokutake/twig-indent'
 "============== TagList :     ================
 " @TODO: Complete infos
 NeoBundle 'taglist.vim'
@@ -1677,7 +1691,6 @@ noremap <silent> ZZ :call AutocloseSession()<CR>
 " }}}
 
 " Real Vimmer forget the cross
-"@FIXME: Seem's to "break" file explorer.
 no <down> ddp
 no <left> :tabprevious<CR>
 no <right> :tabnext<CR>
