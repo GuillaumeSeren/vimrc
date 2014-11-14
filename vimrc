@@ -1706,7 +1706,32 @@ vno <left> <Nop>
 vno <right> <Nop>
 vno <up> <Nop>
 
+"@FIXME: Seem's to "break" file explorer.
+"From:
+"http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
+augroup netrw_dvorak_fix
+    autocmd!
+    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+augroup END
 
+function! Fix_netrw_maps_for_dvorak()
+    " {cr} = « gauche / droite »
+    " @TODO: Remap to more vinegar related feature, like:
+    " - c : Go back
+    " - t : Preview (ranger inspired)
+    noremap <buffer> c h
+    noremap <buffer> r l
+    " {ts} = « haut / bas »
+    noremap <buffer> t j
+    noremap <buffer> s k
+    " noremap <buffer> d h
+    " noremap <buffer> h gj
+    " noremap <buffer> t gk
+    " noremap <buffer> n l
+    " noremap <buffer> e d
+    " noremap <buffer> l n
+    " and any others...
+endfunction
 
 " OpenTab and lcd to the file {{{:
 " Change local working dir upon tab creation
