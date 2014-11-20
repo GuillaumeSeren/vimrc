@@ -1365,6 +1365,15 @@ set encoding=utf-8
 "set fileencoding=utf-8
 " }}}
 
+" TERM TYPE {{{ :
+" Let's use screen-256
+" From: http://reyhan.org/2013/12/colours-on-vim-and-tmux.html
+"set term=screen-256color
+"set term=rxvt-unicode-256color
+" Just for vimShell
+"let g:vimshell_environment_term='rxvt-unicode-256color'
+" }}}
+
 " Clipboard {{{ :
 " Set the clipboard if running inside X11
 if has("X11")
