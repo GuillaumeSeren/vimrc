@@ -264,6 +264,15 @@ NeoBundle 'tpope/vim-ragtag'
 " http://www.vim.org/scripts/script.php?script_id=4300
 " https://github.com/tpope/vim-eunuch
 NeoBundle 'tpope/vim-eunuch'
+"============== vim-scriptease : ================
+" tpope/vim-scriptease
+" scriptease.vim: A Vim plugin for Vim plugins
+" http://www.vim.org/scripts/script.php?script_id=4394
+NeoBundle 'tpope/vim-scriptease'
+"============== MatchIt : =======================
+"extended % matching for HTML, LaTeX, and many other languages
+"http://www.vim.org/scripts/script.php?script_id=39
+NeoBundle 'benjifisher/matchit.zip'
 "============== vim-gitgutter : ====================
 " airblade/vim-gitgutter
 " A Vim plugin which shows a git diff in the gutter (sign column) and
@@ -274,7 +283,7 @@ NeoBundle 'airblade/vim-gitgutter'
 " A parser for a condensed HTML format
 " Deprecated: car requiert Python
 " https://github.com/rstacruz/sparkup
-" NeoBundle 'rstacruz/sparkup'
+NeoBundle 'rstacruz/sparkup'
 "============== EasyMotion :     ================
 " Vim motions on speed!
 " https://github.com/Lokaltog/vim-easymotion
@@ -367,6 +376,11 @@ nmap ) <Plug>SearchPartyVisualFindSubstitute
 " & Starts a :substitute using the currently selected visual text.
 "   <Plug>SearchPartyVisualFindSubstitute
 "=============================================
+"============== Vim-Move : ===================
+" https://github.com/matze/vim-move
+" Plugin to move lines and selections up and down
+" http://www.vim.org/scripts/script.php?script_id=4687
+NeoBundle 'matze/vim-move'
 "============== vim-github-dashboard : =======
 " junegunn/vim-github-dashboard
 " Browse GitHub events in Vim
@@ -573,6 +587,10 @@ NeoBundle '2072/PHP-Indenting-for-VIm'
 " Twig syntax highlighting, snipMate, etc.
 " https://github.com/evidens/vim-twig
 NeoBundle 'evidens/vim-twig'
+"============== PHP Getter / Setter : ====
+" php_getset.vim
+" Automatically add getter/setters for PHP4 properties.
+NeoBundle 'vim-scripts/php_getset.vim'
 "============== Twig Indent : ================
 " Vim script for indentation of html twig file.
 " https://github.com/tokutake/twig-indent
@@ -1133,7 +1151,9 @@ syntax enable
 " Coloration syntaxique des fichiers zarb :
 " TWIG :
 au BufRead,BufNewFile *.twig set syntax=htmldjango
-
+"============== vim-move : ================
+" Custom vim-move shortcut
+"let g:move_key_modifier = '<c>'
 "============== ColorSheme :  =============
 " vim-colors-solarized
 " precision colorscheme for the vim text editor
