@@ -308,6 +308,16 @@ NeoBundle 'mileszs/ack.vim'
 " CLI script 'ack'
 NeoBundle 'rking/ag.vim'
 "========================================================
+"============== vim-test ===============================
+" janko-m/vim-test
+"  Run your tests at the speed of thought
+NeoBundle 'janko-m/vim-test'
+"============== vim-latex ==============================
+" lervag/vim-latex
+" https://github.com/lervag/vim-latex
+" A simple and lightweight vim-plugin for editing LaTeX files.
+NeoBundle 'lervag/vim-latex'
+"============== SUCKLESS ===============================
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
 " manager in Vim.
@@ -590,6 +600,27 @@ NeoBundle 'evidens/vim-twig'
 "============== PHP Getter / Setter : ====
 " php_getset.vim
 " Automatically add getter/setters for PHP4 properties.
+" Commands:
+"  :InsertGetterSetter
+"      Inserts a getter/setter for the property on the current line, or
+"      the range of properties specified via a visual block or x,y range
+"      notation.  The user is prompted to determine what type of method
+"      to insert.
+"
+"  :InsertGetterOnly
+"      Inserts a getter for the property on the current line, or the
+"      range of properties specified via a visual block or x,y range
+"      notation.  The user is not prompted.
+"
+"  :InsertSetterOnly
+"      Inserts a setter for the property on the current line, or the
+"      range of properties specified via a visual block or x,y range
+"      notation.  The user is not prompted.
+"
+"  :InsertBothGetterSetter
+"      Inserts a getter and setter for the property on the current line,
+"      or the range of properties specified via a visual block or x,y
+"      range notation.  The user is not prompted.
 NeoBundle 'vim-scripts/php_getset.vim'
 "============== Twig Indent : ================
 " Vim script for indentation of html twig file.
@@ -983,6 +1014,15 @@ let g:EasyMotion_leader_key = '\'
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
 " CLI script 'ack'
 "========================================================
+"============== vim-test ===============================
+" janko-m/vim-test
+"  Run your tests at the speed of thought
+"NeoBundle 'janko-m/vim-test'
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+"============== SUCKLESS ===============================
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
 " manager in Vim.
