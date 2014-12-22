@@ -348,10 +348,11 @@ NeoBundle 'joonty/vdebug.git'
 " A tree explorer plugin for vim.
 " https://github.com/scrooloose/nerdtree
 "NeoBundle 'scrooloose/nerdtree'
-"============== NerdCommenter :     ================
-" Vim plugin for intensely orgasmic commenting
-" https://github.com/scrooloose/nerdcommenter
-NeoBundle 'scrooloose/nerdcommenter'
+"============== Vim-commentary : =================
+"tpope/vim-commentary
+"commentary.vim: comment stuff out
+"http://www.vim.org/scripts/script.php?script_id=3695
+NeoBundle 'tpope/vim-commentary'
 "============== ChekSyntax :     ================
 " Check a file's syntax when saving a file (php, ruby, tex ...) with vim
 " https://github.com/tomtom/checksyntax_vim
