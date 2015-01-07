@@ -120,93 +120,6 @@ NeoBundle 'ujihisa/unite-colorscheme'
 " https://github.com/scrooloose/syntastic
 NeoBundle 'scrooloose/syntastic.git'
 
-" DBEXT {{{2
-" vim-scripts/dbext.vim
-" Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL,
-" DBI,..)
-" http://www.vim.org/scripts/script.php?script_id=356
-" https://github.com/vim-scripts/dbext.vim
-" help : ':h dbext-tutorial'
-NeoBundle 'vim-scripts/dbext.vim'
-
-" GUNDO {{{2
-" @TODO: Should be replaced by a unite call
-" Gundo.vim is Vim plugin to visualize your Vim undo tree.
-" sjl / gundo.vim
-" A git mirror of gundo.vim
-" http://sjl.bitbucket.org/gundo.vim/
-" quick setup : http://sjl.bitbucket.org/gundo.vim/#installation
-"let g:gundo_width = 60
-"let g:gundo_preview_height = 40
-"let g:gundo_right = 1
-"nnoremap <F5> :GundoToggle<CR>
-"===========================================
-NeoBundle 'sjl/gundo.vim.git'
-
-" SearchParty {{{2
-" dahu/SearchParty
-" Extended search commands and maps for Vim
-" https://github.com/dahu/SearchParty
-" NeoBundle 'dahu/cearchParty'
-" Enhanced searches, highlights and matches for Vim
-" Tip
-" If you like SearchParty and want to share the W00t!, I’m grateful for tips
-" or beverages.
-" Visual Searches
-"
-" * Searches for the next occurrence of the currently selected visual
-"   text. <Plug>SearchPartyVisualFindNext
-"
-" # Searches for the prior occurrence of the currently selected visual
-"   text. <Plug>SearchPartyVisualFindPrior
-"
-" & Starts a :substitute using the currently selected visual text.
-"   <Plug>SearchPartyVisualFindSubstitute
-NeoBundle 'dahu/SearchParty'
-
-" SHABERU {{{2
-" supermomonga/shaberu.vim
-" めっちゃしゃべる
-" https://github.com/supermomonga/shaberu.vim
-" Shaberu.vim is the wrapper of speech synethis. You can make your vim speak
-" easily with Shaberu.vim.
-NeoBundle 'supermomonga/shaberu.vim'
-
-" vimwiki {{{2
-" Personal Wiki for Vim
-" https://github.com/vimwiki/vimwiki
-" Key bindings
-" see :h vimwiki-mappings
-" normal mode:
-" <Leader>ww -- Open default wiki index file.
-" <Leader>wt -- Open default wiki index file in a new tab.
-" <Leader>ws -- Select and open wiki index file.
-" <Leader>wd -- Delete wiki file you are in.
-" <Leader>wr -- Rename wiki file you are in.
-" <Enter> -- Folow/Create wiki link
-" <Shift-Enter> -- Split and folow/create wiki link
-" <Ctrl-Enter> -- Vertical split and folow/create wiki link
-" <Backspace> -- Go back to parent(previous) wiki link
-" <Tab> -- Find next wiki link
-" <Shift-Tab> -- Find previous wiki link
-NeoBundle 'vimwiki/vimwiki'
-
-" tabular {{{2
-" https://github.com/godlygeek/tabular
-" Vim script for text filtering and alignment
-" one  : 1
-" two  : 2
-" tree : 3
-" select text in visual mode, then hit : Tabularize /:
-" change the : with the needed char to align
-NeoBundle 'godlygeek/tabular'
-
-" YouCompleteMe {{{2
-"A code-completion engine for Vim
-"http://valloric.github.io/YouCompleteMe/
-"https://github.com/Valloric/YouCompleteMe
-"NeoBundle 'Valloric/YouCompleteMe'
-
 " VimShell {{{2
 " Powerful shell implemented by vim.
 " https://github.com/Shougo/vimshell.vim
@@ -228,36 +141,92 @@ NeoBundle 'tpope/vim-sensible'
 " https://github.com/tpope/vim-fugitive
 NeoBundle 'tpope/vim-fugitive'
 
-" Surround {{{2
-" surround.vim: quoting/parenthesizing made simple
-" https://github.com/tpope/vim-surround
-NeoBundle 'tpope/vim-surround'
+" VimMisc {{{2
+" Miscellaneous auto-load Vim scripts required by easytags
+" https://github.com/xolox/vim-misc
+NeoBundle 'xolox/vim-misc.git'
 
-" SpeedDating {{{2
-" speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
-" https://github.com/tpope/vim-speeddating
-NeoBundle 'tpope/vim-speeddating.git'
-
-" UniPaired {{{2
-" key combos for 'pairs' of things. Mostly previous/next type stuff
-" https://github.com/tpope/vim-unimpaired
-NeoBundle 'tpope/vim-unimpaired'
-
-" Rails {{{2
-" rails.vim: Ruby on Rails power tools
-" https://github.com/tpope/vim-rails
-NeoBundle 'tpope/vim-rails.git'
-
-" Vinegar {{{2
-" vinegar.vim: combine with netrw to create a delicious salad dressing
-" https://github.com/tpope/vim-vinegar
-NeoBundle 'tpope/vim-vinegar.git'
+" VimSession {{{2
+" Extended session management for Vim (:mksession on steroids)
+" https://github.com/xolox/vim-session
+NeoBundle 'xolox/vim-session.git'
 
 " Repeat {{{2
 " repeat.vim: enable repeating supported plugin maps with "."
 " http://www.vim.org/scripts/script.php?script_id=2136
 " https://github.com/tpope/vim-repeat
 NeoBundle 'tpope/vim-repeat'
+
+" SpeedDating {{{2
+" speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
+" https://github.com/tpope/vim-speeddating
+NeoBundle 'tpope/vim-speeddating.git'
+
+" Vinegar {{{2
+" vinegar.vim: combine with netrw to create a delicious salad dressing
+" https://github.com/tpope/vim-vinegar
+NeoBundle 'tpope/vim-vinegar.git'
+
+" vim-eunuch {{{2
+" tpope/vim-eunuch
+" eunuch.vim: helpers for UNIX
+" http://www.vim.org/scripts/script.php?script_id=4300
+" https://github.com/tpope/vim-eunuch
+NeoBundle 'tpope/vim-eunuch'
+
+"" UniPaired {{{2
+"" key combos for 'pairs' of things. Mostly previous/next type stuff
+"" https://github.com/tpope/vim-unimpaired
+"NeoBundle 'tpope/vim-unimpaired'
+"
+"" Surround {{{2
+"" surround.vim: quoting/parenthesizing made simple
+"" https://github.com/tpope/vim-surround
+"NeoBundle 'tpope/vim-surround'
+"
+"" Vim-commentary {{{2
+"" http://www.vim.org/scripts/script.php?script_id=3695
+"" tpope/vim-commentary
+"" commentary.vim: comment stuff out
+"NeoBundle 'tpope/vim-commentary'
+
+" VimAirline {{{2
+" lean & mean status/tabline for vim that's light as air
+" https://github.com/bling/vim-airline
+NeoBundle 'bling/vim-airline'
+
+" vimwiki {{{2
+" Personal Wiki for Vim
+" https://github.com/vimwiki/vimwiki
+" Key bindings
+" see :h vimwiki-mappings
+" normal mode:
+" <Leader>ww -- Open default wiki index file.
+" <Leader>wt -- Open default wiki index file in a new tab.
+" <Leader>ws -- Select and open wiki index file.
+" <Leader>wd -- Delete wiki file you are in.
+" <Leader>wr -- Rename wiki file you are in.
+" <Enter> -- Folow/Create wiki link
+" <Shift-Enter> -- Split and folow/create wiki link
+" <Ctrl-Enter> -- Vertical split and folow/create wiki link
+" <Backspace> -- Go back to parent(previous) wiki link
+" <Tab> -- Find next wiki link
+" <Shift-Tab> -- Find previous wiki link
+NeoBundle 'vimwiki/vimwiki'
+
+" EasyMotion {{{2
+" Vim motions on speed!
+" https://github.com/Lokaltog/vim-easymotion
+NeoBundle 'Lokaltog/vim-easymotion'
+
+" Stupid-EasyMotion {{{2
+" A dumbed down version of EasyMotion
+" that aids navigation on the current line
+" We use the global leader
+" <Leader><Leader>w  - make every word a target
+" <Leader><Leader>W  - make every space separated word a target
+" <Leader><Leader>fx - make every character x in the line a target
+NeoBundle 'joequery/Stupid-EasyMotion'
 
 " RagTag {{{2
 " ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
@@ -282,23 +251,11 @@ NeoBundle 'tpope/vim-repeat'
 " CTRL+X "       <%# foo| %>
 NeoBundle 'tpope/vim-ragtag'
 
-" vim-eunuch {{{2
-" tpope/vim-eunuch
-" eunuch.vim: helpers for UNIX
-" http://www.vim.org/scripts/script.php?script_id=4300
-" https://github.com/tpope/vim-eunuch
-NeoBundle 'tpope/vim-eunuch'
-
-" vim-scriptease {{{2
-" tpope/vim-scriptease
-" scriptease.vim: A Vim plugin for Vim plugins
-" http://www.vim.org/scripts/script.php?script_id=4394
-NeoBundle 'tpope/vim-scriptease'
-
-" MatchIt {{{2
-"extended % matching for HTML, LaTeX, and many other languages
-"http://www.vim.org/scripts/script.php?script_id=39
-NeoBundle 'benjifisher/matchit.zip'
+" vim-colors-solarized {{{2
+" precision colorscheme for the vim text editor
+" http://ethanschoonover.com/solarized
+" https://github.com/altercation/vim-colors-solarized
+NeoBundle 'altercation/vim-colors-solarized.git'
 
 " vim-gitgutter {{{2
 " airblade/vim-gitgutter
@@ -306,377 +263,420 @@ NeoBundle 'benjifisher/matchit.zip'
 " stages/reverts hunks.
 NeoBundle 'airblade/vim-gitgutter'
 
-" sparkup {{{2
-" A parser for a condensed HTML format
-" Deprecated: car requiert Python
-" https://github.com/rstacruz/sparkup
-NeoBundle 'rstacruz/sparkup'
-
-" EasyMotion {{{2
-" Vim motions on speed!
-" https://github.com/Lokaltog/vim-easymotion
-NeoBundle 'Lokaltog/vim-easymotion'
-
-" Stupid-EasyMotion {{{2
-" A dumbed down version of EasyMotion
-" that aids navigation on the current line
-" We use the global leader
-" <Leader><Leader>w  - make every word a target
-" <Leader><Leader>W  - make every space separated word a target
-" <Leader><Leader>fx - make every character x in the line a target
-NeoBundle 'joequery/Stupid-EasyMotion'
-
-" ACK.VIM {{{2
-" https://github.com/mileszs/ack.vim
-" Vim plugin for the Perl module / CLI script 'ack'
-NeoBundle 'mileszs/ack.vim'
-
-" AG.VIM {{{2
-" https://github.com/rking/ag.vim
-" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
-" CLI script 'ack'
-NeoBundle 'rking/ag.vim'
-
-" vim-test {{{2
-" janko-m/vim-test
-"  Run your tests at the speed of thought
-NeoBundle 'janko-m/vim-test'
-
-" vim-latex {{{2
-" lervag/vim-latex
-" https://github.com/lervag/vim-latex
-" A simple and lightweight vim-plugin for editing LaTeX files.
-NeoBundle 'lervag/vim-latex'
-
-" SUCKLESS {{{2
-" https://github.com/fabi1cazenave/suckless.vim
-" This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
-" manager in Vim.
-NeoBundle 'fabi1cazenave/suckless.vim'
-
-" TagBar {{{2
-" Vim plugin that displays tags in a window, ordered by class etc.
-" https://github.com/majutsushi/tagbar
-NeoBundle 'majutsushi/tagbar'
-
-" BashSupport {{{2
-" BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
-" https://github.com/vim-scripts/bash-support.vim
-"NeoBundle 'vim-scripts/bash-support.vim'
-
-" vDebug {{{2
-" On remplace Xdebug par Vdebug apparement plus performant
-" http://www.vim.org/scripts/script.php?script_id=4170
-" https://github.com/joonty/vdebug
-" Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
-NeoBundle 'joonty/vdebug.git'
-
-" EasyAlign {{{2
-" A simple Vim alignment plugin
-" https://github.com/junegunn/vim-easy-align
-"NeoBundle 'junegunn/vim-easy-align'
-
-" Startify {{{2
-" A fancy start screen for Vim.
-" https://github.com/mhinz/vim-startify
-"NeoBundle 'mhinz/vim-startify'
-
-" NerdTree {{{2
-" A tree explorer plugin for vim.
-" https://github.com/scrooloose/nerdtree
-"NeoBundle 'scrooloose/nerdtree'
-
-" Vim-commentary {{{2
-"tpope/vim-commentary
-"commentary.vim: comment stuff out
-"http://www.vim.org/scripts/script.php?script_id=3695
-NeoBundle 'tpope/vim-commentary'
-
-" ChekSyntax {{{2
-" Check a file's syntax when saving a file (php, ruby, tex ...) with vim
-" https://github.com/tomtom/checksyntax_vim
-"NeoBundle 'tomtom/checksyntax_vim'
-
-" Matrix Screensaver {{{2
-" Matrix Screen for VIM
-" https://github.com/uguu-org/vim-matrix-screensaver
-NeoBundle 'uguu-org/vim-matrix-screensaver'
-
-" Vim-Move {{{2
-" https://github.com/matze/vim-move
-" Plugin to move lines and selections up and down
-" http://www.vim.org/scripts/script.php?script_id=4687
-NeoBundle 'matze/vim-move'
-
-" vim-github-dashboard {{{2
-" junegunn/vim-github-dashboard
-" Browse GitHub events in Vim
-" Browse GitHub events (user dashboard, user/repo activity) in Vim.
-
-" Commands
-" With authentication
+" SearchParty {{{2
+" dahu/SearchParty
+" Extended search commands and maps for Vim
+" https://github.com/dahu/SearchParty
+" NeoBundle 'dahu/cearchParty'
+" Enhanced searches, highlights and matches for Vim
+" Tip
+" If you like SearchParty and want to share the W00t!, I’m grateful for tips
+" or beverages.
+" Visual Searches
 "
-" :GHDashboard
-" :GHDashboard USER
-" :GHActivity
-" :GHActivity USER
-" :GHActivity USER/REPO
-" Without authentication (60 calls/hour limit, only public
-" activities)
+" * Searches for the next occurrence of the currently selected visual
+"   text. <Plug>SearchPartyVisualFindNext
 "
-" :GHDashboard! USER
-" :GHActivity! USER
-" :GHActivity! USER/REPO
-" Navigation
+" # Searches for the prior occurrence of the currently selected visual
+"   text. <Plug>SearchPartyVisualFindPrior
+"
+" & Starts a :substitute using the currently selected visual text.
+"   <Plug>SearchPartyVisualFindSubstitute
+NeoBundle 'dahu/SearchParty'
 
-" Use Tab and Shift-Tab to navigate back and
-" forth through the links.
-" Press Enter key or double-click on a link to
-" open it in the browser.
-" Press R to refresh the window.
-" Press q to close the window.
-NeoBundle 'junegunn/vim-github-dashboard'
+" DBEXT {{{2
+" vim-scripts/dbext.vim
+" Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL,
+" DBI,..)
+" http://www.vim.org/scripts/script.php?script_id=356
+" https://github.com/vim-scripts/dbext.vim
+" help : ':h dbext-tutorial'
+NeoBundle 'vim-scripts/dbext.vim'
 
-" Project {{{2
-" lcd to the root of the project everytime you BufEnter a file inside a project.
-" https://github.com/amiorin/vim-project
-NeoBundle 'amiorin/vim-project'
-
-" VimMisc {{{2
-" Miscellaneous auto-load Vim scripts required by easytags
-" https://github.com/xolox/vim-misc
-NeoBundle 'xolox/vim-misc.git'
-
-" BlockIt {{{2
-" sk1418 / blockit
-" a vim plugin to wrap lines in a block
-" https://github.com/sk1418/blockit
-NeoBundle 'sk1418/blockit.git'
-
-" HowMuch {{{2
-" sk1418 / HowMuch
-" A Vim plugin to calculate visual selected expressions
-" https://github.com/sk1418/HowMuch
-NeoBundle 'sk1418/HowMuch.git'
-
-" EasyTags {{{2
-" Automated tag file generation and syntax highlighting of tags in Vim
-" https://github.com/xolox/vim-easytags
-"@FIXME: Fix the generation process :
-" - Provide a command to generate a tag in a project.
-" - Use specific tag file by project.
-" - Load / Reload only tag file selected by the pwd value project name ?
-" - In theory the base tag file should be provided by a call from the VCS.
-" -
-"NeoBundle 'xolox/vim-easytags.git'
-"@TODO: Fix easytags call to be lighter
-" EasyTags setup
-"let g:easytags_file = '~/.vim/tags/generic'
-" Set tags generic for vim
-"set tags='~/.vim/tags/'
-"let g:easytags_autorecurse = 1
-"let g:easytags_include_members = 1
-"let g:easytags_dynamic_file = 2
-" Refresh Tags on write file
-"let g:easytags_events = ['BufWritePost']
-" Updtate highlight
-"let g:easytags_auto_update = 0
-"@TODO: Add async call to avoid freezing vim.
-"let g:eastags_async = 1
-
-" VimSession {{{2
-" Extended session management for Vim (:mksession on steroids)
-" https://github.com/xolox/vim-session
-NeoBundle 'xolox/vim-session.git'
-
-" VimAirline {{{2
-" lean & mean status/tabline for vim that's light as air
-" https://github.com/bling/vim-airline
-NeoBundle 'bling/vim-airline'
-
-" CtrlP {{{2
-" Fuzzy file, buffer, mru, tag, etc finder.
-" https://github.com/kien/ctrlp.vim
-"NeoBundle 'kien/ctrlp.vim.git'
-
-" cra.vim {{{2
-" cra.vim
-" Vim plugin to create yearly timesheet
-NeoBundle 'YannMoisan/cra.vim'
-
-" tomorrow-themes-vim {{{2
-" Tomorrow Theme for Vim
-NeoBundle 'd11wtq/tomorrow-theme-vim'
-
-" CALENDAR {{{2
-" A calendar application for Vim
-" https://github.com/itchyny/calendar.vim
-NeoBundle 'itchyny/calendar.vim'
-
-" COLOR {{{2
-" Colour schemes for a variety of editors created by Dayle Rees.
-" http://daylerees.github.io
-"NeoBundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
-
+" Rails {{{2
+" rails.vim: Ruby on Rails power tools
+" https://github.com/tpope/vim-rails
+NeoBundle 'tpope/vim-rails.git'
 
 " VCSCOMMAND {{{2
 " http://www.vim.org/scripts/script.php?script_id=90
 " https://code.google.com/p/vcscommand/
 NeoBundle 'vcscommand.vim'
 
-" SuperTab {{{2
-" https://github.com/ervandew/supertab
-" Perform all your vim insert mode completions with Tab
-"NeoBundle 'SuperTab'
+" vim-scriptease {{{2
+" tpope/vim-scriptease
+" scriptease.vim: A Vim plugin for Vim plugins
+" http://www.vim.org/scripts/script.php?script_id=4394
+NeoBundle 'tpope/vim-scriptease'
 
-" ColorSheme {{{2
-
-" vim-colors-solarized {{{2
-" precision colorscheme for the vim text editor
-" http://ethanschoonover.com/solarized
-" https://github.com/altercation/vim-colors-solarized
-NeoBundle 'altercation/vim-colors-solarized.git'
-
-" morhetz / gruvbox {{{2
-" Retro groove color scheme for Vim
-" https://github.com/morhetz/gruvbox
-NeoBundle 'morhetz/gruvbox.git'
-
-" zeis / vim-kolor {{{2
-" Vim color scheme.
-" https://github.com/zeis/vim-kolor
-NeoBundle 'zeis/vim-kolor.git'
-
-" junegunn / seoul256.vim {{{2
-" a low-contrast Vim color scheme based on Seoul Colors
-NeoBundle 'junegunn/seoul256.vim.git'
-
-" Moria {{{2
-" A color scheme for GUI supposed to be highly readable
-" http://www.vim.org/scripts/script.php?script_id=1464
-NeoBundle 'vim-scripts/moria'
-
-" Bad Wolf {{{2
-" A Vim color scheme.
-" https://github.com/sjl/badwolf/
-NeoBundle 'sjl/badwolf'
-
-" Molokai {{{2
-" tomasr/molokai
-" Molokai color scheme for Vim
-" https://github.com/tomasr/molokai
-NeoBundle 'tomasr/molokai'
-
-" Zenburn {{{2
-NeoBundle 'Zenburn'
-
-" Vividchalk {{{2
-" a colorscheme strangely reminiscent of Vibrant Ink for a
-" certain OS X editor
-" https://github.com/tpope/vim-vividchalk
-" http://www.vim.org/scripts/script.php?script_id=1891
-NeoBundle 'tpope/vim-vividchalk.git'
-
-" darkspectrum {{{2
-" @TODO: Complete infos
-NeoBundle 'darkspectrum'
-
-" ROGUE.VIM {{{2
-" katono/rogue.vim
-" Porting of Rogue-clone II for Vim
-NeoBundle 'katono/rogue.vim'
-
-" Characterize {{{2
-" tpope/vim-characterize
-" characterize.vim:
-" Unicode character metadata
-" http://www.vim.org/scripts/script.php?script_id=4410
-NeoBundle 'tpope/vim-characterize'
-
-" php.vim {{{2
-"NeoBundle 'php.vim'
-" 20141028: Change to new StanAngeloff
-" https://github.com/StanAngeloff/php.vim
-NeoBundle 'StanAngeloff/php.vim'
-
-" Better PHP indent {{{2
-" The official VIm indent script for PHP
-" http://www.2072productions.com/to/phpindent.txt
-" https://github.com/2072/PHP-Indenting-for-VIm
-NeoBundle '2072/PHP-Indenting-for-VIm'
-
-" Twig plugin {{{2
-" evidens/vim-twig
-" Twig syntax highlighting, snipMate, etc.
-" https://github.com/evidens/vim-twig
-NeoBundle 'evidens/vim-twig'
-
-" PHP Getter / Setter {{{2
-" php_getset.vim
-" Automatically add getter/setters for PHP4 properties.
-" Commands:
-"  :InsertGetterSetter
-"      Inserts a getter/setter for the property on the current line, or
-"      the range of properties specified via a visual block or x,y range
-"      notation.  The user is prompted to determine what type of method
-"      to insert.
+"" vDebug {{{2
+"" On remplace Xdebug par Vdebug apparement plus performant
+"" http://www.vim.org/scripts/script.php?script_id=4170
+"" https://github.com/joonty/vdebug
+"" Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
+"NeoBundle 'joonty/vdebug.git'
 "
-"  :InsertGetterOnly
-"      Inserts a getter for the property on the current line, or the
-"      range of properties specified via a visual block or x,y range
-"      notation.  The user is not prompted.
+"" GUNDO {{{2
+"" @TODO: Should be replaced by a unite call
+"" Gundo.vim is Vim plugin to visualize your Vim undo tree.
+"" sjl / gundo.vim
+"" A git mirror of gundo.vim
+"" http://sjl.bitbucket.org/gundo.vim/
+"" quick setup : http://sjl.bitbucket.org/gundo.vim/#installation
+""let g:gundo_width = 60
+""let g:gundo_preview_height = 40
+""let g:gundo_right = 1
+""nnoremap <F5> :GundoToggle<CR>
+""===========================================
+"NeoBundle 'sjl/gundo.vim.git'
 "
-"  :InsertSetterOnly
-"      Inserts a setter for the property on the current line, or the
-"      range of properties specified via a visual block or x,y range
-"      notation.  The user is not prompted.
+"" SHABERU {{{2
+"" supermomonga/shaberu.vim
+"" めっちゃしゃべる
+"" https://github.com/supermomonga/shaberu.vim
+"" Shaberu.vim is the wrapper of speech synethis. You can make your vim speak
+"" easily with Shaberu.vim.
+"NeoBundle 'supermomonga/shaberu.vim'
 "
-"  :InsertBothGetterSetter
-"      Inserts a getter and setter for the property on the current line,
-"      or the range of properties specified via a visual block or x,y
-"      range notation.  The user is not prompted.
-NeoBundle 'vim-scripts/php_getset.vim'
-
-" Twig Indent {{{2
-" Vim script for indentation of html twig file.
-" https://github.com/tokutake/twig-indent
-"NeoBundle 'tokutake/twig-indent'
-
-" TagList {{{2
-NeoBundle 'taglist.vim'
-
-" a.vim {{{2
-" A few of quick commands to swtich between source files and header files
-" quickly.
-NeoBundle 'a.vim'
-
-" argtextobj.vim {{{2
-" Text-object like motion for arguments
-NeoBundle 'argtextobj.vim'
-
-" CSS color {{{2
-" Highlight colors in css files
-" NeoBundle 'skammer/vim-css-color'
-" NOT WORKING
-"Highlight colors in css files
-" http://ap.github.io/vim-css-color/
-"NeoBundle 'ap/vim-css-color'
-
-" css.vim {{{2
-" css.vim
-" Cutting-edge vim css syntax file
-" http://www.vim.org
-"NeoBundle "JulesWang/css.vim"
-
-" Bundle samples {{{2
-" non github repos{{{3
-" CommandT :     ================
-"Bundle 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (ie. when working on your own plugin)
-"Bundle 'file:///Users/gmarik/path/to/plugin'
-" Just for ex of multi repo {{{3
-"NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-
+"" tabular {{{2
+"" https://github.com/godlygeek/tabular
+"" Vim script for text filtering and alignment
+"" one  : 1
+"" two  : 2
+"" tree : 3
+"" select text in visual mode, then hit : Tabularize /:
+"" change the : with the needed char to align
+"NeoBundle 'godlygeek/tabular'
+"
+"" YouCompleteMe {{{2
+""A code-completion engine for Vim
+""http://valloric.github.io/YouCompleteMe/
+""https://github.com/Valloric/YouCompleteMe
+""NeoBundle 'Valloric/YouCompleteMe'
+"
+"" MatchIt {{{2
+""extended % matching for HTML, LaTeX, and many other languages
+""http://www.vim.org/scripts/script.php?script_id=39
+"NeoBundle 'benjifisher/matchit.zip'
+"
+"" sparkup {{{2
+"" A parser for a condensed HTML format
+"" Deprecated: car requiert Python
+"" https://github.com/rstacruz/sparkup
+"NeoBundle 'rstacruz/sparkup'
+"
+"" ACK.VIM {{{2
+"" https://github.com/mileszs/ack.vim
+"" Vim plugin for the Perl module / CLI script 'ack'
+"NeoBundle 'mileszs/ack.vim'
+"
+"" AG.VIM {{{2
+"" https://github.com/rking/ag.vim
+"" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
+"" CLI script 'ack'
+"NeoBundle 'rking/ag.vim'
+"
+"" vim-test {{{2
+"" janko-m/vim-test
+""  Run your tests at the speed of thought
+"NeoBundle 'janko-m/vim-test'
+"
+"" vim-latex {{{2
+"" lervag/vim-latex
+"" https://github.com/lervag/vim-latex
+"" A simple and lightweight vim-plugin for editing LaTeX files.
+"NeoBundle 'lervag/vim-latex'
+"
+"" SUCKLESS {{{2
+"" https://github.com/fabi1cazenave/suckless.vim
+"" This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
+"" manager in Vim.
+"NeoBundle 'fabi1cazenave/suckless.vim'
+"
+"" TagBar {{{2
+"" Vim plugin that displays tags in a window, ordered by class etc.
+"" https://github.com/majutsushi/tagbar
+"NeoBundle 'majutsushi/tagbar'
+"
+"" BashSupport {{{2
+"" BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
+"" https://github.com/vim-scripts/bash-support.vim
+""NeoBundle 'vim-scripts/bash-support.vim'
+"
+"" EasyAlign {{{2
+"" A simple Vim alignment plugin
+"" https://github.com/junegunn/vim-easy-align
+""NeoBundle 'junegunn/vim-easy-align'
+"
+"" Startify {{{2
+"" A fancy start screen for Vim.
+"" https://github.com/mhinz/vim-startify
+""NeoBundle 'mhinz/vim-startify'
+"
+"" NerdTree {{{2
+"" A tree explorer plugin for vim.
+"" https://github.com/scrooloose/nerdtree
+""NeoBundle 'scrooloose/nerdtree'
+"
+"" ChekSyntax {{{2
+"" Check a file's syntax when saving a file (php, ruby, tex ...) with vim
+"" https://github.com/tomtom/checksyntax_vim
+""NeoBundle 'tomtom/checksyntax_vim'
+"
+"" Matrix Screensaver {{{2
+"" Matrix Screen for VIM
+"" https://github.com/uguu-org/vim-matrix-screensaver
+"NeoBundle 'uguu-org/vim-matrix-screensaver'
+"
+"" Vim-Move {{{2
+"" https://github.com/matze/vim-move
+"" Plugin to move lines and selections up and down
+"" http://www.vim.org/scripts/script.php?script_id=4687
+"NeoBundle 'matze/vim-move'
+"
+"" vim-github-dashboard {{{2
+"" junegunn/vim-github-dashboard
+"" Browse GitHub events in Vim
+"" Browse GitHub events (user dashboard, user/repo activity) in Vim.
+"
+"" Commands
+"" With authentication
+""
+"" :GHDashboard
+"" :GHDashboard USER
+"" :GHActivity
+"" :GHActivity USER
+"" :GHActivity USER/REPO
+"" Without authentication (60 calls/hour limit, only public
+"" activities)
+""
+"" :GHDashboard! USER
+"" :GHActivity! USER
+"" :GHActivity! USER/REPO
+"" Navigation
+"
+"" Use Tab and Shift-Tab to navigate back and
+"" forth through the links.
+"" Press Enter key or double-click on a link to
+"" open it in the browser.
+"" Press R to refresh the window.
+"" Press q to close the window.
+"NeoBundle 'junegunn/vim-github-dashboard'
+"
+"" Project {{{2
+"" lcd to the root of the project everytime you BufEnter a file inside a project.
+"" https://github.com/amiorin/vim-project
+"NeoBundle 'amiorin/vim-project'
+"
+"" BlockIt {{{2
+"" sk1418 / blockit
+"" a vim plugin to wrap lines in a block
+"" https://github.com/sk1418/blockit
+"NeoBundle 'sk1418/blockit.git'
+"
+"" HowMuch {{{2
+"" sk1418 / HowMuch
+"" A Vim plugin to calculate visual selected expressions
+"" https://github.com/sk1418/HowMuch
+"NeoBundle 'sk1418/HowMuch.git'
+"
+"" EasyTags {{{2
+"" Automated tag file generation and syntax highlighting of tags in Vim
+"" https://github.com/xolox/vim-easytags
+""@FIXME: Fix the generation process :
+"" - Provide a command to generate a tag in a project.
+"" - Use specific tag file by project.
+"" - Load / Reload only tag file selected by the pwd value project name ?
+"" - In theory the base tag file should be provided by a call from the VCS.
+"" -
+""NeoBundle 'xolox/vim-easytags.git'
+""@TODO: Fix easytags call to be lighter
+"" EasyTags setup
+""let g:easytags_file = '~/.vim/tags/generic'
+"" Set tags generic for vim
+""set tags='~/.vim/tags/'
+""let g:easytags_autorecurse = 1
+""let g:easytags_include_members = 1
+""let g:easytags_dynamic_file = 2
+"" Refresh Tags on write file
+""let g:easytags_events = ['BufWritePost']
+"" Updtate highlight
+""let g:easytags_auto_update = 0
+""@TODO: Add async call to avoid freezing vim.
+""let g:eastags_async = 1
+"
+"" CtrlP {{{2
+"" Fuzzy file, buffer, mru, tag, etc finder.
+"" https://github.com/kien/ctrlp.vim
+""NeoBundle 'kien/ctrlp.vim.git'
+"
+"" cra.vim {{{2
+"" cra.vim
+"" Vim plugin to create yearly timesheet
+"NeoBundle 'YannMoisan/cra.vim'
+"
+"" tomorrow-themes-vim {{{2
+"" Tomorrow Theme for Vim
+"NeoBundle 'd11wtq/tomorrow-theme-vim'
+"
+"" CALENDAR {{{2
+"" A calendar application for Vim
+"" https://github.com/itchyny/calendar.vim
+"NeoBundle 'itchyny/calendar.vim'
+"
+"" COLOR {{{2
+"" Colour schemes for a variety of editors created by Dayle Rees.
+"" http://daylerees.github.io
+""NeoBundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
+"
+"
+"" SuperTab {{{2
+"" https://github.com/ervandew/supertab
+"" Perform all your vim insert mode completions with Tab
+""NeoBundle 'SuperTab'
+"
+"" ColorSheme {{{2
+"
+"" morhetz / gruvbox {{{2
+"" Retro groove color scheme for Vim
+"" https://github.com/morhetz/gruvbox
+"NeoBundle 'morhetz/gruvbox.git'
+"
+"" zeis / vim-kolor {{{2
+"" Vim color scheme.
+"" https://github.com/zeis/vim-kolor
+"NeoBundle 'zeis/vim-kolor.git'
+"
+"" junegunn / seoul256.vim {{{2
+"" a low-contrast Vim color scheme based on Seoul Colors
+"NeoBundle 'junegunn/seoul256.vim.git'
+"
+"" Moria {{{2
+"" A color scheme for GUI supposed to be highly readable
+"" http://www.vim.org/scripts/script.php?script_id=1464
+"NeoBundle 'vim-scripts/moria'
+"
+"" Bad Wolf {{{2
+"" A Vim color scheme.
+"" https://github.com/sjl/badwolf/
+"NeoBundle 'sjl/badwolf'
+"
+"" Molokai {{{2
+"" tomasr/molokai
+"" Molokai color scheme for Vim
+"" https://github.com/tomasr/molokai
+"NeoBundle 'tomasr/molokai'
+"
+"" Zenburn {{{2
+"NeoBundle 'Zenburn'
+"
+"" Vividchalk {{{2
+"" a colorscheme strangely reminiscent of Vibrant Ink for a
+"" certain OS X editor
+"" https://github.com/tpope/vim-vividchalk
+"" http://www.vim.org/scripts/script.php?script_id=1891
+"NeoBundle 'tpope/vim-vividchalk.git'
+"
+"" darkspectrum {{{2
+"" @TODO: Complete infos
+"NeoBundle 'darkspectrum'
+"
+"" ROGUE.VIM {{{2
+"" katono/rogue.vim
+"" Porting of Rogue-clone II for Vim
+"NeoBundle 'katono/rogue.vim'
+"
+"" Characterize {{{2
+"" tpope/vim-characterize
+"" characterize.vim:
+"" Unicode character metadata
+"" http://www.vim.org/scripts/script.php?script_id=4410
+"NeoBundle 'tpope/vim-characterize'
+"
+"" php.vim {{{2
+""NeoBundle 'php.vim'
+"" 20141028: Change to new StanAngeloff
+"" https://github.com/StanAngeloff/php.vim
+"NeoBundle 'StanAngeloff/php.vim'
+"
+"" Better PHP indent {{{2
+"" The official VIm indent script for PHP
+"" http://www.2072productions.com/to/phpindent.txt
+"" https://github.com/2072/PHP-Indenting-for-VIm
+"NeoBundle '2072/PHP-Indenting-for-VIm'
+"
+"" Twig plugin {{{2
+"" evidens/vim-twig
+"" Twig syntax highlighting, snipMate, etc.
+"" https://github.com/evidens/vim-twig
+"NeoBundle 'evidens/vim-twig'
+"
+"" PHP Getter / Setter {{{2
+"" php_getset.vim
+"" Automatically add getter/setters for PHP4 properties.
+"" Commands:
+""  :InsertGetterSetter
+""      Inserts a getter/setter for the property on the current line, or
+""      the range of properties specified via a visual block or x,y range
+""      notation.  The user is prompted to determine what type of method
+""      to insert.
+""
+""  :InsertGetterOnly
+""      Inserts a getter for the property on the current line, or the
+""      range of properties specified via a visual block or x,y range
+""      notation.  The user is not prompted.
+""
+""  :InsertSetterOnly
+""      Inserts a setter for the property on the current line, or the
+""      range of properties specified via a visual block or x,y range
+""      notation.  The user is not prompted.
+""
+""  :InsertBothGetterSetter
+""      Inserts a getter and setter for the property on the current line,
+""      or the range of properties specified via a visual block or x,y
+""      range notation.  The user is not prompted.
+"NeoBundle 'vim-scripts/php_getset.vim'
+"
+"" Twig Indent {{{2
+"" Vim script for indentation of html twig file.
+"" https://github.com/tokutake/twig-indent
+""NeoBundle 'tokutake/twig-indent'
+"
+"" TagList {{{2
+"NeoBundle 'taglist.vim'
+"
+"" a.vim {{{2
+"" A few of quick commands to swtich between source files and header files
+"" quickly.
+"NeoBundle 'a.vim'
+"
+"" argtextobj.vim {{{2
+"" Text-object like motion for arguments
+"NeoBundle 'argtextobj.vim'
+"
+"" CSS color {{{2
+"" Highlight colors in css files
+"" NeoBundle 'skammer/vim-css-color'
+"" NOT WORKING
+""Highlight colors in css files
+"" http://ap.github.io/vim-css-color/
+""NeoBundle 'ap/vim-css-color'
+"
+"" css.vim {{{2
+"" css.vim
+"" Cutting-edge vim css syntax file
+"" http://www.vim.org
+""NeoBundle "JulesWang/css.vim"
+"
+"" Bundle samples {{{2
+"" non github repos{{{3
+"" CommandT :     ================
+""Bundle 'git://git.wincent.com/command-t.git'
+"" git repos on your local machine (ie. when working on your own plugin)
+""Bundle 'file:///Users/gmarik/path/to/plugin'
+"" Just for ex of multi repo {{{3
+""NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+"
 " Old {{{2
 " An awesome debugging client for Vim, Xdebug and PHP
 " https://github.com/vim-scripts/Xdebug
