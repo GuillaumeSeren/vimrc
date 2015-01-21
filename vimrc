@@ -692,11 +692,6 @@ NeoBundle 'thinca/vim-threes'
 "" Vim plugin for the Perl module / CLI script 'ack'
 "NeoBundle 'mileszs/ack.vim'
 "
-"" vim-test {{{2
-"" janko-m/vim-test
-""  Run your tests at the speed of thought
-"NeoBundle 'janko-m/vim-test'
-"
 "" Startify {{{2
 "" A fancy start screen for Vim.
 "" https://github.com/mhinz/vim-startify
@@ -829,6 +824,55 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" Remap Arrow Up/Down to move line {{{2
+" Real Vimmer forget the cross
+no <down> ddp
+no <up> ddkP
+
+" Remap Arrow Right / Left to switch tab {{{2
+no <left> :tabprevious<CR>
+no <right> :tabnext<CR>
+
+" Disable Arrow in insert mode {{{2
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
+
+" Disable Arrow in visual mode {{{2
+vno <down> <Nop>
+vno <left> <Nop>
+vno <right> <Nop>
+vno <up> <Nop>
+
+" Remap netrw arrow {{{2
+"@FIXME: Seem's to "break" file explorer.
+"From:
+"http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
+augroup netrw_dvorak_fix
+    autocmd!
+    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+augroup END
+
+function! Fix_netrw_maps_for_dvorak()
+    " {cr} = « gauche / droite »
+    " @TODO: Remap to more vinegar related feature, like:
+    " - c : Go back
+    " - t : Preview (ranger inspired)
+    noremap <buffer> c h
+    noremap <buffer> r l
+    " {ts} = « haut / bas »
+    noremap <buffer> t j
+    noremap <buffer> s k
+    " noremap <buffer> d h
+    " noremap <buffer> h gj
+    " noremap <buffer> t gk
+    " noremap <buffer> n l
+    " noremap <buffer> e d
+    " noremap <buffer> l n
+    " and any others...
+endfunction
+
 " Change default leader key {{{2
 " NOT WORKING
 " Note the required backslash.
@@ -856,7 +900,7 @@ imap <C-@> <C-Space>
 " pratique si on est habitué à coller sous la souris et pas sous le curseur,
 " attention fonctionnement inhabituel
 set mouse=a
-" NeoBundle tweak {{{1
+" Tweaking {{{1
 " AG {{{2
 " if available use ag
 " From: http://robots.thoughtbot.com/faster-grepping-in-vim
@@ -864,12 +908,6 @@ set mouse=a
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  "" ag is fast enough that CtrlP doesn't need to cache
-  "let g:ctrlp_use_caching = 0
 endif
 
 " Unite {{{2
@@ -880,36 +918,7 @@ endif
 " http://www.reddit.com/r/vim/comments/1fpti5/unitevim_the_plugin_you_didnt_know_you_need/
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 " nnoremap <C-p> :Unite file_rec/async<cr>
-" Unite grep
-nnoremap <space>/ :Unite grep:.<cr>
-let g:unite_source_history_yank_enable = 1
-" Unite history / Yank
-nnoremap <space>y :Unite history/yank<cr>
-" Unite in buffer
-nnoremap <space>s :Unite -quick-match buffer<cr>
-" Show mapping
-nnoremap <space>m :Unite mapping<cr>
-" Show Syntastic error
-nnoremap <space>x :Error<cr>
-
-" Format th e unite output to better
-" http://eblundell.com/thoughts/2013/08/15/Vim-CtrlP-behaviour-with-Unite.html
-let g:unite_enable_start_insert = 1
-let g:unite_split_rule = "botright"
-let g:unite_force_overwrite_statusline = 0
-let g:unite_winheight = 10
-" Custom source :
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-            \ 'ignore_pattern', join([
-            \ '\.git/',
-            \ ], '\|'))
-" Default filters :
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-" Emulate ctrl-p behavior quite general unite (all type)
-nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
-" Keep actions shortcut in distinct function: s:unite_settings()
-autocmd FileType unite call s:unite_settings()
+" Unite functions {{{3
 " Function unite_settings()
 " add distinct action to be used in a unite buffer
 function! s:unite_settings()
@@ -931,6 +940,61 @@ function! s:unite_settings()
     " Quit on escape
     nmap <buffer> <ESC> <Plug>(unite_exit)
 endfunction
+
+" Unite Config {{{3
+" Use ag for search
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+"let g:unite_data_directory=s:get_cache_dir('unite')
+let g:unite_source_history_yank_enable=1
+let g:unite_source_rec_max_cache_files=5000
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight = 10
+
+" Default filters :
+" https://github.com/bling/dotvim/blob/master/vimrc
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+" Custom source :
+call unite#custom#source('line,outline','matchers','matcher_fuzzy')
+" 20150121: old conf:
+" http://eblundell.com/thoughts/2013/08/15/Vim-CtrlP-behaviour-with-Unite.html
+"call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+"    \ 'ignore_pattern', join([
+"    \ '\.git/',
+"    \ ], '\|'))
+"function! s:get_cache_dir(suffix)
+"    return resolve(expand(s:cache_dir . '/' . a:suffix))
+"endfunction
+" Format the unite output to better
+call unite#custom#profile('default', 'context', {
+    \ 'start_insert': 1,
+    \ 'direction': 'botright',
+    \ })
+
+" Keep actions shortcut in distinct function: s:unite_settings()
+autocmd FileType unite call s:unite_settings()
+
+" Unite mappings {{{3
+" Unite grep
+nnoremap <space>/ :Unite grep:.<cr>
+let g:unite_source_history_yank_enable = 1
+" Unite history / Yank
+nnoremap <space>y :Unite history/yank<cr>
+" Unite in buffer
+nnoremap <space>s :Unite -quick-match buffer<cr>
+" Show mapping
+nnoremap <space>m :Unite mapping<cr>
+" Show Syntastic error
+nnoremap <space>x :Error<cr>
+
+" Emulate ctrl-p behavior quite general unite (all type)
+nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
+
 " NeoComplete {{{2
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
@@ -1021,7 +1085,6 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " NeoSnippet {{{2
-" @TODO: Complete infos
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -1029,11 +1092,11 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -1044,30 +1107,12 @@ endif
 " Syntax checking hacks for vim
 " https://github.com/scrooloose/syntastic
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
-"let g:syntastic_phpcs_conf               = '--standard=PSR2'
-" from : https://github.com/scrooloose/syntastic/wiki/PHP%3A---phpcs
-"let g:syntastic_php_phpcs_args='--tab-width=0'
-"set tabstop=8
-"let g:syntastic_php_phpcs_args=" --standard=PSR2 "
-let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
-"let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=/home/gseren/src/pro/bd/git_tool_gseren/hooks/bd_standart.xml"
-"let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PEAR"
-"let g:syntastic_phpcs_conf='--standard=Drupal --extensions=php,module,inc,install,test,profile,theme'
-let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_enable_signs             = 1
 let g:syntastic_aggregate_errors         = 1
-"
-"function! PhpSyntaxOverride()
-"  hi! def link phpDocTags  phpDefine
-"  hi! def link phpDocParam phpType
-"endfunction
-"
-"augroup phpSyntaxOverride
-"  autocmd!
-"  autocmd FileType php call PhpSyntaxOverride()
-"augroup END
+let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
+" from : https://github.com/scrooloose/syntastic/wiki/PHP%3A---phpcs
+let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
 
 " DBEXT {{{2
 " vim-scripts/dbext.vim
@@ -1087,21 +1132,6 @@ nmap ) <Plug>SearchPartyVisualFindNext
 nmap ~ <Plug>SearchPartyVisualFindPrior
 nmap & <Plug>SearchPartyVisualFindSubstitute
 nmap ^l <Plug>SearchPartyHighlightClear
-
-" EasyMotion {{{2
-" Vim motions on speed!
-" https://github.com/Lokaltog/vim-easymotion
-" easymotion key:
-"let g:EasyMotion_leader_key = '\'
-
-" vim-test {{{2
-" janko-m/vim-test
-"  Run your tests at the speed of thought
-"NeoBundle 'janko-m/vim-test'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
 
 " Vdebug tweak {{{2
 let g:vdebug_keymap = {
@@ -1124,7 +1154,6 @@ let g:vdebug_keymap = {
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
 "let g:session_autosave_periodic = 1
-
 
 " PHP.vim {{{2
 " HighLight sql
@@ -1176,8 +1205,6 @@ au BufNewFile,BufRead *.glsl setl ft=c
 " I like some folding ideas from :
 " http://dougblack.io/words/a-good-vimrc.html#colors
 set foldmethod=marker
-"set foldmethod=indent
-"set foldmethod=syntax
 " Then we want it to close every fold by default so that we have this high level
 " view when we open our vimrc.
 set foldlevel=0
@@ -1191,22 +1218,15 @@ set showcmd
 " https://github.com/Shougo/vimshell.vim/issues/73
 " Change to syntax enable
 syntax enable
+
 " COLORSHEME {{{2
 " set the background light or dark
 set background=dark
 let g:solarized_termtrans = 1
 colorscheme solarized
-" Change tabeline display
-"hi TabLine      guifg=#333 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
-"hi TabLineSel   guifg=red guibg=green gui=bold ctermfg=red ctermbg=green cterm=bold
-"hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
-"colorscheme blue
 " Change le colorsheme en mode diff
 if &diff
-    "colorscheme evening
-    "colorscheme darkblue
     colorscheme solarized
-    "colorscheme wombat256mod
 endif
 
 " STATUS {{{2
@@ -1246,64 +1266,38 @@ set listchars=tab:··,trail:¤,extends:>,precedes:<
 set list
 
 " HighLight 81 col {{{2
-" @todo : fix the highliht the 80th char +
-" OR ELSE just the 81st column of wide lines...
-"highlight ColorColumn ctermbg=magenta
-"== Set colorcolumn to be enabled when it goes over colum 80.
-"set colorcolumn=+0
-"highlight ColorColumn ctermbg=red guibg=red
-" test todo : @TODO TODO todo
-"highlight todo ctermbg=green guibg=green
-"match todo /TODO/
-"set OverLength=+0
-"highlight OverLength ctermbg=blue guibg=darkblue ctermfg=white guibg=#592929
 " From «More Instantly Better Vim» - OSCON 2013
 " http://youtu.be/aHm36-na4-4
 highlight OverLength ctermbg=darkblue ctermfg=white guibg=darkblue guibg=white
-"highlight OverLength ctermbg=white guibg=white ctermfg=white guibg=#592929
-"highlight OverLength ctermbg=darkblue guibg=darkblue
-"match OverLength '\%>81v.\+'
-":match ErrorMsg '\%>80v.\+'
 call matchadd('OverLength', '\%81v', 100)
-"call matchadd('OverLength', '\%>81v.\3', 100)
-"call matchadd('OverLength', '\%>81v.\%>82v', 100)
-"call matchadd('OverLength', '\%>81v.\-1', 100)
-"hi Error80 ctermbg=red
-"syn match Error80        /\%>60v.\+/ " highlight anything past 80
 "=====[ Comments are important ]==================
-"highlight Comment term=bold ctermfg=white
+" Highlight TODO:
 highlight todo ctermbg=darkcyan ctermfg=white guibg=darkcyan guibg=white
 call matchadd('todo', 'TODO\|@TODO', 100)
+" Highlight MAIL:
 call matchadd('todo', 'MAIL\|mail', 100)
+" Highlight misspelled word
 highlight SpellBad cterm=underline
+" Highlight bugfix / fixme
 highlight fix ctermbg=darkred ctermfg=white guibg=darkred guibg=white
 call matchadd('fix', 'BUGFIX\|@BUGFIX\|FIXME\|@FIXME', 100)
-"@TODO: Add new highlighting
-" * @author Guillaume Seren
+" Highlight author
 highlight author ctermfg=brown guibg=brown
 call matchadd('author', 'author\|@author', 100)
-" * @since 20140603
-" * Description :
-" * HISTORY :
-" * @param string $sUrlToCall
-" * @return string $sResponse
-" # Mail   : guillaumeseren@gmail.com
 
-" SHOW {{{2
-" ======
+" SHOW NON-BREAKABLE SPACE {{{2
+" colorise les nbsp
+highlight NbSp ctermbg=lightgray guibg=lightred
+match NbSp /\%xa0/
+
+" Cursor {{{2
 " Keep 3 line before / after cursor.
 set scrolloff=3
-
-" color line / column {{{2
 " SHOW CURRENT LINE :
-" Pour highlighter la ligne courante (pour mieux se repérer) en bleu :
 set cursorline
-"highlight CursorLine ctermbg=blue
 "SHOW CURRENT COLUMN :
 set cursorcolumn
-"highlight cursorcolumn ctermbg=blue
-
-" SHOW CURSOR {{{2
+" SHOW CURSOR
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
 set guicursor=n-v-c:block-Cursor
@@ -1311,44 +1305,22 @@ set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
 set guicursor+=i:blinkwait10
 
-" SHOW LINE NUMBER {{{2
-" Pour activer les numéros de lignes dans la marge :
-"set number
-" Beaucoup plus pratique pour sauter de ligne en ligne,
-" zz permet de centrer l'écran
-" voir stupideasymotion
-set relativenumber
+" LINE NUMBER {{{2
+" Show line number
 set number
-
-" SHOW NON-BREAKABLE SPACE {{{2
-" ==========================
-" colorise les nbsp
-highlight NbSp ctermbg=lightgray guibg=lightred
-match NbSp /\%xa0/
+" Show number relative from the cursor
+set relativenumber
 
 " STATUS BAR {{{2
 " Afficher en permanence la barre d'état (en plus de la barre de commande) :
 set laststatus=2
 
-" AutoCmd {{{1
-" AutoReLoad vimrc {{{2
-" ==========
-" Auto apply modification to vimrc
-if has("autocmd")
-    autocmd! bufwritepost .vimrc source ~/.vimrc
-    "autocmd! BufWritePost vimrc.bepo source ~/.vim/vimrc.bepo
-endif
-
-" INDENTING {{{2
-" ===========
-" Syntax :
+" Config {{{1
+" Syntax {{{2
 " The colors get messed up when I scroll. Vim uses various heuristics to save
 " time when determining the highlighting, and sometimes they cause problems.
 " Look up :h syn-sync for a more detailed explanation.
 "syn sync fromstart
-" Coloration syntaxique des fichiers zarb :
-" TWIG :
-au BufRead,BufNewFile *.twig set syntax=htmldjango
 " Détection du type de fichier pour l'indentation
 filetype plugin indent on
 " Do we need to test on autocmd
@@ -1381,26 +1353,13 @@ set smarttab
 set lazyredraw
 " autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
 set noautoindent
-" Requis aussi pour vundle
-"filetype plugin indent on
-"filetype indent on
 " Detection de l'indentation
 set cindent
 set smartindent
 
-" SESSION {{{2
-" Récupération de la position du curseur entre 2 ouvertures de fichiers
-" Parfois ce n'est pas ce qu'on veut ...
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-                \| exe "normal g'\"" | endif
-endif
-
 " ENCODING {{{2
 " Use UTF-8.
 set encoding=utf-8
-"@TODO: Add exception for man page.
-"set fileencoding=utf-8
 
 " TERM TYPE {{{2
 " Let's use screen-256
@@ -1417,15 +1376,6 @@ if has("X11")
 else
     set clipboard=unnamed
 endif
-
-" COMPLETION MENU {{{2
-" Show autocomplete menus.
-set wildmenu
-" Afficher une liste lors de complétion de commandes/fichiers :
-set wildmode=list:full
-" Allow completion on filenames right after a '='.
-" Uber-useful when editing bash scripts
-set isfname-==
 
 " SEARCH {{{2
 " Recherche en minuscule -> indépendante de la casse,
@@ -1452,6 +1402,15 @@ set showcmd
 " A utiliser en live, paste désactive l'indentation automatique
 " (entre autre) et nopaste le contraire
 set nopaste
+
+" COMPLETION MENU {{{2
+" Show autocomplete menus.
+set wildmenu
+" Afficher une liste lors de complétion de commandes/fichiers :
+set wildmode=list:full
+" Allow completion on filenames right after a '='.
+" Uber-useful when editing bash scripts
+set isfname-==
 
 " On peut passer rapidement du mode paste au mode nopaste avec un raccourcis,
 " builtin sur les versions récentes de vim >= 7,
@@ -1506,23 +1465,6 @@ set spell
     " z= : affiche la liste de suggestion pour corriger.
 set spelllang=fr,en
 
-" Format json selection {{{2
-map <Leader>j !python -m json.tool<CR>
-
-" CHMOD (old) {{{2
-" =======
-" donner des droits d'exécution au fichier
-" si le fichier commence par #! et contient /bin/ dans son chemin
-"function ModeChange()
-"    if getline(1) =~ "^#!"
-"        if getline(1) =~ "/bin/"
-"            silent !chmod a+x <afile>
-"        endif
-"    endif
-"endfunction
-"
-"au BufWritePost * call ModeChange()
-
 " MOVE CURSOR {{{2
 " Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
 set whichwrap=<,>,[,]
@@ -1534,6 +1476,25 @@ set nostartofline
 " COMMAND HISTORY {{{2
 " Nombre de commandes maximale dans l'historique :
 set history=10000
+
+" AutoCmd {{{1
+" AutoReLoad vimrc {{{2
+" Auto apply modification to vimrc
+if has("autocmd")
+    autocmd! bufwritepost .vimrc source ~/.vimrc
+endif
+
+" SESSION {{{2
+" Récupération de la position du curseur entre 2 ouvertures de fichiers
+" Parfois ce n'est pas ce qu'on veut ...
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+                \| exe "normal g'\"" | endif
+endif
+
+" Functions {{{1
+" Format json selection {{{2
+map <Leader>j !python -m json.tool<CR>
 
 " SAVE as ROOT {{{2
 " use :W to sudo-write the current buffer
@@ -1549,54 +1510,6 @@ function! AutocloseSession()
 endfunction
 noremap <silent> ZZ :call AutocloseSession()<CR>
 
-" Remap Arrow Up/Down to move line {{{2
-" Real Vimmer forget the cross
-no <down> ddp
-no <up> ddkP
-
-" Remap Arrow Right / Left to switch tab {{{2
-no <left> :tabprevious<CR>
-no <right> :tabnext<CR>
-
-" Disable Arrow in insert mode {{{2
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
-ino <up> <Nop>
-
-" Disable Arrow in visual mode {{{2
-vno <down> <Nop>
-vno <left> <Nop>
-vno <right> <Nop>
-vno <up> <Nop>
-
-" Remap netrw arrow {{{2
-"@FIXME: Seem's to "break" file explorer.
-"From:
-"http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
-augroup netrw_dvorak_fix
-    autocmd!
-    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
-augroup END
-
-function! Fix_netrw_maps_for_dvorak()
-    " {cr} = « gauche / droite »
-    " @TODO: Remap to more vinegar related feature, like:
-    " - c : Go back
-    " - t : Preview (ranger inspired)
-    noremap <buffer> c h
-    noremap <buffer> r l
-    " {ts} = « haut / bas »
-    noremap <buffer> t j
-    noremap <buffer> s k
-    " noremap <buffer> d h
-    " noremap <buffer> h gj
-    " noremap <buffer> t gk
-    " noremap <buffer> n l
-    " noremap <buffer> e d
-    " noremap <buffer> l n
-    " and any others...
-endfunction
 
 " OpenTab and lcd to the file {{{2
 " Change local working dir upon tab creation
@@ -1610,10 +1523,6 @@ function! TabNewWithCwD(newpath)
     endif
 endfunction
 command! -nargs=1 -complete=file TabNew :call TabNewWithCwD("<args>")
-
-" Man {{{2
-" Man page for work under cursor
-"nnoremap K :Man <cword> <CR>
 
 " Remove trailing whitespace {{{2
 function! CleanWhiteSpace()
@@ -1657,5 +1566,3 @@ command! MkdirP call MkdirP()
 :autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
 " php
 :autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" Add set modifiable
-":autocmd BufWinEnter * setlocal modifiable
