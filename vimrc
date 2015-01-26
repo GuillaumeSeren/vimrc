@@ -10,19 +10,29 @@
 " Let's try to split this file into several clear part
 " - Keyboard BÉPO
 " - Plugins
-" - Plugins tweak
+" - Tweaking
 " - Display
 " - Input
 " - AutoCmd
 
 " TODO-LIST {{{1
-" ===========
+" - Clean LazyLoading of all non default pluqin.
+" - Define augroup to configure pluqin if loaded.
+" - Clean bépo conflict with vim plugin (comment, unipaired, surround).
+" - Clean oldies.
+" - Still a bug on direct number access on '9'.
 
 " Skip initialization for vim-tiny or vim-small {{{1
 if !1 | finish | endif
 
+" REMAP KEYBOARD for bépo {{{1
+" @TODO: Detect keyboard layout (qwerty / bépo)
+" I use kind dvorak-fr the «bépo» layout on my keyboard.
+source ~/.vim/vimrc.bepo
+" remap number for direct access
+source ~/.vim/vimrc.num
+
 " Auto Install NeoBundle {{{1
-" ==========
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 
 " Check if bundle dir is available for new install
@@ -187,19 +197,11 @@ NeoBundle 'terryma/vim-multiple-cursors'
 "" https://github.com/tpope/vim-surround
 ""NeoBundle 'tpope/vim-surround'
 
-"" Vim-commentary {{{2
-"" http://www.vim.org/scripts/script.php?script_id=3695
-"" tpope/vim-commentary
-"" commentary.vim: comment stuff out
-""NeoBundle 'tpope/vim-commentary'
-""NeoBundleLazy 'tpope/vim-commentary', '', 'same'
-""NeoBundleLazy 't9md/vim-surround_custom_mapping', '', 'same', {
-""      \ 'depends' : 'vim-surround',
-""      \ 'autoload' : {
-""      \   'mappings' : [
-""      \     ['n', '<Plug>Dsurround'], ['n', '<Plug>Csurround'],
-""      \     ['n', '<Plug>Ysurround'], ['n', '<Plug>YSurround']
-""      \ ]}}
+" Vim-commentary {{{2
+" http://www.vim.org/scripts/script.php?script_id=3695
+" tpope/vim-commentary
+" commentary.vim: comment stuff out
+NeoBundle 'tpope/vim-commentary'
 
 " Clang complete {{{2
 " Use of Clang for completing C, C++, Objective-C and Objective-C++
@@ -473,7 +475,7 @@ NeoBundleLazy 'avakhov/vim-yaml', {
         \ 'filetypes' : ['python', 'yaml']
     \ }}
 
-" tpope: Vim-Markdown {{{2
+" Vim-Markdown {{{2
 NeoBundleLazy 'tpope/vim-markdown', {
     \ 'autoload':{
         \ 'filetypes':['markdown']
@@ -527,10 +529,14 @@ NeoBundleLazy 'vim-scripts/php_getset.vim', {
         \ 'filetypes':['php']
     \ }}
 
-"" argtextobj.vim {{{2
-"" 20150121: Not really usefull will clean.
-"" Text-object like motion for arguments
-"NeoBundle 'argtextobj.vim'
+" Textobjs {{{2
+" Text-object like motion for arguments
+NeoBundleLazy 'kana/vim-textobj-user'
+NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
+    \ 'depends': 'vim-textobj-user',
+    \ 'autoload': {
+    \ 'mappings': [[ 'ox', '<Plug>' ]]
+    \ }}
 
 " CSS color {{{2
 " Highlight colors in css files
@@ -807,13 +813,6 @@ filetype plugin indent on
 NeoBundleCheck
 
 " Input {{{1
-" REMAP KEYBOARD for bépo {{{2
-" @TODO: Detect keyboard layout (qwerty / bépo)
-" I use kind dvorak-fr the «bépo» layout on my keyboard.
-source ~/.vim/vimrc.bepo
-" remap number for direct access
-source ~/.vim/vimrc.num
-
 " Searching {{{2
 " From http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
 " 検索後にジャンプした際に検索単語を画面中央に持ってくる
@@ -824,6 +823,12 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" Disable Arrow in insert mode {{{2
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
+
 " Remap Arrow Up/Down to move line {{{2
 " Real Vimmer forget the cross
 no <down> ddp
@@ -832,12 +837,6 @@ no <up> ddkP
 " Remap Arrow Right / Left to switch tab {{{2
 no <left> :tabprevious<CR>
 no <right> :tabnext<CR>
-
-" Disable Arrow in insert mode {{{2
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
-ino <up> <Nop>
 
 " Disable Arrow in visual mode {{{2
 vno <down> <Nop>
@@ -880,6 +879,7 @@ endfunction
 let mapleader = ","
 " Permettre l'utilisation de la touche backspace dans tous les cas :
 set backspace=2
+
 " Permet de sauvegarder par ctrl + s {{{2
 :nmap <c-s> :w<CR>
 " Fonctionne aussi en mode edition
@@ -888,10 +888,10 @@ set backspace=2
 
 " Completion avec ctrl + space {{{2
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-            \ "\<lt>C-n>" :
-            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+    \ "\<lt>C-n>" :
+    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
 " MOUSE {{{2
@@ -900,6 +900,7 @@ imap <C-@> <C-Space>
 " pratique si on est habitué à coller sous la souris et pas sous le curseur,
 " attention fonctionnement inhabituel
 set mouse=a
+
 " Tweaking {{{1
 " AG {{{2
 " if available use ag
@@ -1124,6 +1125,17 @@ let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
 " Default database (local)
 " MySQL
 let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd='':dbname=mysql'
+
+" vim-commentary {{{2
+" remap for bépo
+" if exists(":Commentary")
+    xmap gc  <Plug>Commentary
+    nmap gc  <Plug>Commentary
+    omap gc  <Plug>Commentary
+    nmap gcc <Plug>CommentaryLine
+    nmap hgc <Plug>ChangeCommentary
+    nmap gcu <Plug>Commentary<Plug>Commentary
+" endif
 
 " SearchParty {{{2
 " Extended search commands and maps for Vim
