@@ -149,6 +149,10 @@ NeoBundle 'tpope/vim-sensible'
 " https://github.com/tpope/vim-fugitive
 NeoBundle 'tpope/vim-fugitive'
 
+" Committia {{{2
+" A Vim plugin for more pleasant editing on commit messages
+NeoBundle 'rhysd/committia.vim'
+
 " VimMisc {{{2
 " Miscellaneous auto-load Vim scripts required by easytags
 " https://github.com/xolox/vim-misc
@@ -187,15 +191,31 @@ NeoBundle 'tpope/vim-eunuch'
 " True Sublime Text style multiple selections for Vim
 NeoBundle 'terryma/vim-multiple-cursors'
 
+" Recover.vim {{{2
+" chrisbra/Recover.vim
+" A Plugin to show a diff, whenever recovering a buffer
+" http://www.vim.org/scripts/script.php?script_id=3068
+NeoBundle 'chrisbra/Recover.vim'
+
 "" UniPaired {{{2
 "" key combos for 'pairs' of things. Mostly previous/next type stuff
 "" https://github.com/tpope/vim-unimpaired
 "NeoBundle 'tpope/vim-unimpaired'
 "
-"" Surround {{{2
-"" surround.vim: quoting/parenthesizing made simple
-"" https://github.com/tpope/vim-surround
-""NeoBundle 'tpope/vim-surround'
+" Surround {{{2
+" surround.vim: quoting/parenthesizing made simple
+" https://github.com/tpope/vim-surround
+let g:surround_no_mappings= 1
+NeoBundle 'tpope/vim-surround'
+nmap ds  <Plug>Dsurround
+nmap hs  <Plug>Csurround
+nmap ys  <Plug>Ysurround
+nmap yS  <Plug>YSurround
+nmap yss <Plug>Yssurround
+nmap ySs <Plug>YSsurround
+nmap ySS <Plug>YSsurround
+"xmap S   <Plug>VSurround
+"xmap gS  <Plug>VgSurround
 
 " Vim-commentary {{{2
 " http://www.vim.org/scripts/script.php?script_id=3695
