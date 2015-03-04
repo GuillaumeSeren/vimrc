@@ -174,6 +174,10 @@ NeoBundle 'tpope/vim-repeat'
 " https://github.com/tpope/vim-speeddating
 NeoBundle 'tpope/vim-speeddating.git'
 
+" EditorConfig {{{2
+" EditorConfig plugin for Vim http://editorconfig.org
+NeoBundle 'editorconfig/editorconfig-vim'
+
 " Vinegar {{{2
 " vinegar.vim: combine with netrw to create a delicious salad dressing
 " https://github.com/tpope/vim-vinegar
