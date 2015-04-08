@@ -1397,6 +1397,36 @@ set smartindent
 " Use UTF-8.
 set encoding=utf-8
 
+" Modeline {{{2
+set modeline modelines=5
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+"let g:git_modelines_allowed_items = [
+"    \ "textwidth",   "tw",
+"    \ "softtabstop", "sts",
+"    \ "tabstop",     "ts",
+"    \ "shiftwidth",  "sw",
+"    \ "expandtab",   "et",   "noexpandtab", "noet",
+"    \ "filetype",    "ft",
+"    \ "foldmethod",  "fdm",
+"    \ "readonly",    "ro",   "noreadonly", "noro",
+"    \ "rightleft",   "rl",   "norightleft", "norl",
+"    \ "cindent",     "cin",  "nocindent", "nocin",
+"    \ "smartindent", "si",   "nosmartindent", "nosi",
+"    \ "autoindent",  "ai",   "noautoindent", "noai",
+"    \ "spell",
+"    \ "spelllang"
+"    \ ]
+
 " TERM TYPE {{{2
 " Let's use screen-256
 " From: http://reyhan.org/2013/12/colours-on-vim-and-tmux.html
