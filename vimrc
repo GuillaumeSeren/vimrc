@@ -63,6 +63,10 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
+" Some more customisation:
+" from: https://github.com/rkaneko/dotfiles/blob/master/.vimrc.init
+" let g:neobundle#install_max_processes = 4
+let g:neobundle#install_process_timeout = 1500
 " My Bundles here:
 " Brief help
 " :NeoBundleList          - list configured bundles
@@ -94,11 +98,20 @@ NeoBundle 'Shougo/unite.vim.git'
 " Next generation completion framework after neocomplcache
 NeoBundle 'Shougo/neocomplete'
 
-"" YouCompleteMe {{{2
-"" A code-completion engine for Vim
-"" http://valloric.github.io/YouCompleteMe/
-"" https://github.com/Valloric/YouCompleteMe
-"NeoBundle 'Valloric/YouCompleteMe'
+" YouCompleteMe {{{2
+" A code-completion engine for Vim
+" http://valloric.github.io/YouCompleteMe/
+" https://github.com/Valloric/YouCompleteMe
+NeoBundle 'Valloric/YouCompleteMe', {
+      \ 'build'      : {
+         \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+         \ 'unix'    : './install.sh --clang-completer --system-libclang',
+         \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+         \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+         \ }
+      \ }
+" Add or remove arguments to install.sh as necessary.
+" Additional steps might be necessary for Windows, as always. ;)
 
 " NeoSnippet {{{2
 " https://github.com/Shougo/neosnippet.vim
