@@ -497,6 +497,14 @@ NeoBundleLazy 'xolox/vim-lua-ftplugin' , {
     \ 'depends' : 'xolox/vim-misc',
     \ }
 
+" moonscript-vim {{{2
+" leafo/moonscript-vim
+" MoonScript support for vim http://moonscript.org
+NeoBundleLazy 'leafo/moonscript-vim' , {
+    \ 'autoload': {
+        \ 'filetypes': ['moon']},
+    \ }
+
 " elzr: json {{{2
 " A better JSON for Vim: distinct highlighting of keywords vs values,
 " JSON-specific (non-JS) warnings, quote concealing. Pathogen-friendly.
