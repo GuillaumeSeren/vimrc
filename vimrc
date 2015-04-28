@@ -1412,16 +1412,6 @@ set encoding=utf-8
 
 " Modeline {{{2
 set modeline modelines=5
-" Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 "let g:git_modelines_allowed_items = [
 "    \ "textwidth",   "tw",
@@ -1578,6 +1568,18 @@ map <Leader>j !python -m json.tool<CR>
 " SAVE as ROOT {{{2
 " use :W to sudo-write the current buffer
 command! W w !sudo tee % > /dev/null
+
+" AppendModeline() {{{2
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
+        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " CLOSING {{{2
 " ZZ now saves all files, creates a session and exits
