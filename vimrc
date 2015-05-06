@@ -38,7 +38,6 @@ let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 " Check if bundle dir is available for new install
 if !filereadable(neobundle_readme)
     echo "Installing NeoBundle..."
-    echo ""
     silent !mkdir -p ~/.vim/bundle
     silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
 endif
@@ -168,15 +167,11 @@ NeoBundle 'tpope/vim-fugitive'
 " A Vim plugin for more pleasant editing on commit messages
 NeoBundle 'rhysd/committia.vim'
 
-" VimMisc {{{2
-" Miscellaneous auto-load Vim scripts required by easytags
-" https://github.com/xolox/vim-misc
-NeoBundle 'xolox/vim-misc.git'
-
 " VimSession {{{2
 " Extended session management for Vim (:mksession on steroids)
 " https://github.com/xolox/vim-session
-NeoBundle 'xolox/vim-session.git'
+NeoBundle 'xolox/vim-session.git', {
+    \ 'depends' : 'xolox/vim-misc.git' }
 
 " Repeat {{{2
 " repeat.vim: enable repeating supported plugin maps with "."
@@ -216,11 +211,11 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
 
-"" UniPaired {{{2
-"" key combos for 'pairs' of things. Mostly previous/next type stuff
-"" https://github.com/tpope/vim-unimpaired
-"NeoBundle 'tpope/vim-unimpaired'
-"
+" UniPaired {{{2
+" key combos for 'pairs' of things. Mostly previous/next type stuff
+" https://github.com/tpope/vim-unimpaired
+NeoBundle 'tpope/vim-unimpaired'
+
 " Surround {{{2
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
@@ -249,28 +244,31 @@ NeoBundleLazy 'Rip-Rip/clang_complete', {
         \ 'filetypes': ['c', 'cpp']
     \}}
 
-"" RagTag {{{2
-"" ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
-"" http://www.vim.org/scripts/script.php?script_id=1896
-"" https://github.com/tpope/vim-ragtag
-"" CTRL+X /       Close the last open HTML tag
-"" CTRL+X SPACE   Create open/close HTML tags from the typed word
-"" CTRL+X CR      The same as CTRL+X SPACE but puts a newspace in between
-"" CTRL+X !       Insert HTML doctype
-"" CTRL+X @       Insert CSS stylesheet
-"" CTRL+X #       Insert meta content-type meta tag
-"" CTRL+X $       Load JavaScript document
-"" For the following mappings, suppose that
-"" you have typed "foo".
-"" Mapping        Result
-"" ---------      -----------
-"" CTRL+X =       foo<%= | %>
-"" CTRL+X +       <%= foo| %>
-"" CTRL+X -       foo<% | %>
-"" CTRL+X _       <% foo| %>
-"" CTRL+X '       foo<%# | %>
-"" CTRL+X "       <%# foo| %>
-"NeoBundle 'tpope/vim-ragtag'
+" RagTag {{{2
+" ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
+" http://www.vim.org/scripts/script.php?script_id=1896
+" https://github.com/tpope/vim-ragtag
+" CTRL+X /       Close the last open HTML tag
+" CTRL+X SPACE   Create open/close HTML tags from the typed word
+" CTRL+X CR      The same as CTRL+X SPACE but puts a newspace in between
+" CTRL+X !       Insert HTML doctype
+" CTRL+X @       Insert CSS stylesheet
+" CTRL+X #       Insert meta content-type meta tag
+" CTRL+X $       Load JavaScript document
+" For the following mappings, suppose that
+" you have typed "foo".
+" Mapping        Result
+" ---------      -----------
+" CTRL+X =       foo<%= | %>
+" CTRL+X +       <%= foo| %>
+" CTRL+X -       foo<% | %>
+" CTRL+X _       <% foo| %>
+" CTRL+X '       foo<%# | %>
+" CTRL+X "       <%# foo| %>
+NeoBundle 'tpope/vim-ragtag', {
+    \ 'autoload': {
+        \ 'filetype': ['html', 'htm']
+    \}}
 
 " VimAirline {{{2
 " lean & mean status/tabline for vim that's light as air
@@ -337,6 +335,11 @@ NeoBundle 'airblade/vim-gitgutter'
 " & Starts a :substitute using the currently selected visual text.
 "   <Plug>SearchPartyVisualFindSubstitute
 NeoBundle 'dahu/SearchParty'
+
+" vim-visual-star-search
+" Start a * or # search from a visual block
+" http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
+" NeoBundle 'nelstrom/vim-visual-star-search'
 
 " DBEXT {{{2
 " vim-scripts/dbext.vim
@@ -418,7 +421,10 @@ NeoBundle 'itchyny/calendar.vim'
 " a.vim {{{2
 " A few of quick commands to swtich between source files and header files
 " quickly.
-NeoBundle 'a.vim'
+NeoBundleLazy 'a.vim', {
+    \ 'autoload': {
+        \ 'filetype': ['c', 'h']
+    \}}
 
 " BlockIt ASCII art array {{{2
 " sk1418 / blockit
@@ -458,13 +464,6 @@ let g:shaberu_user_define_say_command = 'espeak -v french "%%TEXT%%"'
 " change the : with the needed char to align
 NeoBundle 'godlygeek/tabular'
 
-"" EasyAlign {{{2
-"" A simple Vim alignment plugin
-"" 20150121: Certainement doublons avec Tabularize,
-""           donc a comparer en details
-"" https://github.com/junegunn/vim-easy-align
-""NeoBundle 'junegunn/vim-easy-align'
-"
 " Characterize {{{2
 " tpope/vim-characterize
 " characterize.vim:
@@ -497,6 +496,14 @@ NeoBundleLazy 'xolox/vim-lua-ftplugin' , {
     \ 'autoload': {
         \ 'filetypes': ['lua']},
     \ 'depends' : 'xolox/vim-misc',
+    \ }
+
+" moonscript-vim {{{2
+" leafo/moonscript-vim
+" MoonScript support for vim http://moonscript.org
+NeoBundleLazy 'leafo/moonscript-vim' , {
+    \ 'autoload': {
+        \ 'filetypes': ['moon']},
     \ }
 
 " elzr: json {{{2
@@ -605,24 +612,6 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {
         \ 'filetypes':['css']
     \ }}
 
-"" Twig plugin {{{2
-"" 20150121: Seem's to break color disable it
-"" evidens/vim-twig
-"" Twig syntax highlighting, snipMate, etc.
-"" https://github.com/evidens/vim-twig
-"NeoBundleLazy 'evidens/vim-twig', {
-"    \ 'autoload': {
-"        \ 'filetypes':['twig']
-"    \ }}
-"
-"" Twig Indent {{{2
-"" Vim script for indentation of html twig file.
-"" https://github.com/tokutake/twig-indent
-"NeoBundleLazy 'tokutake/twig-indent', {
-"    \ 'autoload': {
-"        \ 'filetypes':['twig']
-"    \ }}
-
 " sparkup {{{2
 " A parser for a condensed HTML format
 " https://github.com/rstacruz/sparkup
@@ -630,15 +619,6 @@ NeoBundleLazy 'rstacruz/sparkup', {
     \ 'autoload': {
         \ 'filetypes':['html', 'xhtml']
     \ }}
-
-"" emmet for vim: {{{2
-"" http://emmet.io/
-"" 20150121: Useless with sparkup ?
-"" https://github.com/mattn/emmet-vim
-"NeoBundleLazy 'mattn/emmet-vim', {
-"    \ 'autoload': {
-"        \ 'filetypes': ['html', 'xhtml', 'css', 'xml']
-"    \}}
 
 " vim-latex {{{2
 " lervag/vim-latex
@@ -674,154 +654,10 @@ NeoBundle 'thinca/vim-portal'
 " https://github.com/thinca/vim-threes
 NeoBundle 'thinca/vim-threes'
 
-"" TagBar {{{2
-"" Vim plugin that displays tags in a window, ordered by class etc.
-"" https://github.com/majutsushi/tagbar
-"NeoBundle 'majutsushi/tagbar'
-"
-"" EasyTags {{{2
-"" Automated tag file generation and syntax highlighting of tags in Vim
-"" https://github.com/xolox/vim-easytags
-""@FIXME: Fix the generation process :
-"" - Provide a command to generate a tag in a project.
-"" - Use specific tag file by project.
-"" - Load / Reload only tag file selected by the pwd value project name ?
-"" - In theory the base tag file should be provided by a call from the VCS.
-"" -
-""NeoBundle 'xolox/vim-easytags.git'
-""@TODO: Fix easytags call to be lighter
-"" EasyTags setup
-""let g:easytags_file = '~/.vim/tags/generic'
-"" Set tags generic for vim
-""set tags='~/.vim/tags/'
-""let g:easytags_autorecurse = 1
-""let g:easytags_include_members = 1
-""let g:easytags_dynamic_file = 2
-"" Refresh Tags on write file
-""let g:easytags_events = ['BufWritePost']
-"" Updtate highlight
-""let g:easytags_auto_update = 0
-""@TODO: Add async call to avoid freezing vim.
-""let g:eastags_async = 1
-"
-"" TagList {{{2
-"NeoBundle 'taglist.vim'
-"
-"" ROGUE.VIM {{{2
-"" katono/rogue.vim
-"" Porting of Rogue-clone II for Vim
-"NeoBundle 'katono/rogue.vim'
-"
-"" GUNDO {{{2
-"" @TODO: Should be replaced by a unite call
-"" Gundo.vim is Vim plugin to visualize your Vim undo tree.
-"" sjl / gundo.vim
-"" A git mirror of gundo.vim
-"" http://sjl.bitbucket.org/gundo.vim/
-"" quick setup : http://sjl.bitbucket.org/gundo.vim/#installation
-""let g:gundo_width = 60
-""let g:gundo_preview_height = 40
-""let g:gundo_right = 1
-""nnoremap <F5> :GundoToggle<CR>
-""===========================================
-"NeoBundle 'sjl/gundo.vim.git'
-"
-"" MatchIt {{{2
-"" 20150121: Not usefull because it is in basic vim now.
-""extended % matching for HTML, LaTeX, and many other languages
-""http://www.vim.org/scripts/script.php?script_id=39
-"NeoBundle 'benjifisher/matchit.zip'
-"
-"" ACK.VIM {{{2
-"" https://github.com/mileszs/ack.vim
-"" Vim plugin for the Perl module / CLI script 'ack'
-"NeoBundle 'mileszs/ack.vim'
-"
-"" Startify {{{2
-"" A fancy start screen for Vim.
-"" https://github.com/mhinz/vim-startify
-""NeoBundle 'mhinz/vim-startify'
-"
-"" NerdTree {{{2
-"" A tree explorer plugin for vim.
-"" https://github.com/scrooloose/nerdtree
-""NeoBundle 'scrooloose/nerdtree'
-"
-"" ChekSyntax {{{2
-"" 20150121: Useless avec syntastic.
-"" Check a file's syntax when saving a file (php, ruby, tex ...) with vim
-"" https://github.com/tomtom/checksyntax_vim
-""NeoBundle 'tomtom/checksyntax_vim'
-"
-"" Project {{{2
-"" lcd to the root of the project everytime you BufEnter a file inside a project.
-"" https://github.com/amiorin/vim-project
-"NeoBundle 'amiorin/vim-project'
-"
-"" CtrlP {{{2
-"" Fuzzy file, buffer, mru, tag, etc finder.
-"" https://github.com/kien/ctrlp.vim
-""NeoBundle 'kien/ctrlp.vim.git'
-"
-"" tomorrow-themes-vim {{{2
-"" Tomorrow Theme for Vim
-"NeoBundle 'd11wtq/tomorrow-theme-vim'
-"
-"" COLOR {{{2
-"" Colour schemes for a variety of editors created by Dayle Rees.
-"" http://daylerees.github.io
-""NeoBundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
-"
-"
-"" SuperTab {{{2
-"" https://github.com/ervandew/supertab
-"" Perform all your vim insert mode completions with Tab
-""NeoBundle 'SuperTab'
-"
-"" ColorSheme {{{2
-"
-"" morhetz / gruvbox {{{2
-"" Retro groove color scheme for Vim
-"" https://github.com/morhetz/gruvbox
-"NeoBundle 'morhetz/gruvbox.git'
-"
-"" zeis / vim-kolor {{{2
-"" Vim color scheme.
-"" https://github.com/zeis/vim-kolor
-"NeoBundle 'zeis/vim-kolor.git'
-"
-"" junegunn / seoul256.vim {{{2
-"" a low-contrast Vim color scheme based on Seoul Colors
-"NeoBundle 'junegunn/seoul256.vim.git'
-"
-"" Moria {{{2
-"" A color scheme for GUI supposed to be highly readable
-"" http://www.vim.org/scripts/script.php?script_id=1464
-"NeoBundle 'vim-scripts/moria'
-"
-"" Bad Wolf {{{2
-"" A Vim color scheme.
-"" https://github.com/sjl/badwolf/
-"NeoBundle 'sjl/badwolf'
-"
-"" Molokai {{{2
-"" tomasr/molokai
-"" Molokai color scheme for Vim
-"" https://github.com/tomasr/molokai
-"NeoBundle 'tomasr/molokai'
-"
-"" Zenburn {{{2
-"NeoBundle 'Zenburn'
-"
-"" darkspectrum {{{2
-"" @TODO: Complete infos
-"NeoBundle 'darkspectrum'
-"
-"" Matrix Screensaver {{{2
-"" 20150121: Break the whole thing drop it.
-"" Matrix Screen for VIM
-"" https://github.com/uguu-org/vim-matrix-screensaver
-"NeoBundle 'uguu-org/vim-matrix-screensaver'
+" TagBar {{{2
+" Vim plugin that displays tags in a window, ordered by class etc.
+" https://github.com/majutsushi/tagbar
+NeoBundle 'majutsushi/tagbar'
 
 "" Bundle samples {{{2
 "" non github repos{{{3
@@ -851,7 +687,7 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-" Input {{{1
+" Input bindings {{{1
 " Searching {{{2
 " From http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
 " 検索後にジャンプした際に検索単語を画面中央に持ってくる
@@ -912,9 +748,6 @@ function! Fix_netrw_maps_for_dvorak()
 endfunction
 
 " Change default leader key {{{2
-" NOT WORKING
-" Note the required backslash.
-"let mapleader = "\<space>"
 let mapleader = ","
 " Permettre l'utilisation de la touche backspace dans tous les cas :
 set backspace=2
@@ -1050,10 +883,10 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " Define dictionary.
 "@todo: find new dictionary
 let g:neocomplete#sources#dictionary#dictionaries = {
-            \ 'default'  : '',
-            \ 'vimshell' : $HOME.'/.vimshell_hist',
-            \ 'scheme'   : $HOME.'/.gosh_completions'
-            \ }
+    \ 'default'  : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme'   : $HOME.'/.gosh_completions'
+    \ }
 let g:neocomplcache_disabled_sources_list = {'_' : ['dictionary_complete']}
 " Define keyword.
 " je fais esprét de me trompait
@@ -1116,9 +949,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
@@ -1197,7 +1027,7 @@ let g:vdebug_keymap = {
     \ "get_context"       : "<F11>",
     \ "eval_under_cursor" : "<F12>",
     \ "eval_visual"       : "<Leader>e",
-    \}
+    \ }
 
 " VimSession {{{2
 " Extended session management for Vim (:mksession on steroids)
@@ -1240,9 +1070,12 @@ au BufNewFile,BufRead /etc/apache2/* setl ft=apache
 au BufNewFile,BufRead /etc/nginx/* setl ft=nginx
 au BufNewFile,BufRead /etc/exim4/* setl ft=exim
 au BufNewFile,BufRead *.txt setl ft=text
-au BufNewFile,BufRead *.tac setl ft=python " .tac files are used in twisted
-au BufNewFile,BufRead *.override setl ft=c " pygobject overrides
-au BufNewFile,BufRead *.defs setl syntax=scheme et " pygobject definitions
+" .tac files are used in twisted
+au BufNewFile,BufRead *.tac setl ft=python
+" pygobject overrides
+au BufNewFile,BufRead *.override setl ft=c
+" pygobject definitions
+au BufNewFile,BufRead *.defs setl syntax=scheme et
 au BufNewFile,BufRead *.vala setl ft=vala
 au BufNewFile,BufRead *.vapi setl ft=vala
 au BufNewFile,BufRead *.json setl ft=javascript
@@ -1313,7 +1146,7 @@ set title
 
 " Show Special Char {{{2
 " show tabs / nbsp / trailing spaces
-set listchars=tab:··,trail:¤,extends:>,precedes:<
+set listchars=tab:··,trail:¤,extends:▷,precedes:◁
 set list
 
 " HighLight 81 col {{{2
@@ -1483,12 +1316,6 @@ set wildmode=list:full
 " Uber-useful when editing bash scripts
 set isfname-==
 
-" On peut passer rapidement du mode paste au mode nopaste avec un raccourcis,
-" builtin sur les versions récentes de vim >= 7,
-" sinon il faudrait créer une fonction :
-" 20141009: Disable the switch I did not use it.
-"set pastetoggle=<F5>
-
 " BACKUP {{{2
 " Modif tmp
 set swapfile
@@ -1576,12 +1403,13 @@ command! W w !sudo tee % > /dev/null
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
+        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
 " CLOSING {{{2
 " ZZ now saves all files, creates a session and exits
 function! AutocloseSession()
@@ -1648,3 +1476,5 @@ command! MkdirP call MkdirP()
 :autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
 " php
 :autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+
+nnoremap <space-a> :echom 'This is a Test !'<CR>
