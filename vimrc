@@ -102,14 +102,16 @@ NeoBundle 'Shougo/neocomplete'
 " A code-completion engine for Vim
 " http://valloric.github.io/YouCompleteMe/
 " https://github.com/Valloric/YouCompleteMe
+" https://github.com/Valloric/YouCompleteMe/issues/1082
+" NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'build'      : {
-         \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-         \ 'unix'    : './install.sh --clang-completer --system-libclang',
-         \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-         \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-         \ }
-      \ }
+     \ 'build'      : {
+        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'unix'    : './install.sh --clang-completer --system-libclang',
+        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+        \ }
+     \ }
 " Add or remove arguments to install.sh as necessary.
 " Additional steps might be necessary for Windows, as always. ;)
 
@@ -495,14 +497,6 @@ NeoBundleLazy 'xolox/vim-lua-ftplugin' , {
     \ 'autoload': {
         \ 'filetypes': ['lua']},
     \ 'depends' : 'xolox/vim-misc',
-    \ }
-
-" moonscript-vim {{{2
-" leafo/moonscript-vim
-" MoonScript support for vim http://moonscript.org
-NeoBundleLazy 'leafo/moonscript-vim' , {
-    \ 'autoload': {
-        \ 'filetypes': ['moon']},
     \ }
 
 " elzr: json {{{2
@@ -1582,13 +1576,12 @@ command! W w !sudo tee % > /dev/null
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
-        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
 " CLOSING {{{2
 " ZZ now saves all files, creates a session and exits
 function! AutocloseSession()
