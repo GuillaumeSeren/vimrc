@@ -214,7 +214,7 @@ NeoBundle 'chrisbra/Recover.vim'
 " UniPaired {{{2
 " key combos for 'pairs' of things. Mostly previous/next type stuff
 " https://github.com/tpope/vim-unimpaired
-NeoBundle 'tpope/vim-unimpaired'
+" NeoBundle 'tpope/vim-unimpaired'
 
 " Surround {{{2
 " surround.vim: quoting/parenthesizing made simple
@@ -643,6 +643,12 @@ NeoBundleLazy 'vim-scripts/bash-support.vim', {
 " https://github.com/tpope/vim-vividchalk
 " http://www.vim.org/scripts/script.php?script_id=1891
 NeoBundle 'tpope/vim-vividchalk.git'
+
+" jellybeans.vim {{{2
+" A colorful, dark color scheme for Vim.
+" http://www.vim.org/scripts/script.php?script_id=2555
+" https://github.com/nanotech/jellybeans.vim
+NeoBundle 'nanotech/jellybeans.vim'
 
 " Vim-Portal {{{2
 " Hello and, again, this is the Portal Gun for Vim.
