@@ -578,9 +578,9 @@ NeoBundle 'itchyny/calendar.vim'
 " A few of quick commands to swtich between source files and header files
 " quickly.
 NeoBundleLazy 'a.vim', {
-    \ 'autoload': {
-        \ 'filetype': ['c', 'h']
-    \}}
+\ 'autoload': {
+\     'filetype': ['c', 'h']
+\ }}
 
 " BlockIt ASCII art array {{{2
 " sk1418 / blockit
@@ -608,7 +608,6 @@ NeoBundle 'matze/vim-move'
 " easily with Shaberu.vim.
 NeoBundle 'supermomonga/shaberu.vim'
 " Speak Japanese voice on OS X
-let g:shaberu_user_define_say_command = 'espeak -v french "%%TEXT%%"'
 
 " Tabularize ! {{{2
 " https://github.com/godlygeek/tabular
@@ -649,39 +648,41 @@ NeoBundle 'tpope/vim-rails.git'
 " http://peterodding.com/code/vim/lua-ftplugin
 " https://github.com/xolox/vim-lua-ftplugin
 NeoBundleLazy 'xolox/vim-lua-ftplugin' , {
-    \ 'autoload': {
-        \ 'filetypes': ['lua']},
-    \ 'depends' : 'xolox/vim-misc',
-    \ }
+\ 'autoload': {
+\     'filetypes': ['lua']
+\ },
+\     'depends' : 'xolox/vim-misc',
+\ }
 
 " moonscript-vim {{{2
 " leafo/moonscript-vim
 " MoonScript support for vim http://moonscript.org
 NeoBundleLazy 'leafo/moonscript-vim' , {
-    \ 'autoload': {
-        \ 'filetypes': ['moon']},
-    \ }
+\ 'autoload': {
+\     'filetypes': ['moon']
+\     },
+\ }
 
 " elzr: json {{{2
 " A better JSON for Vim: distinct highlighting of keywords vs values,
 " JSON-specific (non-JS) warnings, quote concealing. Pathogen-friendly.
 " https://github.com/elzr/vim-json
 NeoBundleLazy 'elzr/vim-json', {
-    \ 'autoload' : {
-        \ 'filetypes' : ['javascript']
-    \ }}
+\ 'autoload' : {
+\     'filetypes' : ['javascript']
+\ }}
 
 " yaml {{{2
 NeoBundleLazy 'avakhov/vim-yaml', {
-    \ 'autoload' : {
-        \ 'filetypes' : ['python', 'yaml']
-    \ }}
+\ 'autoload' : {
+\     'filetypes' : ['python', 'yaml']
+\ }}
 
 " Vim-Markdown {{{2
 NeoBundleLazy 'tpope/vim-markdown', {
-    \ 'autoload':{
-        \ 'filetypes':['markdown']
-    \ }}
+\ 'autoload':{
+\     'filetypes':['markdown']
+\ }}
 
 " php.vim {{{2
 " old::
@@ -689,18 +690,18 @@ NeoBundleLazy 'tpope/vim-markdown', {
 " 20141028: Change to new StanAngeloff
 " https://github.com/StanAngeloff/php.vim
 NeoBundleLazy 'StanAngeloff/php.vim', {
-    \ 'autoload': {
-        \ 'filetypes':['php']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['php']
+\ }}
 
 " Better PHP indent {{{2
 " The official VIm indent script for PHP
 " http://www.2072productions.com/to/phpindent.txt
 " https://github.com/2072/PHP-Indenting-for-VIm
 NeoBundleLazy '2072/PHP-Indenting-for-VIm', {
-    \ 'autoload': {
-        \ 'filetypes':['php']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['php']
+\ }}
 
 " PHP Getter / Setter {{{2
 " php_getset.vim
@@ -727,18 +728,18 @@ NeoBundleLazy '2072/PHP-Indenting-for-VIm', {
 "      or the range of properties specified via a visual block or x,y
 "      range notation.  The user is not prompted.
 NeoBundleLazy 'vim-scripts/php_getset.vim', {
-    \ 'autoload': {
-        \ 'filetypes':['php']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['php']
+\ }}
 
 " Textobjs {{{2
 " Text-object like motion for arguments
 NeoBundleLazy 'kana/vim-textobj-user'
 NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
-    \ 'depends': 'vim-textobj-user',
-    \ 'autoload': {
-    \ 'mappings': [[ 'ox', '<Plug>' ]]
-    \ }}
+\ 'depends': 'vim-textobj-user',
+\ 'autoload': {
+\     'mappings': [[ 'ox', '<Plug>' ]]
+\ }}
 
 " CSS color {{{2
 " Highlight colors in css files
@@ -747,51 +748,51 @@ NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
 "Highlight colors in css files
 " http://ap.github.io/vim-css-color/
 NeoBundleLazy 'ap/vim-css-color', {
-    \ 'autoload': {
-        \ 'filetypes':['css']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['css']
+\ }}
 
 " css.vim {{{2
 " css.vim
 " Cutting-edge vim css syntax file
 " http://www.vim.org
 NeoBundleLazy "JulesWang/css.vim", {
-    \ 'autoload': {
-        \ 'filetypes':['css']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['css']
+\ }}
 
 " vim-css3-syntax {{{2
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`.
 " https://github.com/hail2u/vim-css3-syntax
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
-    \ 'autoload': {
-        \ 'filetypes':['css']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['css']
+\ }}
 
 " sparkup {{{2
 " A parser for a condensed HTML format
 " https://github.com/rstacruz/sparkup
 NeoBundleLazy 'rstacruz/sparkup', {
-    \ 'autoload': {
-        \ 'filetypes':['html', 'xhtml']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['html', 'xhtml']
+\ }}
 
 " vim-latex {{{2
 " lervag/vim-latex
 " https://github.com/lervag/vim-latex
 " A simple and lightweight vim-plugin for editing LaTeX files.
 NeoBundleLazy 'lervag/vim-latex', {
-    \ 'autoload': {
-        \ 'filetypes':['tex']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['tex']
+\ }}
 
 " BashSupport {{{2
 " BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
 " https://github.com/vim-scripts/bash-support.vim
 NeoBundleLazy 'vim-scripts/bash-support.vim', {
-    \ 'autoload': {
-        \ 'filetypes':['sh']
-    \ }}
+\ 'autoload': {
+\     'filetypes':['sh']
+\ }}
 
 " Vividchalk {{{2
 " a colorscheme strangely reminiscent of Vibrant Ink for a
@@ -1116,6 +1117,9 @@ let g:vdebug_keymap = {
 \ "eval_under_cursor" : "<F12>",
 \ "eval_visual"       : "<Leader>e",
 \ }
+
+" Shaberu {{{2
+let g:shaberu_user_define_say_command = 'espeak -v french "%%TEXT%%"'
 
 " CRA.vim {{{2
 " define cra filetype for lazy loading
