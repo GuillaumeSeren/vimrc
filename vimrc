@@ -5,43 +5,27 @@
 " @LICENSE : www.opensource.org/licenses/bsd-license.php
 " @Link    : https://github.com/GuillaumeSeren/vimrc
 " ---------------
+
 " Summary {{{1
 " ===========
 " Let's try to split this file into several clear part
-" - Plugins
-" - Tweaking
-" - Display
+" - Startup config
+" - Vim config
+" - Auto load / install plugin manager
+" - Plugins List
+" - Tweaking Plugins
 " - AutoCmd
+" - Functions
+" - Display
 " - Input
 " - Keyboard BÉPO
 
-" TODO-LIST {{{1
+" TODO-LIST
 " - Clean LazyLoading of all non default pluqin.
 " - Define augroup to configure pluqin if loaded.
 " - Clean bépo conflict with vim plugin (comment, unipaired, surround).
 " - Clean oldies.
 " - Still a bug on direct number access on '9'.
-
-" Skip initialization for vim-tiny or vim-small {{{1
-if !1 | finish | endif
-
-" REMAP KEYBOARD for bépo {{{1
-" @FIXME: Detect keyboard layout (qwerty / bépo)
-" @TODO: Move it at the end, the config must not be layout dependant.
-" I use kind dvorak-fr the «bépo» layout on my keyboard.
-source ~/.vim/vimrc.bepo
-" remap number for direct access
-source ~/.vim/vimrc.num
-
-" Auto Install NeoBundle {{{1
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-
-" Check if bundle dir is available for new install
-if !filereadable(neobundle_readme)
-    echo "Installing NeoBundle..."
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
-endif
 
 " Startup config {{{1
 " ===========
@@ -54,7 +38,196 @@ if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" NeoBundle List {{{1
+" Vim Config {{{1
+" Syntax {{{2
+" The colors get messed up when I scroll. Vim uses various heuristics to save
+" time when determining the highlighting, and sometimes they cause problems.
+" Look up :h syn-sync for a more detailed explanation.
+"syn sync fromstart
+" Détection du type de fichier pour l'indentation
+filetype plugin indent on
+" Do we need to test on autocmd
+if has("autocmd")
+    "filetype indent on
+    filetype plugin indent on
+endif
+" Automatically indent when adding a curly bracket, etc.
+set smartindent
+" Indispensable pour ne pas tout casser avec ce qui va suivre
+set preserveindent
+" indentation automatique
+set autoindent
+" Largeur de l'autoindentation
+set shiftwidth=4
+" Arrondit la valeur de l'indentation
+set shiftround
+" Largeur du caractère tab
+set tabstop=4
+" Largeur de l'indentation de la touche tab
+set softtabstop=4
+" Remplace les tab par des expaces
+set expandtab ts=4 sw=4 ai
+" Do not tab expand on Makefile
+autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+" Utilise shiftwidth à la place de tabstop en début de ligne (et backspace supprime d'un coup si ce sont des espaces)
+set smarttab
+" 20140901: Add for test.
+" redraw only when we need to.
+set lazyredraw
+" autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
+set noautoindent
+" Detection de l'indentation
+set cindent
+set smartindent
+
+" ENCODING {{{2
+" Use UTF-8.
+set encoding=utf-8
+
+" Modeline {{{2
+set modeline modelines=5
+
+"let g:git_modelines_allowed_items = [
+"    \ "textwidth",   "tw",
+"    \ "softtabstop", "sts",
+"    \ "tabstop",     "ts",
+"    \ "shiftwidth",  "sw",
+"    \ "expandtab",   "et",   "noexpandtab", "noet",
+"    \ "filetype",    "ft",
+"    \ "foldmethod",  "fdm",
+"    \ "readonly",    "ro",   "noreadonly", "noro",
+"    \ "rightleft",   "rl",   "norightleft", "norl",
+"    \ "cindent",     "cin",  "nocindent", "nocin",
+"    \ "smartindent", "si",   "nosmartindent", "nosi",
+"    \ "autoindent",  "ai",   "noautoindent", "noai",
+"    \ "spell",
+"    \ "spelllang"
+"    \ ]
+
+" TERM TYPE {{{2
+" Let's use screen-256
+" From: http://reyhan.org/2013/12/colours-on-vim-and-tmux.html
+"set term=screen-256color
+"set term=rxvt-unicode-256color
+" Just for vimShell
+"let g:vimshell_environment_term='rxvt-unicode-256color'
+
+" Clipboard {{{2
+" Set the clipboard if running inside X11
+if has("X11")
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
+
+" SEARCH {{{2
+" Recherche en minuscule -> indépendante de la casse,
+" une majuscule -> stricte
+set smartcase
+" Ne jamais respecter la casse
+" (attention totalement indépendant du précédent mais de priorité plus faible)
+set ignorecase
+" Déplace le curseur au fur et a mesure qu'on tape une recherche,
+" pas toujours pratique, j'ai abandonné
+set incsearch
+" Met en évidence TOUS les résultats d'une recherche,
+" A consommer avec modération
+set hlsearch
+" Déplacer le curseur quand on écrit un (){}[]
+" (attention il ne s'agit pas du highlight
+set showmatch
+" Affiche le nombre de lignes sélectionnées en mode visuel
+" ou la touche/commande qu'on vient de taper en mode commande
+set showcmd
+
+" PASTE / NOPASTE {{{2
+"@TODO: Not certain if really needed
+" A utiliser en live, paste désactive l'indentation automatique
+" (entre autre) et nopaste le contraire
+set nopaste
+
+" COMPLETION MENU {{{2
+" Show autocomplete menus.
+set wildmenu
+" Afficher une liste lors de complétion de commandes/fichiers :
+set wildmode=list:full
+" Allow completion on filenames right after a '='.
+" Uber-useful when editing bash scripts
+set isfname-==
+
+" BACKUP {{{2
+" Modif tmp
+set swapfile
+" Modif tmp
+let g:dotvim_backup=expand('$HOME') . '/.vim/backup'
+if ! isdirectory(g:dotvim_backup)
+    call mkdir(g:dotvim_backup, "p")
+endif
+set directory=~/.vim/backup
+
+" Backups with persistent undos {{{2
+set backup
+let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
+if ! isdirectory(g:dotvim_backups)
+    call mkdir(g:dotvim_backups, "p")
+endif
+exec "set backupdir=" . g:dotvim_backups
+if has('persistent_undo')
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+    exec "set undodir=" . g:dotvim_backups
+endif
+
+" LINE WRAPPING {{{2
+" Laisse les lignes déborder de l'écran si besoin
+"set nowrap
+" Ne laisse pas les ligne deborder de l'écran
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+set linebreak
+" Size of the linewrapping
+set textwidth=80
+
+" SPELL CHECKER {{{2
+" @TODO: Remap the mapping of the spell checker
+" @TOOD: Support auto detection of the sentence language,
+"        so it can support multi language fr / us / en / etc (jpn)
+" En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
+" Chiant pour programmer, mais améliorable avec des dico
+    " perso et par languages
+set spell
+" [s / ]s : saute au prochain / précédant mot avec faute.
+    " z= : affiche la liste de suggestion pour corriger.
+set spelllang=fr,en
+
+" MOVE CURSOR {{{2
+" Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
+set whichwrap=<,>,[,]
+
+" Stay on the same column if possible {{{2
+" Tenter de rester toujours sur la même colonne lors de changements de lignes :
+set nostartofline
+
+" COMMAND HISTORY {{{2
+" Nombre de commandes maximale dans l'historique :
+set history=10000
+
+" Auto load / install plugin manager {{{1
+if !1 | finish | endif
+
+" Auto Install NeoBundle
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+
+" Check if bundle dir is available for new install
+if !filereadable(neobundle_readme)
+    echo "Installing NeoBundle..."
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+endif
+
+" Plugins List {{{1
 " All the addons
 " NeoBundle base {{{2
 " 20131206: Add NeoBundle
@@ -693,93 +866,7 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-" Input bindings {{{1
-" Searching {{{2
-" From http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
-" 検索後にジャンプした際に検索単語を画面中央に持ってくる
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
-" Disable Arrow in insert mode {{{2
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
-ino <up> <Nop>
-
-" Remap Arrow Up/Down to move line {{{2
-" Real Vimmer forget the cross
-no <down> ddp
-no <up> ddkP
-
-" Remap Arrow Right / Left to switch tab {{{2
-no <left> :tabprevious<CR>
-no <right> :tabnext<CR>
-
-" Disable Arrow in visual mode {{{2
-vno <down> <Nop>
-vno <left> <Nop>
-vno <right> <Nop>
-vno <up> <Nop>
-
-" Remap netrw arrow {{{2
-"@FIXME: Seem's to "break" file explorer.
-"From:
-"http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
-augroup netrw_dvorak_fix
-    autocmd!
-    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
-augroup END
-
-function! Fix_netrw_maps_for_dvorak()
-    " {cr} = « gauche / droite »
-    " @TODO: Remap to more vinegar related feature, like:
-    " - c : Go back
-    " - t : Preview (ranger inspired)
-    noremap <buffer> c h
-    noremap <buffer> r l
-    " {ts} = « haut / bas »
-    noremap <buffer> t j
-    noremap <buffer> s k
-    " noremap <buffer> d h
-    " noremap <buffer> h gj
-    " noremap <buffer> t gk
-    " noremap <buffer> n l
-    " noremap <buffer> e d
-    " noremap <buffer> l n
-    " and any others...
-endfunction
-
-" Change default leader key {{{2
-let mapleader = ","
-" Permettre l'utilisation de la touche backspace dans tous les cas :
-set backspace=2
-
-" Permet de sauvegarder par ctrl + s {{{2
-:nmap <c-s> :w<CR>
-" Fonctionne aussi en mode edition
-:imap <c-s> <Esc>:w<CR>a
-:imap <c-s> <Esc><c-s>
-
-" Completion avec ctrl + space {{{2
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-    \ "\<lt>C-n>" :
-    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
-
-" MOUSE {{{2
-" =======
-" Utilise la souris pour les terminaux qui le peuvent (tous ?)
-" pratique si on est habitué à coller sous la souris et pas sous le curseur,
-" attention fonctionnement inhabituel
-set mouse=a
-
-" Tweaking {{{1
+" Tweaking Plugins {{{1
 " AG {{{2
 " if available use ag
 " From: http://robots.thoughtbot.com/faster-grepping-in-vim
@@ -1068,7 +1155,8 @@ let php_alt_properties = 1
 " TODO: documentation for php_folding_manual
 let php_folding = 3
 
-" filetype detection {{{1
+" AutoCmd {{{1
+" Fix filetype detection {{{2
 au BufRead /var/log/kern.log set ft=messages
 au BufRead /var/log/syslog setl ft=messages
 au BufNewFile,BufRead /etc/apache/* setl ft=apache
@@ -1089,6 +1177,109 @@ au BufNewFile,BufRead *.qml setl ft=javascript
 au BufNewFile,BufRead *.otl setl ft=votl
 au BufNewFile,BufRead *.jeco setl ft=eco
 au BufNewFile,BufRead *.glsl setl ft=c
+
+" AutoReLoad vimrc {{{2
+" Auto apply modification to vimrc
+if has("autocmd")
+    autocmd! bufwritepost .vimrc source ~/.vimrc
+endif
+
+" SESSION {{{2
+" Récupération de la position du curseur entre 2 ouvertures de fichiers
+" Parfois ce n'est pas ce qu'on veut ...
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+                \| exe "normal g'\"" | endif
+endif
+
+" Functions {{{1
+" Format json selection {{{2
+map <Leader>j !python -m json.tool<CR>
+
+" SAVE as ROOT {{{2
+" use :W to sudo-write the current buffer
+command! W w !sudo tee % > /dev/null
+
+" AppendModeline() {{{2
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
+        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+" CLOSING {{{2
+" ZZ now saves all files, creates a session and exits
+function! AutocloseSession()
+    " if g:SessionLoaded || !filereadable(g:SessionPath)
+    "     exec 'mksession! ' . g:SessionPath
+    " endif
+    wqall
+endfunction
+noremap <silent> ZZ :call AutocloseSession()<CR>
+
+
+" OpenTab and lcd to the file {{{2
+" Change local working dir upon tab creation
+function! TabNewWithCwD(newpath)
+    :execute "tabnew " . a:newpath
+    if isdirectory(a:newpath)
+        :execute "lcd " . a:newpath
+    else
+        let dirname = fnamemodify(a:newpath, ":h")
+        :execute "lcd " . dirname
+    endif
+endfunction
+command! -nargs=1 -complete=file TabNew :call TabNewWithCwD("<args>")
+
+" Remove trailing whitespace {{{2
+function! CleanWhiteSpace()
+    let l = line(".")
+    let c = col(".")
+    :%s/\s\+$//e
+    let last_search_removed_from_history = histdel('s', -1)
+    call cursor(l, c)
+endfunction()
+command! -nargs=0 CleanWhiteSpace :call CleanWhiteSpace()
+
+" Convert DOS line endings to UNIX line endings {{{2
+function! FromDos()
+    %s/\r//e
+endfunction
+command! FromDos call FromDos()
+
+" Auto Chmod {{{2
+" Automatically give executable permissions if file begins with #! and
+" contains '/bin/' in the path
+function! MakeScriptExecuteable()
+    if getline(1) =~ "^#!.*/bin/"
+        silent !chmod +x <afile>
+    endif
+endfunction
+
+" Mkdir Create missing directory {{{2
+" Used to create missing directories before writing a
+" buffer
+function! MkdirP()
+    :!mkdir -p %:h
+endfunction
+command! MkdirP call MkdirP()
+
+" SHEBANG {{{2
+" shebang automatique lors de l'ouverture nouveau
+" d'un fichier *.py, *.sh (bash), modifier l'entête selon les besoins :
+" shell
+:autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+" python
+:autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+" php
+:autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+
+nnoremap <space-a> :echom 'This is a Test !'<CR>
 
 " Display {{{1
 " Folding {{{2
@@ -1205,282 +1396,96 @@ set relativenumber
 " Afficher en permanence la barre d'état (en plus de la barre de commande) :
 set laststatus=2
 
-" Config {{{1
-" Syntax {{{2
-" The colors get messed up when I scroll. Vim uses various heuristics to save
-" time when determining the highlighting, and sometimes they cause problems.
-" Look up :h syn-sync for a more detailed explanation.
-"syn sync fromstart
-" Détection du type de fichier pour l'indentation
-filetype plugin indent on
-" Do we need to test on autocmd
-if has("autocmd")
-    "filetype indent on
-    filetype plugin indent on
-endif
-" Automatically indent when adding a curly bracket, etc.
-set smartindent
-" Indispensable pour ne pas tout casser avec ce qui va suivre
-set preserveindent
-" indentation automatique
-set autoindent
-" Largeur de l'autoindentation
-set shiftwidth=4
-" Arrondit la valeur de l'indentation
-set shiftround
-" Largeur du caractère tab
-set tabstop=4
-" Largeur de l'indentation de la touche tab
-set softtabstop=4
-" Remplace les tab par des expaces
-set expandtab ts=4 sw=4 ai
-" Do not tab expand on Makefile
-autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
-" Utilise shiftwidth à la place de tabstop en début de ligne (et backspace supprime d'un coup si ce sont des espaces)
-set smarttab
-" 20140901: Add for test.
-" redraw only when we need to.
-set lazyredraw
-" autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
-set noautoindent
-" Detection de l'indentation
-set cindent
-set smartindent
+" Input bindings {{{1
+" Searching {{{2
+" From http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
-" ENCODING {{{2
-" Use UTF-8.
-set encoding=utf-8
+" Disable Arrow in insert mode {{{2
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
 
-" Modeline {{{2
-set modeline modelines=5
+" Remap Arrow Up/Down to move line {{{2
+" Real Vimmer forget the cross
+no <down> ddp
+no <up> ddkP
 
-"let g:git_modelines_allowed_items = [
-"    \ "textwidth",   "tw",
-"    \ "softtabstop", "sts",
-"    \ "tabstop",     "ts",
-"    \ "shiftwidth",  "sw",
-"    \ "expandtab",   "et",   "noexpandtab", "noet",
-"    \ "filetype",    "ft",
-"    \ "foldmethod",  "fdm",
-"    \ "readonly",    "ro",   "noreadonly", "noro",
-"    \ "rightleft",   "rl",   "norightleft", "norl",
-"    \ "cindent",     "cin",  "nocindent", "nocin",
-"    \ "smartindent", "si",   "nosmartindent", "nosi",
-"    \ "autoindent",  "ai",   "noautoindent", "noai",
-"    \ "spell",
-"    \ "spelllang"
-"    \ ]
+" Remap Arrow Right / Left to switch tab {{{2
+no <left> :tabprevious<CR>
+no <right> :tabnext<CR>
 
-" TERM TYPE {{{2
-" Let's use screen-256
-" From: http://reyhan.org/2013/12/colours-on-vim-and-tmux.html
-"set term=screen-256color
-"set term=rxvt-unicode-256color
-" Just for vimShell
-"let g:vimshell_environment_term='rxvt-unicode-256color'
+" Disable Arrow in visual mode {{{2
+vno <down> <Nop>
+vno <left> <Nop>
+vno <right> <Nop>
+vno <up> <Nop>
 
-" Clipboard {{{2
-" Set the clipboard if running inside X11
-if has("X11")
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
+" Remap netrw arrow {{{2
+"@FIXME: Seem's to "break" file explorer.
+"From:
+"http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
+augroup netrw_dvorak_fix
+    autocmd!
+    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+augroup END
 
-" SEARCH {{{2
-" Recherche en minuscule -> indépendante de la casse,
-" une majuscule -> stricte
-set smartcase
-" Ne jamais respecter la casse
-" (attention totalement indépendant du précédent mais de priorité plus faible)
-set ignorecase
-" Déplace le curseur au fur et a mesure qu'on tape une recherche,
-" pas toujours pratique, j'ai abandonné
-set incsearch
-" Met en évidence TOUS les résultats d'une recherche,
-" A consommer avec modération
-set hlsearch
-" Déplacer le curseur quand on écrit un (){}[]
-" (attention il ne s'agit pas du highlight
-set showmatch
-" Affiche le nombre de lignes sélectionnées en mode visuel
-" ou la touche/commande qu'on vient de taper en mode commande
-set showcmd
-
-" PASTE / NOPASTE {{{2
-"@TODO: Not certain if really needed
-" A utiliser en live, paste désactive l'indentation automatique
-" (entre autre) et nopaste le contraire
-set nopaste
-
-" COMPLETION MENU {{{2
-" Show autocomplete menus.
-set wildmenu
-" Afficher une liste lors de complétion de commandes/fichiers :
-set wildmode=list:full
-" Allow completion on filenames right after a '='.
-" Uber-useful when editing bash scripts
-set isfname-==
-
-" BACKUP {{{2
-" Modif tmp
-set swapfile
-" Modif tmp
-let g:dotvim_backup=expand('$HOME') . '/.vim/backup'
-if ! isdirectory(g:dotvim_backup)
-    call mkdir(g:dotvim_backup, "p")
-endif
-set directory=~/.vim/backup
-
-" Backups with persistent undos {{{2
-set backup
-let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
-if ! isdirectory(g:dotvim_backups)
-    call mkdir(g:dotvim_backups, "p")
-endif
-exec "set backupdir=" . g:dotvim_backups
-if has('persistent_undo')
-    set undofile
-    set undolevels=1000
-    set undoreload=10000
-    exec "set undodir=" . g:dotvim_backups
-endif
-
-" LINE WRAPPING {{{2
-" Laisse les lignes déborder de l'écran si besoin
-"set nowrap
-" Ne laisse pas les ligne deborder de l'écran
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-set linebreak
-" Size of the linewrapping
-set textwidth=80
-
-" SPELL CHECKER {{{2
-" @TODO: Remap the mapping of the spell checker
-" @TOOD: Support auto detection of the sentence language,
-"        so it can support multi language fr / us / en / etc (jpn)
-" En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
-" Chiant pour programmer, mais améliorable avec des dico
-    " perso et par languages
-set spell
-" [s / ]s : saute au prochain / précédant mot avec faute.
-    " z= : affiche la liste de suggestion pour corriger.
-set spelllang=fr,en
-
-" MOVE CURSOR {{{2
-" Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
-set whichwrap=<,>,[,]
-
-" Stay on the same column if possible {{{2
-" Tenter de rester toujours sur la même colonne lors de changements de lignes :
-set nostartofline
-
-" COMMAND HISTORY {{{2
-" Nombre de commandes maximale dans l'historique :
-set history=10000
-
-" AutoCmd {{{1
-" AutoReLoad vimrc {{{2
-" Auto apply modification to vimrc
-if has("autocmd")
-    autocmd! bufwritepost .vimrc source ~/.vimrc
-endif
-
-" SESSION {{{2
-" Récupération de la position du curseur entre 2 ouvertures de fichiers
-" Parfois ce n'est pas ce qu'on veut ...
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-                \| exe "normal g'\"" | endif
-endif
-
-" Functions {{{1
-" Format json selection {{{2
-map <Leader>j !python -m json.tool<CR>
-
-" SAVE as ROOT {{{2
-" use :W to sudo-write the current buffer
-command! W w !sudo tee % > /dev/null
-
-" AppendModeline() {{{2
-" Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
-        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
-" CLOSING {{{2
-" ZZ now saves all files, creates a session and exits
-function! AutocloseSession()
-    " if g:SessionLoaded || !filereadable(g:SessionPath)
-    "     exec 'mksession! ' . g:SessionPath
-    " endif
-    wqall
-endfunction
-noremap <silent> ZZ :call AutocloseSession()<CR>
-
-
-" OpenTab and lcd to the file {{{2
-" Change local working dir upon tab creation
-function! TabNewWithCwD(newpath)
-    :execute "tabnew " . a:newpath
-    if isdirectory(a:newpath)
-        :execute "lcd " . a:newpath
-    else
-        let dirname = fnamemodify(a:newpath, ":h")
-        :execute "lcd " . dirname
-    endif
-endfunction
-command! -nargs=1 -complete=file TabNew :call TabNewWithCwD("<args>")
-
-" Remove trailing whitespace {{{2
-function! CleanWhiteSpace()
-    let l = line(".")
-    let c = col(".")
-    :%s/\s\+$//e
-    let last_search_removed_from_history = histdel('s', -1)
-    call cursor(l, c)
-endfunction()
-command! -nargs=0 CleanWhiteSpace :call CleanWhiteSpace()
-
-" Convert DOS line endings to UNIX line endings {{{2
-function! FromDos()
-    %s/\r//e
-endfunction
-command! FromDos call FromDos()
-
-" Auto Chmod {{{2
-" Automatically give executable permissions if file begins with #! and
-" contains '/bin/' in the path
-function! MakeScriptExecuteable()
-    if getline(1) =~ "^#!.*/bin/"
-        silent !chmod +x <afile>
-    endif
+function! Fix_netrw_maps_for_dvorak()
+    " {cr} = « gauche / droite »
+    " @TODO: Remap to more vinegar related feature, like:
+    " - c : Go back
+    " - t : Preview (ranger inspired)
+    noremap <buffer> c h
+    noremap <buffer> r l
+    " {ts} = « haut / bas »
+    noremap <buffer> t j
+    noremap <buffer> s k
+    " noremap <buffer> d h
+    " noremap <buffer> h gj
+    " noremap <buffer> t gk
+    " noremap <buffer> n l
+    " noremap <buffer> e d
+    " noremap <buffer> l n
+    " and any others...
 endfunction
 
-" Mkdir Create missing directory {{{2
-" Used to create missing directories before writing a
-" buffer
-function! MkdirP()
-    :!mkdir -p %:h
-endfunction
-command! MkdirP call MkdirP()
+" Change default leader key {{{2
+let mapleader = ","
+" Permettre l'utilisation de la touche backspace dans tous les cas :
+set backspace=2
 
-" SHEBANG {{{2
-" shebang automatique lors de l'ouverture nouveau
-" d'un fichier *.py, *.sh (bash), modifier l'entête selon les besoins :
-" shell
-:autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" python
-:autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" php
-:autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+" Permet de sauvegarder par ctrl + s {{{2
+:nmap <c-s> :w<CR>
+" Fonctionne aussi en mode edition
+:imap <c-s> <Esc>:w<CR>a
+:imap <c-s> <Esc><c-s>
 
-nnoremap <space-a> :echom 'This is a Test !'<CR>
+" Completion avec ctrl + space {{{2
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+    \ "\<lt>C-n>" :
+    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
+" MOUSE {{{2
+" =======
+" Utilise la souris pour les terminaux qui le peuvent (tous ?)
+" pratique si on est habitué à coller sous la souris et pas sous le curseur,
+" attention fonctionnement inhabituel
+set mouse=a
+
+" REMAP KEYBOARD for bépo {{{1
+" @FIXME: Detect keyboard layout (qwerty / bépo)
+" @TODO: Move it at the end, the config must not be layout dependant.
+" I use kind dvorak-fr the «bépo» layout on my keyboard.
+source ~/.vim/vimrc.bepo
+" remap number for direct access
+source ~/.vim/vimrc.num
