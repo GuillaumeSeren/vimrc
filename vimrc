@@ -376,22 +376,11 @@ NeoBundle 'tpope/vim-vinegar.git'
 " https://github.com/tpope/vim-eunuch
 NeoBundle 'tpope/vim-eunuch'
 
-" Multiple-Cursor {{{2
-" terryma/vim-multiple-cursors
-" True Sublime Text style multiple selections for Vim
-NeoBundle 'terryma/vim-multiple-cursors'
-
 " Recover.vim {{{2
 " chrisbra/Recover.vim
 " A Plugin to show a diff, whenever recovering a buffer
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
-
-" UniPaired {{{2
-" key combos for 'pairs' of things. Mostly previous/next type stuff
-" @FIXME: Break with my keyboard layout.
-" https://github.com/tpope/vim-unimpaired
-" NeoBundle 'tpope/vim-unimpaired'
 
 " Surround {{{2
 " surround.vim: quoting/parenthesizing made simple
@@ -403,39 +392,6 @@ NeoBundle 'tpope/vim-surround'
 " tpope/vim-commentary
 " commentary.vim: comment stuff out
 NeoBundle 'tpope/vim-commentary'
-
-" Clang complete {{{2
-" Use of Clang for completing C, C++, Objective-C and Objective-C++
-NeoBundleLazy 'Rip-Rip/clang_complete', {
-\ 'autoload': {
-\     'filetypes': ['c', 'cpp']
-\ }}
-
-" RagTag {{{2
-" ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
-" http://www.vim.org/scripts/script.php?script_id=1896
-" https://github.com/tpope/vim-ragtag
-" CTRL+X /       Close the last open HTML tag
-" CTRL+X SPACE   Create open/close HTML tags from the typed word
-" CTRL+X CR      The same as CTRL+X SPACE but puts a newspace in between
-" CTRL+X !       Insert HTML doctype
-" CTRL+X @       Insert CSS stylesheet
-" CTRL+X #       Insert meta content-type meta tag
-" CTRL+X $       Load JavaScript document
-" For the following mappings, suppose that
-" you have typed "foo".
-" Mapping        Result
-" ---------      -----------
-" CTRL+X =       foo<%= | %>
-" CTRL+X +       <%= foo| %>
-" CTRL+X -       foo<% | %>
-" CTRL+X _       <% foo| %>
-" CTRL+X '       foo<%# | %>
-" CTRL+X "       <%# foo| %>
-NeoBundle 'tpope/vim-ragtag', {
-\ 'autoload': {
-\     'filetype': ['html', 'htm']
-\ }}
 
 " VimAirline {{{2
 " lean & mean status/tabline for vim that's light as air
@@ -480,37 +436,6 @@ NeoBundle 'joequery/Stupid-EasyMotion'
 " A Vim plugin which shows a git diff in the gutter (sign column) and
 " stages/reverts hunks.
 NeoBundle 'airblade/vim-gitgutter'
-
-" SearchParty {{{2
-" dahu/SearchParty
-" Extended search commands and maps for Vim
-" https://github.com/dahu/SearchParty
-" NeoBundle 'dahu/cearchParty'
-" Enhanced searches, highlights and matches for Vim
-" Tip
-" If you like SearchParty and want to share the W00t!, I’m grateful for tips
-" or beverages.
-" Visual Searches
-"
-" * Searches for the next occurrence of the currently selected visual
-"   text. <Plug>SearchPartyVisualFindNext
-"
-" # Searches for the prior occurrence of the currently selected visual
-"   text. <Plug>SearchPartyVisualFindPrior
-"
-" & Starts a :substitute using the currently selected visual text.
-"   <Plug>SearchPartyVisualFindSubstitute
-" @FIXME: Break with my keyboard layout
-" NeoBundle 'dahu/SearchParty'
-
-" DBEXT {{{2
-" vim-scripts/dbext.vim
-" Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL,
-" DBI,..)
-" http://www.vim.org/scripts/script.php?script_id=356
-" https://github.com/vim-scripts/dbext.vim
-" help : ':h dbext-tutorial'
-NeoBundle 'vim-scripts/dbext.vim'
 
 " VCSCOMMAND {{{2
 " http://www.vim.org/scripts/script.php?script_id=90
@@ -561,19 +486,6 @@ NeoBundle 'rking/ag.vim'
 " manager in Vim.
 NeoBundle 'fabi1cazenave/suckless.vim'
 
-" cra.vim {{{2
-" cra.vim
-" Vim plugin to create yearly timesheet
-NeoBundleLazy 'YannMoisan/cra.vim', {
-\ 'autoload': {
-\     'filetypes':['cra']
-\ }}
-
-" CALENDAR {{{2
-" A calendar application for Vim
-" https://github.com/itchyny/calendar.vim
-NeoBundle 'itchyny/calendar.vim'
-
 " a.vim {{{2
 " A few of quick commands to swtich between source files and header files
 " quickly.
@@ -581,24 +493,6 @@ NeoBundleLazy 'a.vim', {
 \ 'autoload': {
 \     'filetype': ['c', 'h']
 \ }}
-
-" BlockIt ASCII art array {{{2
-" sk1418 / blockit
-" a vim plugin to wrap lines in a block
-" https://github.com/sk1418/blockit
-NeoBundle 'sk1418/blockit.git'
-
-" HowMuch {{{2
-" sk1418 / HowMuch
-" A Vim plugin to calculate visual selected expressions
-" https://github.com/sk1418/HowMuch
-NeoBundle 'sk1418/HowMuch.git'
-
-" Vim-Move {{{2
-" https://github.com/matze/vim-move
-" Plugin to move lines and selections up and down
-" http://www.vim.org/scripts/script.php?script_id=4687
-NeoBundle 'matze/vim-move'
 
 " SHABERU {{{2
 " supermomonga/shaberu.vim
