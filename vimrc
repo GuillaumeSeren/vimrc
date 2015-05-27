@@ -8,12 +8,12 @@
 " Summary {{{1
 " ===========
 " Let's try to split this file into several clear part
-" - Keyboard BÉPO
 " - Plugins
 " - Tweaking
 " - Display
-" - Input
 " - AutoCmd
+" - Input
+" - Keyboard BÉPO
 
 " TODO-LIST {{{1
 " - Clean LazyLoading of all non default pluqin.
@@ -26,7 +26,8 @@
 if !1 | finish | endif
 
 " REMAP KEYBOARD for bépo {{{1
-" @TODO: Detect keyboard layout (qwerty / bépo)
+" @FIXME: Detect keyboard layout (qwerty / bépo)
+" @TODO: Move it at the end, the config must not be layout dependant.
 " I use kind dvorak-fr the «bépo» layout on my keyboard.
 source ~/.vim/vimrc.bepo
 " remap number for direct access
@@ -46,7 +47,6 @@ endif
 " ===========
 " We can export some config in modular files like :
 " Change the default mode of vim.
-" @TODO: really need ?
 if has('vim_starting')
     " Be iMproved
     set nocompatible
