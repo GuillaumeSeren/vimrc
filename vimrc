@@ -528,10 +528,8 @@ NeoBundle 'joonty/vdebug.git'
 " junegunn/vim-github-dashboard
 " Browse GitHub events in Vim
 " Browse GitHub events (user dashboard, user/repo activity) in Vim.
-
 " Commands
 " With authentication
-"
 " :GHDashboard
 " :GHDashboard USER
 " :GHActivity
@@ -539,12 +537,10 @@ NeoBundle 'joonty/vdebug.git'
 " :GHActivity USER/REPO
 " Without authentication (60 calls/hour limit, only public
 " activities)
-"
 " :GHDashboard! USER
 " :GHActivity! USER
 " :GHActivity! USER/REPO
 " Navigation
-
 " Use Tab and Shift-Tab to navigate back and
 " forth through the links.
 " Press Enter key or double-click on a link to
@@ -569,11 +565,9 @@ NeoBundle 'fabi1cazenave/suckless.vim'
 " cra.vim
 " Vim plugin to create yearly timesheet
 NeoBundleLazy 'YannMoisan/cra.vim', {
-    \ 'autoload': {
-        \ 'filetypes':['cra']
-    \ }}
-" define cra filetype for lazy loading
-au BufRead,BufNewFile *.cra set filetype=cra
+\ 'autoload': {
+\     'filetypes':['cra']
+\ }}
 
 " CALENDAR {{{2
 " A calendar application for Vim
@@ -1110,18 +1104,22 @@ nmap ^l <Plug>SearchPartyHighlightClear
 
 " Vdebug tweak {{{2
 let g:vdebug_keymap = {
-    \ "run"               : "<F5>",
-    \ "run_to_cursor"     : "<F1>",
-    \ "step_over"         : "<F2>",
-    \ "step_into"         : "<F3>",
-    \ "step_out"          : "<F4>",
-    \ "close"             : "<F6>",
-    \ "detach"            : "<F7>",
-    \ "set_breakpoint"    : "<F10>",
-    \ "get_context"       : "<F11>",
-    \ "eval_under_cursor" : "<F12>",
-    \ "eval_visual"       : "<Leader>e",
-    \ }
+\ "run"               : "<F5>",
+\ "run_to_cursor"     : "<F1>",
+\ "step_over"         : "<F2>",
+\ "step_into"         : "<F3>",
+\ "step_out"          : "<F4>",
+\ "close"             : "<F6>",
+\ "detach"            : "<F7>",
+\ "set_breakpoint"    : "<F10>",
+\ "get_context"       : "<F11>",
+\ "eval_under_cursor" : "<F12>",
+\ "eval_visual"       : "<Leader>e",
+\ }
+
+" CRA.vim {{{2
+" define cra filetype for lazy loading
+au BufRead,BufNewFile *.cra set filetype=cra
 
 " Vim Easy Motion {{{2
 let g:EasyMotion_leader_key = '\'
