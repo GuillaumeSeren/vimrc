@@ -251,13 +251,14 @@ let g:neobundle#install_process_timeout = 1500
 " After install, turn shell ~/.vim/bundle/vimproc,
 " (n,g)make -f your_machines_makefile
 NeoBundle 'Shougo/vimproc', {
-    \ 'build'       : {
-        \ 'windows' : 'make -f make_mingw32.mak',
-        \ 'cygwin'  : 'make -f make_cygwin.mak',
-        \ 'mac'     : 'make -f make_mac.mak',
-        \ 'unix'    : 'make -f make_unix.mak',
-        \ },
-    \ }
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin'  : 'make -f make_cygwin.mak',
+\     'mac'     : 'make -f make_mac.mak',
+\     'linux'   : 'make',
+\     'unix'    : 'gmake',
+\    },
+\ }
 
 " UNITE {{{2
 " Unite and create user interfaces
