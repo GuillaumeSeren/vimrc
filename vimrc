@@ -277,14 +277,15 @@ NeoBundle 'Shougo/neocomplete'
 " https://github.com/Valloric/YouCompleteMe
 " https://github.com/Valloric/YouCompleteMe/issues/1082
 " NeoBundle 'Valloric/YouCompleteMe'
+" @FIXME: DO NOT LOAD YCM IN NEOVIM
 NeoBundle 'Valloric/YouCompleteMe', {
-     \ 'build'      : {
-        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'unix'    : './install.sh --clang-completer --system-libclang',
-        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-        \ }
-     \ }
+\ 'build'       : {
+\     'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+\     'unix'    : './install.sh --clang-completer --system-libclang',
+\     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+\     'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+\     }
+\ }
 " Add or remove arguments to install.sh as necessary.
 " Additional steps might be necessary for Windows, as always. ;)
 
