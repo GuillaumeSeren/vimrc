@@ -394,17 +394,7 @@ NeoBundle 'chrisbra/Recover.vim'
 " Surround {{{2
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
-let g:surround_no_mappings= 1
 NeoBundle 'tpope/vim-surround'
-nmap ds  <Plug>Dsurround
-nmap hs  <Plug>Csurround
-nmap ys  <Plug>Ysurround
-nmap yS  <Plug>YSurround
-nmap yss <Plug>Yssurround
-nmap ySs <Plug>YSsurround
-nmap ySS <Plug>YSsurround
-"xmap S   <Plug>VSurround
-"xmap gS  <Plug>VgSurround
 
 " Vim-commentary {{{2
 " http://www.vim.org/scripts/script.php?script_id=3695
@@ -1089,6 +1079,18 @@ let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
 " Default database (local)
 " MySQL
 let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd='':dbname=mysql'
+
+" VimSurround {{{2
+let g:surround_no_mappings= 1
+nmap ds  <Plug>Dsurround
+nmap hs  <Plug>Csurround
+nmap ys  <Plug>Ysurround
+nmap yS  <Plug>YSurround
+nmap yss <Plug>Yssurround
+nmap ySs <Plug>YSsurround
+nmap ySS <Plug>YSsurround
+"xmap S   <Plug>VSurround
+"xmap gS  <Plug>VgSurround
 
 " vim-commentary {{{2
 " remap for bépo
