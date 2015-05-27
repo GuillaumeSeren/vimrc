@@ -228,8 +228,8 @@ if !filereadable(neobundle_readme)
 endif
 
 " Plugins List {{{1
-" All the addons
-" NeoBundle base {{{2
+" Default plugins {{{2
+" NeoBundle base {{{3
 " 20131206: Add NeoBundle
 " 13-10-2014: NeoBundle change call to begin
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -245,7 +245,7 @@ let g:neobundle#install_process_timeout = 1500
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
-" VIMPROC {{{2
+" VIMPROC {{{3
 " Recommended to install
 " original repos on github
 " After install, turn shell ~/.vim/bundle/vimproc,
@@ -260,18 +260,18 @@ NeoBundle 'Shougo/vimproc', {
 \    },
 \ }
 
-" UNITE {{{2
+" UNITE {{{3
 " Unite and create user interfaces
 " http://www.vim.org/scripts/script.php?script_id=3396
 " https://github.com/Shougo/unite.vim
 NeoBundle 'Shougo/unite.vim.git'
 
-" NeoComplete {{{2
+" NeoComplete {{{3
 " https://github.com/Shougo/neocomplete.vim
 " Next generation completion framework after neocomplcache
 NeoBundle 'Shougo/neocomplete'
 
-" YouCompleteMe {{{2
+" YouCompleteMe {{{3
 " A code-completion engine for Vim
 " http://valloric.github.io/YouCompleteMe/
 " https://github.com/Valloric/YouCompleteMe
@@ -289,17 +289,17 @@ NeoBundle 'Valloric/YouCompleteMe', {
 " Add or remove arguments to install.sh as necessary.
 " Additional steps might be necessary for Windows, as always. ;)
 
-" NeoSnippet {{{2
+" NeoSnippet {{{3
 " https://github.com/Shougo/neosnippet.vim
 " neo-snippet plugin contains neocomplcache snippets source
 NeoBundle 'Shougo/neosnippet'
 
-" NeoSnippet-snippets {{{2
+" NeoSnippet-snippets {{{3
 " https://github.com/Shougo/neosnippet-snippets
 " The standard snippets repository for neosnippet
 NeoBundle 'Shougo/neosnippet-snippets'
 
-" unite-outline {{{2
+" unite-outline {{{3
 " Unite Plugin : OUTLINE =========
 " https://github.com/h1mesuke/unite-outline
 " outline source for unite.vim
@@ -307,98 +307,98 @@ NeoBundle 'Shougo/neosnippet-snippets'
 " Call it with :unite outline
 NeoBundle 'h1mesuke/unite-outline'
 
-" unite-colorscheme {{{2
+" unite-colorscheme {{{3
 " https://github.com/ujihisa/unite-colorscheme
 " A unite.vim plugin
 NeoBundle 'ujihisa/unite-colorscheme'
 
-" SYNTASTIC {{{2
+" SYNTASTIC {{{3
 " Syntax checking hacks for vim
 " https://github.com/scrooloose/syntastic
 NeoBundle 'scrooloose/syntastic.git'
 
-" VimShell {{{2
+" VimShell {{{3
 " Powerful shell implemented by vim.
 " https://github.com/Shougo/vimshell.vim
 NeoBundle 'Shougo/vimshell.vim.git'
 
-" VimFiler {{{2
+" VimFiler {{{3
 " vimfiler.vim
 " Powerful file explorer implemented by Vim script
 " https://github.com/Shougo/vimfiler.vim
 NeoBundle 'Shougo/vimfiler.vim'
 
-" Sensible {{{2
+" Sensible {{{3
 " sensible.vim: Defaults everyone can agree on
 " http://www.vim.org/scripts/script.php?script_id=4391
 NeoBundle 'tpope/vim-sensible'
 
-" Fugitive {{{2
+" Fugitive {{{3
 " fugitive.vim: a Git wrapper so awesome, it should be illegal
 " https://github.com/tpope/vim-fugitive
 NeoBundle 'tpope/vim-fugitive'
 
-" Committia {{{2
+" Committia {{{3
 " A Vim plugin for more pleasant editing on commit messages
 NeoBundle 'rhysd/committia.vim'
 
-" VimSession {{{2
+" VimSession {{{3
 " Extended session management for Vim (:mksession on steroids)
 " https://github.com/xolox/vim-session
 NeoBundle 'xolox/vim-session.git', {
 \ 'depends' : 'xolox/vim-misc.git'
 \ }
 
-" Repeat {{{2
+" Repeat {{{3
 " repeat.vim: enable repeating supported plugin maps with "."
 " http://www.vim.org/scripts/script.php?script_id=2136
 " https://github.com/tpope/vim-repeat
 NeoBundle 'tpope/vim-repeat'
 
-" SpeedDating {{{2
+" SpeedDating {{{3
 " speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
 " https://github.com/tpope/vim-speeddating
 NeoBundle 'tpope/vim-speeddating.git'
 
-" EditorConfig {{{2
+" EditorConfig {{{3
 " EditorConfig plugin for Vim http://editorconfig.org
 NeoBundle 'editorconfig/editorconfig-vim'
 
-" Vinegar {{{2
+" Vinegar {{{3
 " vinegar.vim: combine with netrw to create a delicious salad dressing
 " https://github.com/tpope/vim-vinegar
 NeoBundle 'tpope/vim-vinegar.git'
 
-" vim-eunuch {{{2
+" vim-eunuch {{{3
 " tpope/vim-eunuch
 " eunuch.vim: helpers for UNIX
 " http://www.vim.org/scripts/script.php?script_id=4300
 " https://github.com/tpope/vim-eunuch
 NeoBundle 'tpope/vim-eunuch'
 
-" Recover.vim {{{2
+" Recover.vim {{{3
 " chrisbra/Recover.vim
 " A Plugin to show a diff, whenever recovering a buffer
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
 
-" Surround {{{2
+" Surround {{{3
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
 NeoBundle 'tpope/vim-surround'
 
-" Vim-commentary {{{2
+" Vim-commentary {{{3
 " http://www.vim.org/scripts/script.php?script_id=3695
 " tpope/vim-commentary
 " commentary.vim: comment stuff out
 NeoBundle 'tpope/vim-commentary'
 
-" VimAirline {{{2
+" VimAirline {{{3
 " lean & mean status/tabline for vim that's light as air
 " https://github.com/bling/vim-airline
 NeoBundle 'bling/vim-airline'
 
-" vimwiki {{{2
+" vimwiki {{{3
 " Personal Wiki for Vim
 " https://github.com/vimwiki/vimwiki
 " Key bindings
@@ -417,12 +417,12 @@ NeoBundle 'bling/vim-airline'
 " <Shift-Tab> -- Find previous wiki link
 NeoBundle 'vimwiki/vimwiki'
 
-" EasyMotion {{{2
+" EasyMotion {{{3
 " Vim motions on speed!
 " https://github.com/Lokaltog/vim-easymotion
 NeoBundle 'Lokaltog/vim-easymotion'
 
-" Stupid-EasyMotion {{{2
+" Stupid-EasyMotion {{{3
 " A dumbed down version of EasyMotion
 " that aids navigation on the current line
 " We use the global leader
@@ -431,25 +431,25 @@ NeoBundle 'Lokaltog/vim-easymotion'
 " <Leader><Leader>fx - make every character x in the line a target
 NeoBundle 'joequery/Stupid-EasyMotion'
 
-" vim-gitgutter {{{2
+" vim-gitgutter {{{3
 " airblade/vim-gitgutter
 " A Vim plugin which shows a git diff in the gutter (sign column) and
 " stages/reverts hunks.
 NeoBundle 'airblade/vim-gitgutter'
 
-" VCSCOMMAND {{{2
+" VCSCOMMAND {{{3
 " http://www.vim.org/scripts/script.php?script_id=90
 " https://code.google.com/p/vcscommand/
 NeoBundle 'vcscommand.vim'
 
-" vDebug {{{2
+" vDebug {{{3
 " On remplace Xdebug par Vdebug apparement plus performant
 " http://www.vim.org/scripts/script.php?script_id=4170
 " https://github.com/joonty/vdebug
 " Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
 NeoBundle 'joonty/vdebug.git'
 
-" vim-github-dashboard {{{2
+" vim-github-dashboard {{{3
 " junegunn/vim-github-dashboard
 " Browse GitHub events in Vim
 " Browse GitHub events (user dashboard, user/repo activity) in Vim.
@@ -474,19 +474,19 @@ NeoBundle 'joonty/vdebug.git'
 " Press q to close the window.
 NeoBundle 'junegunn/vim-github-dashboard'
 
-" AG.VIM {{{2
+" AG.VIM {{{3
 " https://github.com/rking/ag.vim
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
 " CLI script 'ack'
 NeoBundle 'rking/ag.vim'
 
-" SUCKLESS {{{2
+" SUCKLESS {{{3
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
 " manager in Vim.
 NeoBundle 'fabi1cazenave/suckless.vim'
 
-" a.vim {{{2
+" a.vim {{{3
 " A few of quick commands to swtich between source files and header files
 " quickly.
 NeoBundleLazy 'a.vim', {
@@ -494,7 +494,7 @@ NeoBundleLazy 'a.vim', {
 \     'filetype': ['c', 'h']
 \ }}
 
-" SHABERU {{{2
+" SHABERU {{{3
 " supermomonga/shaberu.vim
 " めっちゃしゃべる
 " https://github.com/supermomonga/shaberu.vim
@@ -503,7 +503,7 @@ NeoBundleLazy 'a.vim', {
 NeoBundle 'supermomonga/shaberu.vim'
 " Speak Japanese voice on OS X
 
-" Tabularize ! {{{2
+" Tabularize ! {{{3
 " https://github.com/godlygeek/tabular
 " Vim script for text filtering and alignment
 " one  : 1
@@ -513,31 +513,32 @@ NeoBundle 'supermomonga/shaberu.vim'
 " change the : with the needed char to align
 NeoBundle 'godlygeek/tabular'
 
-" Characterize {{{2
+" Characterize {{{3
 " tpope/vim-characterize
 " characterize.vim:
 " Unicode character metadata
 " http://www.vim.org/scripts/script.php?script_id=4410
 NeoBundle 'tpope/vim-characterize'
 
-" vim-scriptease {{{2
+" Specific plugins {{{2
+" vim-scriptease {{{3
 " tpope/vim-scriptease
 " scriptease.vim: A Vim plugin for Vim plugins
 " http://www.vim.org/scripts/script.php?script_id=4394
 NeoBundle 'tpope/vim-scriptease'
 
-" vim-colors-solarized {{{2
+" vim-colors-solarized {{{3
 " precision colorscheme for the vim text editor
 " http://ethanschoonover.com/solarized
 " https://github.com/altercation/vim-colors-solarized
 NeoBundle 'altercation/vim-colors-solarized.git'
 
-" Rails {{{2
+" Rails {{{3
 " rails.vim: Ruby on Rails power tools
 " https://github.com/tpope/vim-rails
 NeoBundle 'tpope/vim-rails.git'
 
-" lua-ftplugin {{{2
+" lua-ftplugin {{{3
 " Lua file type plug-in for the Vim text editor
 " http://peterodding.com/code/vim/lua-ftplugin
 " https://github.com/xolox/vim-lua-ftplugin
@@ -548,7 +549,7 @@ NeoBundleLazy 'xolox/vim-lua-ftplugin' , {
 \     'depends' : 'xolox/vim-misc',
 \ }
 
-" moonscript-vim {{{2
+" moonscript-vim {{{3
 " leafo/moonscript-vim
 " MoonScript support for vim http://moonscript.org
 NeoBundleLazy 'leafo/moonscript-vim' , {
@@ -557,7 +558,7 @@ NeoBundleLazy 'leafo/moonscript-vim' , {
 \     },
 \ }
 
-" elzr: json {{{2
+" elzr: json {{{3
 " A better JSON for Vim: distinct highlighting of keywords vs values,
 " JSON-specific (non-JS) warnings, quote concealing. Pathogen-friendly.
 " https://github.com/elzr/vim-json
@@ -566,19 +567,19 @@ NeoBundleLazy 'elzr/vim-json', {
 \     'filetypes' : ['javascript']
 \ }}
 
-" yaml {{{2
+" yaml {{{3
 NeoBundleLazy 'avakhov/vim-yaml', {
 \ 'autoload' : {
 \     'filetypes' : ['python', 'yaml']
 \ }}
 
-" Vim-Markdown {{{2
+" Vim-Markdown {{{3
 NeoBundleLazy 'tpope/vim-markdown', {
 \ 'autoload':{
 \     'filetypes':['markdown']
 \ }}
 
-" php.vim {{{2
+" php.vim {{{3
 " old::
 " NeoBundle 'php.vim'
 " 20141028: Change to new StanAngeloff
@@ -588,7 +589,7 @@ NeoBundleLazy 'StanAngeloff/php.vim', {
 \     'filetypes':['php']
 \ }}
 
-" Better PHP indent {{{2
+" Better PHP indent {{{3
 " The official VIm indent script for PHP
 " http://www.2072productions.com/to/phpindent.txt
 " https://github.com/2072/PHP-Indenting-for-VIm
@@ -597,7 +598,7 @@ NeoBundleLazy '2072/PHP-Indenting-for-VIm', {
 \     'filetypes':['php']
 \ }}
 
-" PHP Getter / Setter {{{2
+" PHP Getter / Setter {{{3
 " php_getset.vim
 " Automatically add getter/setters for PHP4 properties.
 " Commands:
@@ -626,7 +627,7 @@ NeoBundleLazy 'vim-scripts/php_getset.vim', {
 \     'filetypes':['php']
 \ }}
 
-" Textobjs {{{2
+" Textobjs {{{3
 " Text-object like motion for arguments
 NeoBundleLazy 'kana/vim-textobj-user'
 NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
@@ -635,7 +636,7 @@ NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
 \     'mappings': [[ 'ox', '<Plug>' ]]
 \ }}
 
-" CSS color {{{2
+" CSS color {{{3
 " Highlight colors in css files
 " NeoBundle 'skammer/vim-css-color'
 " NOT WORKING
@@ -646,7 +647,7 @@ NeoBundleLazy 'ap/vim-css-color', {
 \     'filetypes':['css']
 \ }}
 
-" css.vim {{{2
+" css.vim {{{3
 " css.vim
 " Cutting-edge vim css syntax file
 " http://www.vim.org
@@ -655,7 +656,7 @@ NeoBundleLazy "JulesWang/css.vim", {
 \     'filetypes':['css']
 \ }}
 
-" vim-css3-syntax {{{2
+" vim-css3-syntax {{{3
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`.
 " https://github.com/hail2u/vim-css3-syntax
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
@@ -663,7 +664,7 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \     'filetypes':['css']
 \ }}
 
-" sparkup {{{2
+" sparkup {{{3
 " A parser for a condensed HTML format
 " https://github.com/rstacruz/sparkup
 NeoBundleLazy 'rstacruz/sparkup', {
@@ -671,7 +672,7 @@ NeoBundleLazy 'rstacruz/sparkup', {
 \     'filetypes':['html', 'xhtml']
 \ }}
 
-" vim-latex {{{2
+" vim-latex {{{3
 " lervag/vim-latex
 " https://github.com/lervag/vim-latex
 " A simple and lightweight vim-plugin for editing LaTeX files.
@@ -680,7 +681,7 @@ NeoBundleLazy 'lervag/vim-latex', {
 \     'filetypes':['tex']
 \ }}
 
-" BashSupport {{{2
+" BashSupport {{{3
 " BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
 " https://github.com/vim-scripts/bash-support.vim
 NeoBundleLazy 'vim-scripts/bash-support.vim', {
@@ -688,30 +689,30 @@ NeoBundleLazy 'vim-scripts/bash-support.vim', {
 \     'filetypes':['sh']
 \ }}
 
-" Vividchalk {{{2
+" Vividchalk {{{3
 " a colorscheme strangely reminiscent of Vibrant Ink for a
 " certain OS X editor
 " https://github.com/tpope/vim-vividchalk
 " http://www.vim.org/scripts/script.php?script_id=1891
 NeoBundle 'tpope/vim-vividchalk.git'
 
-" jellybeans.vim {{{2
+" jellybeans.vim {{{3
 " A colorful, dark color scheme for Vim.
 " http://www.vim.org/scripts/script.php?script_id=2555
 " https://github.com/nanotech/jellybeans.vim
 NeoBundle 'nanotech/jellybeans.vim'
 
-" Vim-Portal {{{2
+" Vim-Portal {{{3
 " Hello and, again, this is the Portal Gun for Vim.
 " https://github.com/thinca/vim-portal
 NeoBundle 'thinca/vim-portal'
 
-" vim-threes {{{2
+" vim-threes {{{3
 " Play Threes! in Vim!
 " https://github.com/thinca/vim-threes
 NeoBundle 'thinca/vim-threes'
 
-" TagBar {{{2
+" TagBar {{{3
 " Vim plugin that displays tags in a window, ordered by class etc.
 " https://github.com/majutsushi/tagbar
 NeoBundle 'majutsushi/tagbar'
