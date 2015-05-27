@@ -346,7 +346,8 @@ NeoBundle 'rhysd/committia.vim'
 " Extended session management for Vim (:mksession on steroids)
 " https://github.com/xolox/vim-session
 NeoBundle 'xolox/vim-session.git', {
-    \ 'depends' : 'xolox/vim-misc.git' }
+\ 'depends' : 'xolox/vim-misc.git'
+\ }
 
 " Repeat {{{2
 " repeat.vim: enable repeating supported plugin maps with "."
@@ -388,6 +389,7 @@ NeoBundle 'chrisbra/Recover.vim'
 
 " UniPaired {{{2
 " key combos for 'pairs' of things. Mostly previous/next type stuff
+" @FIXME: Break with my keyboard layout.
 " https://github.com/tpope/vim-unimpaired
 " NeoBundle 'tpope/vim-unimpaired'
 
@@ -405,9 +407,9 @@ NeoBundle 'tpope/vim-commentary'
 " Clang complete {{{2
 " Use of Clang for completing C, C++, Objective-C and Objective-C++
 NeoBundleLazy 'Rip-Rip/clang_complete', {
-    \ 'autoload': {
-        \ 'filetypes': ['c', 'cpp']
-    \}}
+\ 'autoload': {
+\     'filetypes': ['c', 'cpp']
+\ }}
 
 " RagTag {{{2
 " ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
@@ -431,9 +433,9 @@ NeoBundleLazy 'Rip-Rip/clang_complete', {
 " CTRL+X '       foo<%# | %>
 " CTRL+X "       <%# foo| %>
 NeoBundle 'tpope/vim-ragtag', {
-    \ 'autoload': {
-        \ 'filetype': ['html', 'htm']
-    \}}
+\ 'autoload': {
+\     'filetype': ['html', 'htm']
+\ }}
 
 " VimAirline {{{2
 " lean & mean status/tabline for vim that's light as air
@@ -463,7 +465,6 @@ NeoBundle 'vimwiki/vimwiki'
 " Vim motions on speed!
 " https://github.com/Lokaltog/vim-easymotion
 NeoBundle 'Lokaltog/vim-easymotion'
-let g:EasyMotion_leader_key = '\'
 
 " Stupid-EasyMotion {{{2
 " A dumbed down version of EasyMotion
@@ -499,12 +500,8 @@ NeoBundle 'airblade/vim-gitgutter'
 "
 " & Starts a :substitute using the currently selected visual text.
 "   <Plug>SearchPartyVisualFindSubstitute
-NeoBundle 'dahu/SearchParty'
-
-" vim-visual-star-search
-" Start a * or # search from a visual block
-" http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
-" NeoBundle 'nelstrom/vim-visual-star-search'
+" @FIXME: Break with my keyboard layout
+" NeoBundle 'dahu/SearchParty'
 
 " DBEXT {{{2
 " vim-scripts/dbext.vim
@@ -1125,6 +1122,9 @@ let g:vdebug_keymap = {
     \ "eval_under_cursor" : "<F12>",
     \ "eval_visual"       : "<Leader>e",
     \ }
+
+" Vim Easy Motion {{{2
+let g:EasyMotion_leader_key = '\'
 
 " VimSession {{{2
 " Extended session management for Vim (:mksession on steroids)
