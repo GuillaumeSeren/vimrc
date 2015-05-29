@@ -38,182 +38,6 @@ if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" Vim Config {{{1
-" Syntax {{{2
-" The colors get messed up when I scroll. Vim uses various heuristics to save
-" time when determining the highlighting, and sometimes they cause problems.
-" Look up :h syn-sync for a more detailed explanation.
-"syn sync fromstart
-" Détection du type de fichier pour l'indentation
-filetype plugin indent on
-" Do we need to test on autocmd
-if has("autocmd")
-    "filetype indent on
-    filetype plugin indent on
-endif
-" Automatically indent when adding a curly bracket, etc.
-set smartindent
-" Indispensable pour ne pas tout casser avec ce qui va suivre
-set preserveindent
-" indentation automatique
-set autoindent
-" Largeur de l'autoindentation
-set shiftwidth=4
-" Arrondit la valeur de l'indentation
-set shiftround
-" Largeur du caractère tab
-set tabstop=4
-" Largeur de l'indentation de la touche tab
-set softtabstop=4
-" Remplace les tab par des expaces
-set expandtab ts=4 sw=4 ai
-" Do not tab expand on Makefile
-autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
-" Utilise shiftwidth à la place de tabstop en début de ligne (et backspace supprime d'un coup si ce sont des espaces)
-set smarttab
-" 20140901: Add for test.
-" redraw only when we need to.
-set lazyredraw
-" autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
-set noautoindent
-" Detection de l'indentation
-set cindent
-set smartindent
-
-" ENCODING {{{2
-" Use UTF-8.
-set encoding=utf-8
-
-" Modeline {{{2
-set modeline modelines=5
-
-"let g:git_modelines_allowed_items = [
-"    \ "textwidth",   "tw",
-"    \ "softtabstop", "sts",
-"    \ "tabstop",     "ts",
-"    \ "shiftwidth",  "sw",
-"    \ "expandtab",   "et",   "noexpandtab", "noet",
-"    \ "filetype",    "ft",
-"    \ "foldmethod",  "fdm",
-"    \ "readonly",    "ro",   "noreadonly", "noro",
-"    \ "rightleft",   "rl",   "norightleft", "norl",
-"    \ "cindent",     "cin",  "nocindent", "nocin",
-"    \ "smartindent", "si",   "nosmartindent", "nosi",
-"    \ "autoindent",  "ai",   "noautoindent", "noai",
-"    \ "spell",
-"    \ "spelllang"
-"    \ ]
-
-" TERM TYPE {{{2
-" Let's use screen-256
-" From: http://reyhan.org/2013/12/colours-on-vim-and-tmux.html
-"set term=screen-256color
-"set term=rxvt-unicode-256color
-" Just for vimShell
-"let g:vimshell_environment_term='rxvt-unicode-256color'
-
-" Clipboard {{{2
-" Set the clipboard if running inside X11
-if has("X11")
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
-
-" SEARCH {{{2
-" Recherche en minuscule -> indépendante de la casse,
-" une majuscule -> stricte
-set smartcase
-" Ne jamais respecter la casse
-" (attention totalement indépendant du précédent mais de priorité plus faible)
-set ignorecase
-" Déplace le curseur au fur et a mesure qu'on tape une recherche,
-" pas toujours pratique, j'ai abandonné
-set incsearch
-" Met en évidence TOUS les résultats d'une recherche,
-" A consommer avec modération
-set hlsearch
-" Déplacer le curseur quand on écrit un (){}[]
-" (attention il ne s'agit pas du highlight
-set showmatch
-" Affiche le nombre de lignes sélectionnées en mode visuel
-" ou la touche/commande qu'on vient de taper en mode commande
-set showcmd
-
-" PASTE / NOPASTE {{{2
-"@TODO: Not certain if really needed
-" A utiliser en live, paste désactive l'indentation automatique
-" (entre autre) et nopaste le contraire
-set nopaste
-
-" COMPLETION MENU {{{2
-" Show autocomplete menus.
-set wildmenu
-" Afficher une liste lors de complétion de commandes/fichiers :
-set wildmode=list:full
-" Allow completion on filenames right after a '='.
-" Uber-useful when editing bash scripts
-set isfname-==
-
-" BACKUP {{{2
-" Modif tmp
-set swapfile
-" Modif tmp
-let g:dotvim_backup=expand('$HOME') . '/.vim/backup'
-if ! isdirectory(g:dotvim_backup)
-    call mkdir(g:dotvim_backup, "p")
-endif
-set directory=~/.vim/backup
-
-" Backups with persistent undos {{{2
-set backup
-let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
-if ! isdirectory(g:dotvim_backups)
-    call mkdir(g:dotvim_backups, "p")
-endif
-exec "set backupdir=" . g:dotvim_backups
-if has('persistent_undo')
-    set undofile
-    set undolevels=1000
-    set undoreload=10000
-    exec "set undodir=" . g:dotvim_backups
-endif
-
-" LINE WRAPPING {{{2
-" Laisse les lignes déborder de l'écran si besoin
-"set nowrap
-" Ne laisse pas les ligne deborder de l'écran
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-set linebreak
-" Size of the linewrapping
-set textwidth=80
-
-" SPELL CHECKER {{{2
-" @TODO: Remap the mapping of the spell checker
-" @TOOD: Support auto detection of the sentence language,
-"        so it can support multi language fr / us / en / etc (jpn)
-" En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
-" Chiant pour programmer, mais améliorable avec des dico
-    " perso et par languages
-set spell
-" [s / ]s : saute au prochain / précédant mot avec faute.
-    " z= : affiche la liste de suggestion pour corriger.
-set spelllang=fr,en
-
-" MOVE CURSOR {{{2
-" Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
-set whichwrap=<,>,[,]
-
-" Stay on the same column if possible {{{2
-" Tenter de rester toujours sur la même colonne lors de changements de lignes :
-set nostartofline
-
-" COMMAND HISTORY {{{2
-" Nombre de commandes maximale dans l'historique :
-set history=10000
-
 " Auto load / install plugin manager {{{1
 if !1 | finish | endif
 
@@ -1056,6 +880,297 @@ let php_alt_properties = 1
 " TODO: documentation for php_folding_manual
 let php_folding = 3
 
+" Vim core {{{1
+" Syntax {{{2
+" The colors get messed up when I scroll. Vim uses various heuristics to save
+" time when determining the highlighting, and sometimes they cause problems.
+" Look up :h syn-sync for a more detailed explanation.
+"syn sync fromstart
+" Détection du type de fichier pour l'indentation
+filetype plugin indent on
+" Do we need to test on autocmd
+if has("autocmd")
+    "filetype indent on
+    filetype plugin indent on
+endif
+" Automatically indent when adding a curly bracket, etc.
+set smartindent
+" Indispensable pour ne pas tout casser avec ce qui va suivre
+set preserveindent
+" indentation automatique
+set autoindent
+" Largeur de l'autoindentation
+set shiftwidth=4
+" Arrondit la valeur de l'indentation
+set shiftround
+" Largeur du caractère tab
+set tabstop=4
+" Largeur de l'indentation de la touche tab
+set softtabstop=4
+" Remplace les tab par des expaces
+set expandtab ts=4 sw=4 ai
+" Do not tab expand on Makefile
+autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+" Utilise shiftwidth à la place de tabstop en début de ligne (et backspace supprime d'un coup si ce sont des espaces)
+set smarttab
+" 20140901: Add for test.
+" redraw only when we need to.
+set lazyredraw
+" autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
+set noautoindent
+" Detection de l'indentation
+set cindent
+set smartindent
+
+" ENCODING {{{2
+" Use UTF-8.
+set encoding=utf-8
+
+" Modeline {{{2
+set modeline modelines=5
+
+"let g:git_modelines_allowed_items = [
+"    \ "textwidth",   "tw",
+"    \ "softtabstop", "sts",
+"    \ "tabstop",     "ts",
+"    \ "shiftwidth",  "sw",
+"    \ "expandtab",   "et",   "noexpandtab", "noet",
+"    \ "filetype",    "ft",
+"    \ "foldmethod",  "fdm",
+"    \ "readonly",    "ro",   "noreadonly", "noro",
+"    \ "rightleft",   "rl",   "norightleft", "norl",
+"    \ "cindent",     "cin",  "nocindent", "nocin",
+"    \ "smartindent", "si",   "nosmartindent", "nosi",
+"    \ "autoindent",  "ai",   "noautoindent", "noai",
+"    \ "spell",
+"    \ "spelllang"
+"    \ ]
+
+" TERM TYPE {{{2
+" Let's use screen-256
+" From: http://reyhan.org/2013/12/colours-on-vim-and-tmux.html
+"set term=screen-256color
+"set term=rxvt-unicode-256color
+" Just for vimShell
+"let g:vimshell_environment_term='rxvt-unicode-256color'
+
+" Clipboard {{{2
+" Set the clipboard if running inside X11
+if has("X11")
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
+
+" SEARCH {{{2
+" Recherche en minuscule -> indépendante de la casse,
+" une majuscule -> stricte
+set smartcase
+" Ne jamais respecter la casse
+" (attention totalement indépendant du précédent mais de priorité plus faible)
+set ignorecase
+" Déplace le curseur au fur et a mesure qu'on tape une recherche,
+" pas toujours pratique, j'ai abandonné
+set incsearch
+" Met en évidence TOUS les résultats d'une recherche,
+" A consommer avec modération
+set hlsearch
+" Déplacer le curseur quand on écrit un (){}[]
+" (attention il ne s'agit pas du highlight
+set showmatch
+" Affiche le nombre de lignes sélectionnées en mode visuel
+" ou la touche/commande qu'on vient de taper en mode commande
+set showcmd
+
+" PASTE / NOPASTE {{{2
+"@TODO: Not certain if really needed
+" A utiliser en live, paste désactive l'indentation automatique
+" (entre autre) et nopaste le contraire
+set nopaste
+
+" COMPLETION MENU {{{2
+" Show autocomplete menus.
+set wildmenu
+" Afficher une liste lors de complétion de commandes/fichiers :
+set wildmode=list:full
+" Allow completion on filenames right after a '='.
+" Uber-useful when editing bash scripts
+set isfname-==
+
+" BACKUP {{{2
+" Modif tmp
+set swapfile
+" Modif tmp
+let g:dotvim_backup=expand('$HOME') . '/.vim/backup'
+if ! isdirectory(g:dotvim_backup)
+    call mkdir(g:dotvim_backup, "p")
+endif
+set directory=~/.vim/backup
+
+" Backups with persistent undos {{{2
+set backup
+let g:dotvim_backups=expand('$HOME') . '/.vim/backups'
+if ! isdirectory(g:dotvim_backups)
+    call mkdir(g:dotvim_backups, "p")
+endif
+exec "set backupdir=" . g:dotvim_backups
+if has('persistent_undo')
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+    exec "set undodir=" . g:dotvim_backups
+endif
+
+" LINE WRAPPING {{{2
+" Laisse les lignes déborder de l'écran si besoin
+"set nowrap
+" Ne laisse pas les ligne deborder de l'écran
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+set linebreak
+" Size of the linewrapping
+set textwidth=80
+
+" SPELL CHECKER {{{2
+" @TODO: Remap the mapping of the spell checker
+" @TOOD: Support auto detection of the sentence language,
+"        so it can support multi language fr / us / en / etc (jpn)
+" En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
+" Chiant pour programmer, mais améliorable avec des dico
+    " perso et par languages
+set spell
+" [s / ]s : saute au prochain / précédant mot avec faute.
+    " z= : affiche la liste de suggestion pour corriger.
+set spelllang=fr,en
+
+" MOVE CURSOR {{{2
+" Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
+set whichwrap=<,>,[,]
+
+" Stay on the same column if possible {{{2
+" Tenter de rester toujours sur la même colonne lors de changements de lignes :
+set nostartofline
+
+" COMMAND HISTORY {{{2
+" Nombre de commandes maximale dans l'historique :
+set history=10000
+
+" Vim display {{{1
+" Folding {{{2
+" I like some folding ideas from :
+" http://dougblack.io/words/a-good-vimrc.html#colors
+set foldmethod=marker
+" Then we want it to close every fold by default so that we have this high level
+" view when we open our vimrc.
+set foldlevel=0
+
+" Show command (usefull for leader) {{{2
+set showcmd
+
+" COLOR Syntax {{{2
+" Coloration syntaxique, indispensable pour ne pas se perdre dans les longs fichiers
+" syntax on
+" https://github.com/Shougo/vimshell.vim/issues/73
+" Change to syntax enable
+syntax enable
+
+" COLORSHEME {{{2
+" set the background light or dark
+set background=dark
+let g:solarized_termtrans = 1
+colorscheme solarized
+" Change le colorsheme en mode diff
+if &diff
+    colorscheme solarized
+endif
+
+" STATUS {{{2
+" Show editing mode
+set showmode
+
+" VISUAL BELL {{{2
+" Error bells are displayed visually.
+set visualbell
+
+" RULER {{{2
+" SI c'est pas déjà fait, affiche la position du curseur
+set ruler
+
+" DIFF {{{2
+" Affiche toujours les diffs en vertical
+set diffopt=vertical
+
+" Split {{{2
+" Set the split below the active region.
+set splitbelow
+
+" Display cmd mod {{{2
+" Indiquer le nombre de modification lorsqu'il y en a plus de 0
+" suite à une commande
+set report=0
+
+" Title {{{2
+" This is nice if you have something
+" that reset the title of you term at
+" each command, othersize it's annoying ...
+set title
+
+" Show Special Char {{{2
+" show tabs / nbsp / trailing spaces
+set listchars=tab:··,trail:¤,extends:▷,precedes:◁
+set list
+
+" HighLight 81 col {{{2
+" From «More Instantly Better Vim» - OSCON 2013
+" http://youtu.be/aHm36-na4-4
+highlight OverLength ctermbg=darkblue ctermfg=white guibg=darkblue guibg=white
+call matchadd('OverLength', '\%81v', 100)
+"=====[ Comments are important ]==================
+" Highlight TODO:
+highlight todo ctermbg=darkcyan ctermfg=white guibg=darkcyan guibg=white
+call matchadd('todo', 'TODO\|@TODO', 100)
+" Highlight MAIL:
+call matchadd('todo', 'MAIL\|mail', 100)
+" Highlight misspelled word
+highlight SpellBad cterm=underline
+" Highlight bugfix / fixme
+highlight fix ctermbg=darkred ctermfg=white guibg=darkred guibg=white
+call matchadd('fix', 'BUGFIX\|@BUGFIX\|FIXME\|@FIXME', 100)
+" Highlight author
+highlight author ctermfg=brown guibg=brown
+call matchadd('author', 'author\|@author', 100)
+
+" SHOW NON-BREAKABLE SPACE {{{2
+" colorise les nbsp
+highlight NbSp ctermbg=lightgray guibg=lightred
+match NbSp /\%xa0/
+
+" Cursor {{{2
+" Keep 3 line before / after cursor.
+set scrolloff=3
+" SHOW CURRENT LINE :
+set cursorline
+"SHOW CURRENT COLUMN :
+set cursorcolumn
+" SHOW CURSOR
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
+
+" LINE NUMBER {{{2
+" Show line number
+set number
+" Show number relative from the cursor
+set relativenumber
+
+" STATUS BAR {{{2
+" Afficher en permanence la barre d'état (en plus de la barre de commande) :
+set laststatus=2
+
 " AutoCmd {{{1
 " Fix filetype detection {{{2
 au BufRead /var/log/kern.log set ft=messages
@@ -1181,121 +1296,6 @@ command! MkdirP call MkdirP()
 :autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
 
 nnoremap <space-a> :echom 'This is a Test !'<CR>
-
-" Display {{{1
-" Folding {{{2
-" I like some folding ideas from :
-" http://dougblack.io/words/a-good-vimrc.html#colors
-set foldmethod=marker
-" Then we want it to close every fold by default so that we have this high level
-" view when we open our vimrc.
-set foldlevel=0
-
-" Show command (usefull for leader) {{{2
-set showcmd
-
-" COLOR Syntax {{{2
-" Coloration syntaxique, indispensable pour ne pas se perdre dans les longs fichiers
-" syntax on
-" https://github.com/Shougo/vimshell.vim/issues/73
-" Change to syntax enable
-syntax enable
-
-" COLORSHEME {{{2
-" set the background light or dark
-set background=dark
-let g:solarized_termtrans = 1
-colorscheme solarized
-" Change le colorsheme en mode diff
-if &diff
-    colorscheme solarized
-endif
-
-" STATUS {{{2
-" Show editing mode
-set showmode
-
-" VISUAL BELL {{{2
-" Error bells are displayed visually.
-set visualbell
-
-" RULER {{{2
-" SI c'est pas déjà fait, affiche la position du curseur
-set ruler
-
-" DIFF {{{2
-" Affiche toujours les diffs en vertical
-set diffopt=vertical
-
-" Split {{{2
-" Set the split below the active region.
-set splitbelow
-
-" Display cmd mod {{{2
-" Indiquer le nombre de modification lorsqu'il y en a plus de 0
-" suite à une commande
-set report=0
-
-" Title {{{2
-" This is nice if you have something
-" that reset the title of you term at
-" each command, othersize it's annoying ...
-set title
-
-" Show Special Char {{{2
-" show tabs / nbsp / trailing spaces
-set listchars=tab:··,trail:¤,extends:▷,precedes:◁
-set list
-
-" HighLight 81 col {{{2
-" From «More Instantly Better Vim» - OSCON 2013
-" http://youtu.be/aHm36-na4-4
-highlight OverLength ctermbg=darkblue ctermfg=white guibg=darkblue guibg=white
-call matchadd('OverLength', '\%81v', 100)
-"=====[ Comments are important ]==================
-" Highlight TODO:
-highlight todo ctermbg=darkcyan ctermfg=white guibg=darkcyan guibg=white
-call matchadd('todo', 'TODO\|@TODO', 100)
-" Highlight MAIL:
-call matchadd('todo', 'MAIL\|mail', 100)
-" Highlight misspelled word
-highlight SpellBad cterm=underline
-" Highlight bugfix / fixme
-highlight fix ctermbg=darkred ctermfg=white guibg=darkred guibg=white
-call matchadd('fix', 'BUGFIX\|@BUGFIX\|FIXME\|@FIXME', 100)
-" Highlight author
-highlight author ctermfg=brown guibg=brown
-call matchadd('author', 'author\|@author', 100)
-
-" SHOW NON-BREAKABLE SPACE {{{2
-" colorise les nbsp
-highlight NbSp ctermbg=lightgray guibg=lightred
-match NbSp /\%xa0/
-
-" Cursor {{{2
-" Keep 3 line before / after cursor.
-set scrolloff=3
-" SHOW CURRENT LINE :
-set cursorline
-"SHOW CURRENT COLUMN :
-set cursorcolumn
-" SHOW CURSOR
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
-
-" LINE NUMBER {{{2
-" Show line number
-set number
-" Show number relative from the cursor
-set relativenumber
-
-" STATUS BAR {{{2
-" Afficher en permanence la barre d'état (en plus de la barre de commande) :
-set laststatus=2
 
 " Input bindings {{{1
 " Searching {{{2
