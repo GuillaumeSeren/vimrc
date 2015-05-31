@@ -397,6 +397,12 @@ NeoBundleLazy 'avakhov/vim-yaml', {
 \     'filetypes' : ['python', 'yaml']
 \ }}
 
+" vim-systemd-syntax {{{3
+NeoBundleLazy 'Matt-Deacalion/vim-systemd-syntax', {
+\ 'autoload' : {
+\     'filetypes' : ['systemd']
+\ }}
+
 " Vim-Markdown {{{3
 NeoBundleLazy 'tpope/vim-markdown', {
 \ 'autoload':{
