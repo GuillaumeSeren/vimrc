@@ -344,6 +344,11 @@ NeoBundle 'godlygeek/tabular'
 " http://www.vim.org/scripts/script.php?script_id=4410
 NeoBundle 'tpope/vim-characterize'
 
+" goyo {{{3
+" Distraction-free writing in Vim
+" https://github.com/junegunn/goyo.vim
+NeoBundle 'junegunn/goyo.vim'
+
 " Specific plugins {{{2
 " vim-scriptease {{{3
 " tpope/vim-scriptease
