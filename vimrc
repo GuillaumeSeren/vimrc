@@ -52,6 +52,11 @@ if !filereadable(neobundle_readme)
 endif
 
 " Plugins List {{{1
+" Load Python for NVIM {{{2
+if has('nvim')
+    runtime! plugin/python_setup.vim
+endif
+
 " Default plugins {{{2
 " NeoBundle base {{{3
 " 20131206: Add NeoBundle
