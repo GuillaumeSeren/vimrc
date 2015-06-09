@@ -1,6 +1,7 @@
 vimrc
 =====
-This is my vim configuration, I use it for my daily usage in coding.
+This is my vim configuration,
+I use it for my daily usage mail / coding / blog.
 
 Keyboard
 ========
@@ -9,25 +10,22 @@ the shorcut, good read is http://bepo.fr/wiki/Accueil.
 
 Plugins
 =======
-NEOBUNDLE            : Gestion des sources de module vim.
-FUGITVE              : Gestion de sources git.
-VCS                  : Gestion de sources (Git, Svn, Mercurial, etc ..).
-SingleCompile        : Compilation de sources (F9 compile / F10 Compile-Run).
-Project              : Gestion d'un projet/arborescence/etc.
-HighLightCurrentLine : Illumine la ligne courante.
-Code_complete        : Complétion de code.
-My_Snippets          : Snippets de code personnalisés.
-TagLists             : Code Browsing, navigation par tags.
-Snippy               : Librairie de snippet.
-
-Notes
-=====
-(Work in Progress)
+As I use NeoBundle to manage the plugins, I distinct two categories (C):
+* Defaults plugins (always loaded).
+* Specifics plugins (lazy loaded on some case).
 
 Install
 =======
-git clone https://github.com/GuillaumeSeren/vimrc ~/.vim
+```
+# Clone this repos
+$ git clone https://github.com/GuillaumeSeren/vimrc ~/.vim
+# Launch vim and install everything
+$ vim
+```
 
-TODO
-====
--Make a small cheat-sheet, with a shortcut (plugin) to show it.
+## Participate !
+If you find it useful, and would like to add your tips and tricks in it,
+feel free to fork this project and fill a __Pull Request__.
+
+## Licence
+The project is GPLv3.
