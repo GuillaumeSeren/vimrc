@@ -226,6 +226,12 @@ NeoBundle 'tpope/vim-commentary'
 " lean & mean status/tabline for vim that's light as air
 " https://github.com/bling/vim-airline
 NeoBundle 'bling/vim-airline'
+if &term=~'linux'
+  let g:airline#extensions#tabline#enabled = 1
+elseif &term=~'screen'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
+endif
 
 " vimwiki {{{3
 " Personal Wiki for Vim
