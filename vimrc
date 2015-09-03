@@ -492,8 +492,6 @@ NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
 " CSS color {{{3
 " Highlight colors in css files
 " NeoBundle 'skammer/vim-css-color'
-" NOT WORKING
-"Highlight colors in css files
 " http://ap.github.io/vim-css-color/
 NeoBundleLazy 'ap/vim-css-color', {
 \ 'autoload': {
