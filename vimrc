@@ -968,6 +968,9 @@ set noautoindent
 " Detection de l'indentation
 set cindent
 set smartindent
+" https://georgebrock.github.io/talks/vim-completion/
+" Autocomplete with dictionary words when spell check is on
+set complete+=kspell
 
 " ENCODING {{{2
 " Use UTF-8.
