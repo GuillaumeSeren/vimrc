@@ -118,6 +118,13 @@ NeoBundle 'Valloric/YouCompleteMe', {
 " Add or remove arguments to install.sh as necessary.
 " Additional steps might be necessary for Windows, as always. ;)
 
+" Vim-DevIcons {{{3
+" https://github.com/ryanoasis/vim-devicons#installation
+" adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
+" developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
+" lightline.vim, vimfiler, and flagship
+NeoBundle 'ryanoasis/vim-devicons'
+
 " NeoSnippet {{{3
 " https://github.com/Shougo/neosnippet.vim
 " neo-snippet plugin contains neocomplcache snippets source
