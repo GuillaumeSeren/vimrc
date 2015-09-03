@@ -118,6 +118,13 @@ NeoBundle 'Valloric/YouCompleteMe', {
 " Add or remove arguments to install.sh as necessary.
 " Additional steps might be necessary for Windows, as always. ;)
 
+" Vim-DevIcons {{{3
+" https://github.com/ryanoasis/vim-devicons#installation
+" adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
+" developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
+" lightline.vim, vimfiler, and flagship
+NeoBundle 'ryanoasis/vim-devicons'
+
 " NeoSnippet {{{3
 " https://github.com/Shougo/neosnippet.vim
 " neo-snippet plugin contains neocomplcache snippets source
@@ -485,8 +492,6 @@ NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
 " CSS color {{{3
 " Highlight colors in css files
 " NeoBundle 'skammer/vim-css-color'
-" NOT WORKING
-"Highlight colors in css files
 " http://ap.github.io/vim-css-color/
 NeoBundleLazy 'ap/vim-css-color', {
 \ 'autoload': {
@@ -902,6 +907,26 @@ let php_alt_properties = 1
 " TODO: documentation for php_folding_manual
 let php_folding = 3
 
+" Committia {{{2
+let g:committia_hooks = {}
+function! g:committia_hooks.edit_open(info)
+    " Additional settings
+    " If no commit message, start with insert mode
+    if a:info.vcs ==# 'git' && getline(1) ==# ''
+        startinsert
+    end
+
+    " Scroll the diff window from insert mode
+    " Map <C-n> and <C-p>
+    imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+    imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+
+endfunction
+
+function! g:committia_hooks.diff_open(info)
+    " No fold on the committia diff screen
+    set nofoldenable
+endfunction
 " Vim core {{{1
 " Syntax {{{2
 " The colors get messed up when I scroll. Vim uses various heuristics to save
@@ -943,6 +968,9 @@ set noautoindent
 " Detection de l'indentation
 set cindent
 set smartindent
+" https://georgebrock.github.io/talks/vim-completion/
+" Autocomplete with dictionary words when spell check is on
+set complete+=kspell
 
 " ENCODING {{{2
 " Use UTF-8.
