@@ -909,6 +909,26 @@ let php_alt_properties = 1
 " TODO: documentation for php_folding_manual
 let php_folding = 3
 
+" Committia {{{2
+let g:committia_hooks = {}
+function! g:committia_hooks.edit_open(info)
+    " Additional settings
+    " If no commit message, start with insert mode
+    if a:info.vcs ==# 'git' && getline(1) ==# ''
+        startinsert
+    end
+
+    " Scroll the diff window from insert mode
+    " Map <C-n> and <C-p>
+    imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+    imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+
+endfunction
+
+function! g:committia_hooks.diff_open(info)
+    " No fold on the committia diff screen
+    set nofoldenable
+endfunction
 " Vim core {{{1
 " Syntax {{{2
 " The colors get messed up when I scroll. Vim uses various heuristics to save
