@@ -10,22 +10,14 @@
 " ===========
 " Let's try to split this file into several clear part
 " - Startup config
-" - Vim config
 " - Auto load / install plugin manager
 " - Plugins List
 " - Tweaking Plugins
+" - Vim core
+" - Vim Display
 " - AutoCmd
 " - Functions
-" - Display
 " - Input
-" - Keyboard BÉPO
-
-" TODO-LIST
-" - Clean LazyLoading of all non default pluqin.
-" - Define augroup to configure pluqin if loaded.
-" - Clean bépo conflict with vim plugin (comment, unipaired, surround).
-" - Clean oldies.
-" - Still a bug on direct number access on '9'.
 
 " Startup config {{{1
 " ===========
@@ -100,31 +92,6 @@ NeoBundle 'Shougo/unite.vim.git'
 " Next generation completion framework after neocomplcache
 NeoBundle 'Shougo/neocomplete'
 
-" YouCompleteMe {{{3
-" A code-completion engine for Vim
-" http://valloric.github.io/YouCompleteMe/
-" https://github.com/Valloric/YouCompleteMe
-" https://github.com/Valloric/YouCompleteMe/issues/1082
-" NeoBundle 'Valloric/YouCompleteMe'
-" @FIXME: DO NOT LOAD YCM IN NEOVIM
-NeoBundle 'Valloric/YouCompleteMe', {
-\ 'build'       : {
-\     'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-\     'unix'    : './install.sh --clang-completer --system-libclang',
-\     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-\     'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-\     }
-\ }
-" Add or remove arguments to install.sh as necessary.
-" Additional steps might be necessary for Windows, as always. ;)
-
-" Vim-DevIcons {{{3
-" https://github.com/ryanoasis/vim-devicons#installation
-" adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
-" developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
-" lightline.vim, vimfiler, and flagship
-NeoBundle 'ryanoasis/vim-devicons'
-
 " NeoSnippet {{{3
 " https://github.com/Shougo/neosnippet.vim
 " neo-snippet plugin contains neocomplcache snippets source
@@ -152,17 +119,6 @@ NeoBundle 'ujihisa/unite-colorscheme'
 " Syntax checking hacks for vim
 " https://github.com/scrooloose/syntastic
 NeoBundle 'scrooloose/syntastic.git'
-
-" VimShell {{{3
-" Powerful shell implemented by vim.
-" https://github.com/Shougo/vimshell.vim
-NeoBundle 'Shougo/vimshell.vim.git'
-
-" VimFiler {{{3
-" vimfiler.vim
-" Powerful file explorer implemented by Vim script
-" https://github.com/Shougo/vimfiler.vim
-NeoBundle 'Shougo/vimfiler.vim'
 
 " Sensible {{{3
 " sensible.vim: Defaults everyone can agree on
@@ -233,12 +189,6 @@ NeoBundle 'tpope/vim-commentary'
 " lean & mean status/tabline for vim that's light as air
 " https://github.com/bling/vim-airline
 NeoBundle 'bling/vim-airline'
-if &term=~'linux'
-  let g:airline#extensions#tabline#enabled = 1
-elseif &term=~'screen'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_powerline_fonts = 1
-endif
 
 " vimwiki {{{3
 " Personal Wiki for Vim
@@ -291,31 +241,6 @@ NeoBundle 'vcscommand.vim'
 " Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
 NeoBundle 'joonty/vdebug.git'
 
-" vim-github-dashboard {{{3
-" junegunn/vim-github-dashboard
-" Browse GitHub events in Vim
-" Browse GitHub events (user dashboard, user/repo activity) in Vim.
-" Commands
-" With authentication
-" :GHDashboard
-" :GHDashboard USER
-" :GHActivity
-" :GHActivity USER
-" :GHActivity USER/REPO
-" Without authentication (60 calls/hour limit, only public
-" activities)
-" :GHDashboard! USER
-" :GHActivity! USER
-" :GHActivity! USER/REPO
-" Navigation
-" Use Tab and Shift-Tab to navigate back and
-" forth through the links.
-" Press Enter key or double-click on a link to
-" open it in the browser.
-" Press R to refresh the window.
-" Press q to close the window.
-NeoBundle 'junegunn/vim-github-dashboard'
-
 " AG.VIM {{{3
 " https://github.com/rking/ag.vim
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
@@ -336,15 +261,6 @@ NeoBundleLazy 'a.vim', {
 \     'filetype': ['c', 'h']
 \ }}
 
-" SHABERU {{{3
-" supermomonga/shaberu.vim
-" めっちゃしゃべる
-" https://github.com/supermomonga/shaberu.vim
-" Shaberu.vim is the wrapper of speech synethis. You can make your vim speak
-" easily with Shaberu.vim.
-NeoBundle 'supermomonga/shaberu.vim'
-" Speak Japanese voice on OS X
-
 " Tabularize ! {{{3
 " https://github.com/godlygeek/tabular
 " Vim script for text filtering and alignment
@@ -362,17 +278,17 @@ NeoBundle 'godlygeek/tabular'
 " http://www.vim.org/scripts/script.php?script_id=4410
 NeoBundle 'tpope/vim-characterize'
 
+" Vim-DevIcons {{{3
+" https://github.com/ryanoasis/vim-devicons#installation
+" adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
+" developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
+" lightline.vim, vimfiler, and flagship
+NeoBundle 'ryanoasis/vim-devicons'
+
 " goyo {{{3
 " Distraction-free writing in Vim
 " https://github.com/junegunn/goyo.vim
 NeoBundle 'junegunn/goyo.vim'
-
-" Specific plugins {{{2
-" vim-scriptease {{{3
-" tpope/vim-scriptease
-" scriptease.vim: A Vim plugin for Vim plugins
-" http://www.vim.org/scripts/script.php?script_id=4394
-NeoBundle 'tpope/vim-scriptease'
 
 " vim-colors-solarized {{{3
 " precision colorscheme for the vim text editor
@@ -577,17 +493,6 @@ NeoBundle 'majutsushi/tagbar'
 "" Just for ex of multi repo {{{3
 ""NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 "
-" Old {{{2
-" An awesome debugging client for Vim, Xdebug and PHP
-" https://github.com/vim-scripts/Xdebug
-" NeoComplCache : depercated
-" Ultimate auto-completion system for Vim.
-" http://www.vim.org/scripts/script.php?script_id=2620
-" https://github.com/Shougo/neocomplcache.vim
-" NeoBundle 'Shougo/neocomplcache.vim.git'
-" Deprecated : If you use Vim 7.3.885 or above with if_lua feature, you should
-" use neocomplete. It is faster than neocomplcache.
-
 " NeoBundle end() {{{2
 call neobundle#end()
 " Required
@@ -807,6 +712,14 @@ let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
 " from : https://github.com/scrooloose/syntastic/wiki/PHP%3A---phpcs
 let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
 
+" Vim-Airline {{{2
+if &term=~'linux'
+  let g:airline#extensions#tabline#enabled = 1
+elseif &term=~'screen'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
+endif
+
 " DBEXT {{{2
 " vim-scripts/dbext.vim
 " Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL,
@@ -927,25 +840,13 @@ function! g:committia_hooks.diff_open(info)
     " No fold on the committia diff screen
     set nofoldenable
 endfunction
+
 " Vim core {{{1
 " Syntax {{{2
-" The colors get messed up when I scroll. Vim uses various heuristics to save
-" time when determining the highlighting, and sometimes they cause problems.
-" Look up :h syn-sync for a more detailed explanation.
-"syn sync fromstart
-" Détection du type de fichier pour l'indentation
-filetype plugin indent on
-" Do we need to test on autocmd
-if has("autocmd")
-    "filetype indent on
-    filetype plugin indent on
-endif
 " Automatically indent when adding a curly bracket, etc.
 set smartindent
 " Indispensable pour ne pas tout casser avec ce qui va suivre
 set preserveindent
-" indentation automatique
-set autoindent
 " Largeur de l'autoindentation
 set shiftwidth=4
 " Arrondit la valeur de l'indentation
@@ -958,23 +859,15 @@ set softtabstop=4
 set expandtab ts=4 sw=4 ai
 " Do not tab expand on Makefile
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
-" Utilise shiftwidth à la place de tabstop en début de ligne (et backspace supprime d'un coup si ce sont des espaces)
-set smarttab
 " 20140901: Add for test.
 " redraw only when we need to.
 set lazyredraw
-" autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
-set noautoindent
 " Detection de l'indentation
 set cindent
 set smartindent
 " https://georgebrock.github.io/talks/vim-completion/
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
-
-" ENCODING {{{2
-" Use UTF-8.
-set encoding=utf-8
 
 " Modeline {{{2
 set modeline modelines=5
@@ -1019,18 +912,12 @@ set smartcase
 " Ne jamais respecter la casse
 " (attention totalement indépendant du précédent mais de priorité plus faible)
 set ignorecase
-" Déplace le curseur au fur et a mesure qu'on tape une recherche,
-" pas toujours pratique, j'ai abandonné
-set incsearch
 " Met en évidence TOUS les résultats d'une recherche,
 " A consommer avec modération
 set hlsearch
 " Déplacer le curseur quand on écrit un (){}[]
 " (attention il ne s'agit pas du highlight
 set showmatch
-" Affiche le nombre de lignes sélectionnées en mode visuel
-" ou la touche/commande qu'on vient de taper en mode commande
-set showcmd
 
 " PASTE / NOPASTE {{{2
 "@TODO: Not certain if really needed
@@ -1039,8 +926,6 @@ set showcmd
 set nopaste
 
 " COMPLETION MENU {{{2
-" Show autocomplete menus.
-set wildmenu
 " Afficher une liste lors de complétion de commandes/fichiers :
 set wildmode=list:full
 " Allow completion on filenames right after a '='.
@@ -1108,6 +993,7 @@ set history=10000
 
 " Vim display {{{1
 " Folding {{{2
+" @TODO: Do not change status on :w keep state fold saved.
 " I like some folding ideas from :
 " http://dougblack.io/words/a-good-vimrc.html#colors
 set foldmethod=marker
@@ -1117,13 +1003,6 @@ set foldlevel=0
 
 " Show command (usefull for leader) {{{2
 set showcmd
-
-" COLOR Syntax {{{2
-" Coloration syntaxique, indispensable pour ne pas se perdre dans les longs fichiers
-" syntax on
-" https://github.com/Shougo/vimshell.vim/issues/73
-" Change to syntax enable
-syntax enable
 
 " COLORSHEME {{{2
 " set the background light or dark
@@ -1142,10 +1021,6 @@ set showmode
 " VISUAL BELL {{{2
 " Error bells are displayed visually.
 set visualbell
-
-" RULER {{{2
-" SI c'est pas déjà fait, affiche la position du curseur
-set ruler
 
 " DIFF {{{2
 " Affiche toujours les diffs en vertical
@@ -1197,8 +1072,6 @@ highlight NbSp ctermbg=lightgray guibg=lightred
 match NbSp /\%xa0/
 
 " Cursor {{{2
-" Keep 3 line before / after cursor.
-set scrolloff=3
 " SHOW CURRENT LINE :
 set cursorline
 "SHOW CURRENT COLUMN :
@@ -1217,54 +1090,46 @@ set number
 " Show number relative from the cursor
 set relativenumber
 
-" STATUS BAR {{{2
-" Afficher en permanence la barre d'état (en plus de la barre de commande) :
-set laststatus=2
-
 " AutoCmd {{{1
 " Fix filetype detection {{{2
-au BufRead /var/log/kern.log set ft=messages
-au BufRead /var/log/syslog setl ft=messages
-au BufNewFile,BufRead /etc/apache/* setl ft=apache
-au BufNewFile,BufRead /etc/apache2/* setl ft=apache
-au BufNewFile,BufRead /etc/nginx/* setl ft=nginx
-au BufNewFile,BufRead /etc/exim4/* setl ft=exim
-au BufNewFile,BufRead *.txt setl ft=text
-" .tac files are used in twisted
-au BufNewFile,BufRead *.tac setl ft=python
-" pygobject overrides
-au BufNewFile,BufRead *.override setl ft=c
-" pygobject definitions
-au BufNewFile,BufRead *.defs setl syntax=scheme et
-au BufNewFile,BufRead *.vala setl ft=vala
-au BufNewFile,BufRead *.vapi setl ft=vala
-au BufNewFile,BufRead *.json setl ft=javascript
-au BufNewFile,BufRead *.qml setl ft=javascript
-au BufNewFile,BufRead *.otl setl ft=votl
-au BufNewFile,BufRead *.jeco setl ft=eco
-au BufNewFile,BufRead *.glsl setl ft=c
+if has("autocmd")
+    au BufRead            /var/log/kern.log set  ft=messages
+    au BufRead            /var/log/syslog   setl ft=messages
+    au BufNewFile,BufRead /etc/apache/*     setl ft=apache
+    au BufNewFile,BufRead /etc/apache2/*    setl ft=apache
+    au BufNewFile,BufRead /etc/nginx/*      setl ft=nginx
+    au BufNewFile,BufRead /etc/exim4/*      setl ft=exim
+    au BufNewFile,BufRead *.txt             setl ft=text
+    " .tac files are used in twisted
+    au BufNewFile,BufRead *.tac             setl ft=python
+    " pygobject overrides
+    au BufNewFile,BufRead *.override        setl ft=c
+    " pygobject definitions
+    au BufNewFile,BufRead *.defs            setl syntax=scheme et
+    au BufNewFile,BufRead *.vala            setl ft=vala
+    au BufNewFile,BufRead *.vapi            setl ft=vala
+    au BufNewFile,BufRead *.json            setl ft=javascript
+    au BufNewFile,BufRead *.qml             setl ft=javascript
+    au BufNewFile,BufRead *.otl             setl ft=votl
+    au BufNewFile,BufRead *.jeco            setl ft=eco
+    au BufNewFile,BufRead *.glsl            setl ft=c
+endif
 
 " AutoReLoad vimrc {{{2
 " Auto apply modification to vimrc
 if has("autocmd")
-    autocmd! bufwritepost .vimrc source ~/.vimrc
+    autocmd! bufwritepost ~/.vimrc source ~/.vimrc
+    autocmd! bufwritepost ~/.vim/vimrc source ~/.vimrc
 endif
 
 " SESSION {{{2
 " Récupération de la position du curseur entre 2 ouvertures de fichiers
-" Parfois ce n'est pas ce qu'on veut ...
 if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
                 \| exe "normal g'\"" | endif
 endif
 
 " Functions {{{1
-" Format json selection {{{2
-map <Leader>j !python -m json.tool<CR>
-
-" SAVE as ROOT {{{2
-" use :W to sudo-write the current buffer
-command! W w !sudo tee % > /dev/null
 
 " AppendModeline() {{{2
 " Append modeline after last line in buffer.
@@ -1358,26 +1223,34 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" Reselect visual block after increment/decrement
+" vnoremap <C-A> <C-A>gv
+" vnoremap <C-x> <C-x>gv
+
+" Reselect visual block after indentation
+vnoremap > >gv
+vnoremap < <gv
+
 " Disable Arrow in insert mode {{{2
 ino <down> <Nop>
 ino <left> <Nop>
 ino <right> <Nop>
 ino <up> <Nop>
 
-" Remap Arrow Up/Down to move line {{{2
-" Real Vimmer forget the cross
-no <down> ddp
-no <up> ddkP
-
-" Remap Arrow Right / Left to switch tab {{{2
-no <left> :tabprevious<CR>
-no <right> :tabnext<CR>
-
 " Disable Arrow in visual mode {{{2
 vno <down> <Nop>
 vno <left> <Nop>
 vno <right> <Nop>
 vno <up> <Nop>
+
+" Remap Arrow Up/Down to move line {{{2
+" Real Vimmer forget the cross
+no <down>   ddp
+no <up>     ddkP
+
+" Remap Arrow Right / Left to switch tab {{{2
+no <left>   :tabprevious<CR>
+no <right>  :tabnext<CR>
 
 " Remap netrw arrow {{{2
 "@FIXME: Seem's to "break" file explorer.
@@ -1409,8 +1282,6 @@ endfunction
 
 " Change default leader key {{{2
 let mapleader = ","
-" Permettre l'utilisation de la touche backspace dans tous les cas :
-set backspace=2
 
 " Permet de sauvegarder par ctrl + s {{{2
 :nmap <c-s> :w<CR>
@@ -1426,6 +1297,14 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
     \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
+" Format json selection {{{2
+map <Leader>j !python -m json.tool<CR>
+
+" SAVE as ROOT {{{2
+" command! W w !sudo tee "%" > /dev/null
+" command! W w !sudo dd of=%
+" Use :SudoWrite
+
 " MOUSE {{{2
 " =======
 " Utilise la souris pour les terminaux qui le peuvent (tous ?)
@@ -1433,7 +1312,7 @@ imap <C-@> <C-Space>
 " attention fonctionnement inhabituel
 set mouse=a
 
-" REMAP KEYBOARD for bépo {{{1
+" REMAP KEYBOARD for bépo {{{2
 " @FIXME: Detect keyboard layout (qwerty / bépo)
 " @TODO: Move it at the end, the config must not be layout dependant.
 " I use kind dvorak-fr the «bépo» layout on my keyboard.
