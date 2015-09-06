@@ -19,13 +19,6 @@
 " - Functions
 " - Input
 
-" TODO-LIST
-" - Clean LazyLoading of all non default pluqin.
-" - Define augroup to configure pluqin if loaded.
-" - Clean bépo conflict with vim plugin (comment, unipaired, surround).
-" - Clean oldies.
-" - Still a bug on direct number access on '9'.
-
 " Startup config {{{1
 " ===========
 " We can export some config in modular files like :
