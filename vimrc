@@ -127,17 +127,6 @@ NeoBundle 'ujihisa/unite-colorscheme'
 " https://github.com/scrooloose/syntastic
 NeoBundle 'scrooloose/syntastic.git'
 
-" VimShell {{{3
-" Powerful shell implemented by vim.
-" https://github.com/Shougo/vimshell.vim
-NeoBundle 'Shougo/vimshell.vim.git'
-
-" VimFiler {{{3
-" vimfiler.vim
-" Powerful file explorer implemented by Vim script
-" https://github.com/Shougo/vimfiler.vim
-NeoBundle 'Shougo/vimfiler.vim'
-
 " Sensible {{{3
 " sensible.vim: Defaults everyone can agree on
 " http://www.vim.org/scripts/script.php?script_id=4391
@@ -310,15 +299,6 @@ NeoBundleLazy 'a.vim', {
 \     'filetype': ['c', 'h']
 \ }}
 
-" SHABERU {{{3
-" supermomonga/shaberu.vim
-" めっちゃしゃべる
-" https://github.com/supermomonga/shaberu.vim
-" Shaberu.vim is the wrapper of speech synethis. You can make your vim speak
-" easily with Shaberu.vim.
-NeoBundle 'supermomonga/shaberu.vim'
-" Speak Japanese voice on OS X
-
 " Tabularize ! {{{3
 " https://github.com/godlygeek/tabular
 " Vim script for text filtering and alignment
@@ -336,17 +316,17 @@ NeoBundle 'godlygeek/tabular'
 " http://www.vim.org/scripts/script.php?script_id=4410
 NeoBundle 'tpope/vim-characterize'
 
+" Vim-DevIcons {{{3
+" https://github.com/ryanoasis/vim-devicons#installation
+" adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
+" developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
+" lightline.vim, vimfiler, and flagship
+NeoBundle 'ryanoasis/vim-devicons'
+
 " goyo {{{3
 " Distraction-free writing in Vim
 " https://github.com/junegunn/goyo.vim
 NeoBundle 'junegunn/goyo.vim'
-
-" Specific plugins {{{2
-" vim-scriptease {{{3
-" tpope/vim-scriptease
-" scriptease.vim: A Vim plugin for Vim plugins
-" http://www.vim.org/scripts/script.php?script_id=4394
-NeoBundle 'tpope/vim-scriptease'
 
 " vim-colors-solarized {{{3
 " precision colorscheme for the vim text editor
@@ -551,17 +531,6 @@ NeoBundle 'majutsushi/tagbar'
 "" Just for ex of multi repo {{{3
 ""NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 "
-" Old {{{2
-" An awesome debugging client for Vim, Xdebug and PHP
-" https://github.com/vim-scripts/Xdebug
-" NeoComplCache : depercated
-" Ultimate auto-completion system for Vim.
-" http://www.vim.org/scripts/script.php?script_id=2620
-" https://github.com/Shougo/neocomplcache.vim
-" NeoBundle 'Shougo/neocomplcache.vim.git'
-" Deprecated : If you use Vim 7.3.885 or above with if_lua feature, you should
-" use neocomplete. It is faster than neocomplcache.
-
 " NeoBundle end() {{{2
 call neobundle#end()
 " Required
