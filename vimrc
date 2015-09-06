@@ -10,15 +10,14 @@
 " ===========
 " Let's try to split this file into several clear part
 " - Startup config
-" - Vim config
 " - Auto load / install plugin manager
 " - Plugins List
 " - Tweaking Plugins
+" - Vim core
+" - Vim Display
 " - AutoCmd
 " - Functions
-" - Display
 " - Input
-" - Keyboard BÉPO
 
 " TODO-LIST
 " - Clean LazyLoading of all non default pluqin.
