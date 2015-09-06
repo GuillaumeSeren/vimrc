@@ -196,12 +196,6 @@ NeoBundle 'tpope/vim-commentary'
 " lean & mean status/tabline for vim that's light as air
 " https://github.com/bling/vim-airline
 NeoBundle 'bling/vim-airline'
-if &term=~'linux'
-  let g:airline#extensions#tabline#enabled = 1
-elseif &term=~'screen'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_powerline_fonts = 1
-endif
 
 " vimwiki {{{3
 " Personal Wiki for Vim
@@ -749,6 +743,14 @@ let g:syntastic_aggregate_errors         = 1
 let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
 " from : https://github.com/scrooloose/syntastic/wiki/PHP%3A---phpcs
 let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
+
+" Vim-Airline {{{2
+if &term=~'linux'
+  let g:airline#extensions#tabline#enabled = 1
+elseif &term=~'screen'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
+endif
 
 " DBEXT {{{2
 " vim-scripts/dbext.vim
