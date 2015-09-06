@@ -875,23 +875,10 @@ endfunction
 
 " Vim core {{{1
 " Syntax {{{2
-" The colors get messed up when I scroll. Vim uses various heuristics to save
-" time when determining the highlighting, and sometimes they cause problems.
-" Look up :h syn-sync for a more detailed explanation.
-"syn sync fromstart
-" Détection du type de fichier pour l'indentation
-filetype plugin indent on
-" Do we need to test on autocmd
-if has("autocmd")
-    "filetype indent on
-    filetype plugin indent on
-endif
 " Automatically indent when adding a curly bracket, etc.
 set smartindent
 " Indispensable pour ne pas tout casser avec ce qui va suivre
 set preserveindent
-" indentation automatique
-set autoindent
 " Largeur de l'autoindentation
 set shiftwidth=4
 " Arrondit la valeur de l'indentation
@@ -904,23 +891,15 @@ set softtabstop=4
 set expandtab ts=4 sw=4 ai
 " Do not tab expand on Makefile
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
-" Utilise shiftwidth à la place de tabstop en début de ligne (et backspace supprime d'un coup si ce sont des espaces)
-set smarttab
 " 20140901: Add for test.
 " redraw only when we need to.
 set lazyredraw
-" autoindent n'est spécifique à aucun langage et fonctionne en général moins bien
-set noautoindent
 " Detection de l'indentation
 set cindent
 set smartindent
 " https://georgebrock.github.io/talks/vim-completion/
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
-
-" ENCODING {{{2
-" Use UTF-8.
-set encoding=utf-8
 
 " Modeline {{{2
 set modeline modelines=5
@@ -965,18 +944,12 @@ set smartcase
 " Ne jamais respecter la casse
 " (attention totalement indépendant du précédent mais de priorité plus faible)
 set ignorecase
-" Déplace le curseur au fur et a mesure qu'on tape une recherche,
-" pas toujours pratique, j'ai abandonné
-set incsearch
 " Met en évidence TOUS les résultats d'une recherche,
 " A consommer avec modération
 set hlsearch
 " Déplacer le curseur quand on écrit un (){}[]
 " (attention il ne s'agit pas du highlight
 set showmatch
-" Affiche le nombre de lignes sélectionnées en mode visuel
-" ou la touche/commande qu'on vient de taper en mode commande
-set showcmd
 
 " PASTE / NOPASTE {{{2
 "@TODO: Not certain if really needed
@@ -985,8 +958,6 @@ set showcmd
 set nopaste
 
 " COMPLETION MENU {{{2
-" Show autocomplete menus.
-set wildmenu
 " Afficher une liste lors de complétion de commandes/fichiers :
 set wildmode=list:full
 " Allow completion on filenames right after a '='.
@@ -1065,13 +1036,6 @@ set foldlevel=0
 " Show command (usefull for leader) {{{2
 set showcmd
 
-" COLOR Syntax {{{2
-" Coloration syntaxique, indispensable pour ne pas se perdre dans les longs fichiers
-" syntax on
-" https://github.com/Shougo/vimshell.vim/issues/73
-" Change to syntax enable
-syntax enable
-
 " COLORSHEME {{{2
 " set the background light or dark
 set background=dark
@@ -1089,10 +1053,6 @@ set showmode
 " VISUAL BELL {{{2
 " Error bells are displayed visually.
 set visualbell
-
-" RULER {{{2
-" SI c'est pas déjà fait, affiche la position du curseur
-set ruler
 
 " DIFF {{{2
 " Affiche toujours les diffs en vertical
@@ -1144,8 +1104,6 @@ highlight NbSp ctermbg=lightgray guibg=lightred
 match NbSp /\%xa0/
 
 " Cursor {{{2
-" Keep 3 line before / after cursor.
-set scrolloff=3
 " SHOW CURRENT LINE :
 set cursorline
 "SHOW CURRENT COLUMN :
@@ -1163,10 +1121,6 @@ set guicursor+=i:blinkwait10
 set number
 " Show number relative from the cursor
 set relativenumber
-
-" STATUS BAR {{{2
-" Afficher en permanence la barre d'état (en plus de la barre de commande) :
-set laststatus=2
 
 " AutoCmd {{{1
 " Fix filetype detection {{{2
@@ -1360,8 +1314,6 @@ endfunction
 
 " Change default leader key {{{2
 let mapleader = ","
-" Permettre l'utilisation de la touche backspace dans tous les cas :
-set backspace=2
 
 " Permet de sauvegarder par ctrl + s {{{2
 :nmap <c-s> :w<CR>
