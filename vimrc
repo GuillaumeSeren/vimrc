@@ -1354,26 +1354,34 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" Reselect visual block after increment/decrement
+" vnoremap <C-A> <C-A>gv
+" vnoremap <C-x> <C-x>gv
+
+" Reselect visual block after indentation
+vnoremap > >gv
+vnoremap < <gv
+
 " Disable Arrow in insert mode {{{2
 ino <down> <Nop>
 ino <left> <Nop>
 ino <right> <Nop>
 ino <up> <Nop>
 
-" Remap Arrow Up/Down to move line {{{2
-" Real Vimmer forget the cross
-no <down> ddp
-no <up> ddkP
-
-" Remap Arrow Right / Left to switch tab {{{2
-no <left> :tabprevious<CR>
-no <right> :tabnext<CR>
-
 " Disable Arrow in visual mode {{{2
 vno <down> <Nop>
 vno <left> <Nop>
 vno <right> <Nop>
 vno <up> <Nop>
+
+" Remap Arrow Up/Down to move line {{{2
+" Real Vimmer forget the cross
+no <down>   ddp
+no <up>     ddkP
+
+" Remap Arrow Right / Left to switch tab {{{2
+no <left>   :tabprevious<CR>
+no <right>  :tabnext<CR>
 
 " Remap netrw arrow {{{2
 "@FIXME: Seem's to "break" file explorer.
