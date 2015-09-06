@@ -927,6 +927,7 @@ function! g:committia_hooks.diff_open(info)
     " No fold on the committia diff screen
     set nofoldenable
 endfunction
+
 " Vim core {{{1
 " Syntax {{{2
 " The colors get messed up when I scroll. Vim uses various heuristics to save
