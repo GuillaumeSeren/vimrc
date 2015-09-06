@@ -241,31 +241,6 @@ NeoBundle 'vcscommand.vim'
 " Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
 NeoBundle 'joonty/vdebug.git'
 
-" vim-github-dashboard {{{3
-" junegunn/vim-github-dashboard
-" Browse GitHub events in Vim
-" Browse GitHub events (user dashboard, user/repo activity) in Vim.
-" Commands
-" With authentication
-" :GHDashboard
-" :GHDashboard USER
-" :GHActivity
-" :GHActivity USER
-" :GHActivity USER/REPO
-" Without authentication (60 calls/hour limit, only public
-" activities)
-" :GHDashboard! USER
-" :GHActivity! USER
-" :GHActivity! USER/REPO
-" Navigation
-" Use Tab and Shift-Tab to navigate back and
-" forth through the links.
-" Press Enter key or double-click on a link to
-" open it in the browser.
-" Press R to refresh the window.
-" Press q to close the window.
-NeoBundle 'junegunn/vim-github-dashboard'
-
 " AG.VIM {{{3
 " https://github.com/rking/ag.vim
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
