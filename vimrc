@@ -99,31 +99,6 @@ NeoBundle 'Shougo/unite.vim.git'
 " Next generation completion framework after neocomplcache
 NeoBundle 'Shougo/neocomplete'
 
-" YouCompleteMe {{{3
-" A code-completion engine for Vim
-" http://valloric.github.io/YouCompleteMe/
-" https://github.com/Valloric/YouCompleteMe
-" https://github.com/Valloric/YouCompleteMe/issues/1082
-" NeoBundle 'Valloric/YouCompleteMe'
-" @FIXME: DO NOT LOAD YCM IN NEOVIM
-NeoBundle 'Valloric/YouCompleteMe', {
-\ 'build'       : {
-\     'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-\     'unix'    : './install.sh --clang-completer --system-libclang',
-\     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-\     'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-\     }
-\ }
-" Add or remove arguments to install.sh as necessary.
-" Additional steps might be necessary for Windows, as always. ;)
-
-" Vim-DevIcons {{{3
-" https://github.com/ryanoasis/vim-devicons#installation
-" adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
-" developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
-" lightline.vim, vimfiler, and flagship
-NeoBundle 'ryanoasis/vim-devicons'
-
 " NeoSnippet {{{3
 " https://github.com/Shougo/neosnippet.vim
 " neo-snippet plugin contains neocomplcache snippets source
