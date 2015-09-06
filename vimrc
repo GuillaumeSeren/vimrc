@@ -1108,6 +1108,7 @@ set history=10000
 
 " Vim display {{{1
 " Folding {{{2
+" @TODO: Do not change status on :w keep state fold saved.
 " I like some folding ideas from :
 " http://dougblack.io/words/a-good-vimrc.html#colors
 set foldmethod=marker
@@ -1223,26 +1224,28 @@ set laststatus=2
 
 " AutoCmd {{{1
 " Fix filetype detection {{{2
-au BufRead /var/log/kern.log set ft=messages
-au BufRead /var/log/syslog setl ft=messages
-au BufNewFile,BufRead /etc/apache/* setl ft=apache
-au BufNewFile,BufRead /etc/apache2/* setl ft=apache
-au BufNewFile,BufRead /etc/nginx/* setl ft=nginx
-au BufNewFile,BufRead /etc/exim4/* setl ft=exim
-au BufNewFile,BufRead *.txt setl ft=text
-" .tac files are used in twisted
-au BufNewFile,BufRead *.tac setl ft=python
-" pygobject overrides
-au BufNewFile,BufRead *.override setl ft=c
-" pygobject definitions
-au BufNewFile,BufRead *.defs setl syntax=scheme et
-au BufNewFile,BufRead *.vala setl ft=vala
-au BufNewFile,BufRead *.vapi setl ft=vala
-au BufNewFile,BufRead *.json setl ft=javascript
-au BufNewFile,BufRead *.qml setl ft=javascript
-au BufNewFile,BufRead *.otl setl ft=votl
-au BufNewFile,BufRead *.jeco setl ft=eco
-au BufNewFile,BufRead *.glsl setl ft=c
+if has("autocmd")
+    au BufRead            /var/log/kern.log set  ft=messages
+    au BufRead            /var/log/syslog   setl ft=messages
+    au BufNewFile,BufRead /etc/apache/*     setl ft=apache
+    au BufNewFile,BufRead /etc/apache2/*    setl ft=apache
+    au BufNewFile,BufRead /etc/nginx/*      setl ft=nginx
+    au BufNewFile,BufRead /etc/exim4/*      setl ft=exim
+    au BufNewFile,BufRead *.txt             setl ft=text
+    " .tac files are used in twisted
+    au BufNewFile,BufRead *.tac             setl ft=python
+    " pygobject overrides
+    au BufNewFile,BufRead *.override        setl ft=c
+    " pygobject definitions
+    au BufNewFile,BufRead *.defs            setl syntax=scheme et
+    au BufNewFile,BufRead *.vala            setl ft=vala
+    au BufNewFile,BufRead *.vapi            setl ft=vala
+    au BufNewFile,BufRead *.json            setl ft=javascript
+    au BufNewFile,BufRead *.qml             setl ft=javascript
+    au BufNewFile,BufRead *.otl             setl ft=votl
+    au BufNewFile,BufRead *.jeco            setl ft=eco
+    au BufNewFile,BufRead *.glsl            setl ft=c
+endif
 
 " AutoReLoad vimrc {{{2
 " Auto apply modification to vimrc
