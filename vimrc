@@ -1421,7 +1421,7 @@ map <Leader>j !python -m json.tool<CR>
 " attention fonctionnement inhabituel
 set mouse=a
 
-" REMAP KEYBOARD for bépo {{{1
+" REMAP KEYBOARD for bépo {{{2
 " @FIXME: Detect keyboard layout (qwerty / bépo)
 " @TODO: Move it at the end, the config must not be layout dependant.
 " I use kind dvorak-fr the «bépo» layout on my keyboard.
