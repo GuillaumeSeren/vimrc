@@ -1255,19 +1255,12 @@ endif
 
 " SESSION {{{2
 " Récupération de la position du curseur entre 2 ouvertures de fichiers
-" Parfois ce n'est pas ce qu'on veut ...
 if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
                 \| exe "normal g'\"" | endif
 endif
 
 " Functions {{{1
-" Format json selection {{{2
-map <Leader>j !python -m json.tool<CR>
-
-" SAVE as ROOT {{{2
-" use :W to sudo-write the current buffer
-command! W w !sudo tee % > /dev/null
 
 " AppendModeline() {{{2
 " Append modeline after last line in buffer.
@@ -1428,6 +1421,14 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
     \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
     \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
+
+" Format json selection {{{2
+map <Leader>j !python -m json.tool<CR>
+
+" SAVE as ROOT {{{2
+" command! W w !sudo tee "%" > /dev/null
+" command! W w !sudo dd of=%
+" Use :SudoWrite
 
 " MOUSE {{{2
 " =======
