@@ -174,6 +174,10 @@ NeoBundle 'tpope/vim-eunuch'
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
 
+" SearchParty {{{3
+" Extended search commands and maps for Vim
+NeoBundle 'dahu/SearchParty'
+
 " Surround {{{3
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
@@ -731,61 +735,9 @@ endif
 " MySQL
 let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd='':dbname=mysql'
 
-" VimSurround {{{2
-let g:surround_no_mappings= 1
-nmap ds  <Plug>Dsurround
-nmap hs  <Plug>Csurround
-nmap ys  <Plug>Ysurround
-nmap yS  <Plug>YSurround
-nmap yss <Plug>Yssurround
-nmap ySs <Plug>YSsurround
-nmap ySS <Plug>YSsurround
-"xmap S   <Plug>VSurround
-"xmap gS  <Plug>VgSurround
-
-" vim-commentary {{{2
-" remap for bépo
-" if exists(":Commentary")
-    xmap gc  <Plug>Commentary
-    nmap gc  <Plug>Commentary
-    omap gc  <Plug>Commentary
-    nmap gcc <Plug>CommentaryLine
-    nmap hgc <Plug>ChangeCommentary
-    nmap gcu <Plug>Commentary<Plug>Commentary
-" endif
-
-" SearchParty {{{2
-" Extended search commands and maps for Vim
-" Remap * to #
-nmap ) <Plug>SearchPartyVisualFindNext
-nmap ~ <Plug>SearchPartyVisualFindPrior
-nmap & <Plug>SearchPartyVisualFindSubstitute
-nmap ^l <Plug>SearchPartyHighlightClear
-
-" Vdebug tweak {{{2
-let g:vdebug_keymap = {
-\ "run"               : "<F5>",
-\ "run_to_cursor"     : "<F1>",
-\ "step_over"         : "<F2>",
-\ "step_into"         : "<F3>",
-\ "step_out"          : "<F4>",
-\ "close"             : "<F6>",
-\ "detach"            : "<F7>",
-\ "set_breakpoint"    : "<F10>",
-\ "get_context"       : "<F11>",
-\ "eval_under_cursor" : "<F12>",
-\ "eval_visual"       : "<Leader>e",
-\ }
-
-" Shaberu {{{2
-let g:shaberu_user_define_say_command = 'espeak -v french "%%TEXT%%"'
-
 " CRA.vim {{{2
 " define cra filetype for lazy loading
 au BufRead,BufNewFile *.cra set filetype=cra
-
-" Vim Easy Motion {{{2
-let g:EasyMotion_leader_key = '\'
 
 " VimSession {{{2
 " Extended session management for Vim (:mksession on steroids)
@@ -960,7 +912,6 @@ endif
 " Laisse les lignes déborder de l'écran si besoin
 "set nowrap
 " Ne laisse pas les ligne deborder de l'écran
-set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 set linebreak
@@ -1130,7 +1081,6 @@ if has("autocmd")
 endif
 
 " Functions {{{1
-
 " AppendModeline() {{{2
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
@@ -1223,25 +1173,74 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" Reselect visual block after increment/decrement
-" vnoremap <C-A> <C-A>gv
-" vnoremap <C-x> <C-x>gv
-
 " Reselect visual block after indentation
 vnoremap > >gv
 vnoremap < <gv
 
+" VimSurround {{{2
+let g:surround_no_mappings= 1
+nmap ds  <Plug>Dsurround
+nmap hs  <Plug>Csurround
+nmap ys  <Plug>Ysurround
+nmap yS  <Plug>YSurround
+nmap yss <Plug>Yssurround
+nmap ySs <Plug>YSsurround
+nmap ySS <Plug>YSsurround
+"xmap S   <Plug>VSurround
+"xmap gS  <Plug>VgSurround
+
+" vim-commentary {{{2
+" remap for bépo
+" if exists(":Commentary")
+    xmap gc  <Plug>Commentary
+    nmap gc  <Plug>Commentary
+    omap gc  <Plug>Commentary
+    nmap gcc <Plug>CommentaryLine
+    nmap hgc <Plug>ChangeCommentary
+    nmap gcu <Plug>Commentary<Plug>Commentary
+" endif
+
+" SearchParty {{{2
+" Extended search commands and maps for Vim
+" Remap * to #
+" This is done to prevent error when remaping for bépo
+nmap ^* <Plug>SearchPartyVisualFindNext
+nmap ^l <Plug>SearchPartyHighlightClear
+
+" SpeedDating {{{2
+" Reselect after increment decrement
+map <C-A> <Plug>SpeedDatingUpgv
+map <C-X> <Plug>SpeedDatingDowngv
+
+" Vdebug tweak {{{2
+let g:vdebug_keymap = {
+\ "run"               : "<F5>",
+\ "run_to_cursor"     : "<F1>",
+\ "step_over"         : "<F2>",
+\ "step_into"         : "<F3>",
+\ "step_out"          : "<F4>",
+\ "close"             : "<F6>",
+\ "detach"            : "<F7>",
+\ "set_breakpoint"    : "<F10>",
+\ "get_context"       : "<F11>",
+\ "eval_under_cursor" : "<F12>",
+\ "eval_visual"       : "<Leader>e",
+\ }
+
+" Vim Easy Motion {{{2
+let g:EasyMotion_leader_key = '\'
+
 " Disable Arrow in insert mode {{{2
-ino <down> <Nop>
-ino <left> <Nop>
+ino <down>  <Nop>
+ino <left>  <Nop>
 ino <right> <Nop>
-ino <up> <Nop>
+ino <up>    <Nop>
 
 " Disable Arrow in visual mode {{{2
-vno <down> <Nop>
-vno <left> <Nop>
+vno <down>  <Nop>
+vno <left>  <Nop>
 vno <right> <Nop>
-vno <up> <Nop>
+vno <up>    <Nop>
 
 " Remap Arrow Up/Down to move line {{{2
 " Real Vimmer forget the cross
