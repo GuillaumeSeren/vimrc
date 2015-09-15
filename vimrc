@@ -1231,6 +1231,10 @@ nnoremap g# g#zz
 vnoremap > >gv
 vnoremap < <gv
 
+" Reselect after increment decrement
+map <C-A> <Plug>SpeedDatingUpgv
+map <C-X> <Plug>SpeedDatingDowngv
+
 " Disable Arrow in insert mode {{{2
 ino <down> <Nop>
 ino <left> <Nop>
