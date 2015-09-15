@@ -731,9 +731,6 @@ endif
 " MySQL
 let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd='':dbname=mysql'
 
-" Shaberu {{{2
-let g:shaberu_user_define_say_command = 'espeak -v french "%%TEXT%%"'
-
 " CRA.vim {{{2
 " define cra filetype for lazy loading
 au BufRead,BufNewFile *.cra set filetype=cra
@@ -911,7 +908,6 @@ endif
 " Laisse les lignes déborder de l'écran si besoin
 "set nowrap
 " Ne laisse pas les ligne deborder de l'écran
-set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 set linebreak
