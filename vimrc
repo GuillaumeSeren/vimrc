@@ -174,6 +174,10 @@ NeoBundle 'tpope/vim-eunuch'
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
 
+" SearchParty {{{3
+" Extended search commands and maps for Vim
+NeoBundle 'dahu/SearchParty'
+
 " Surround {{{3
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
