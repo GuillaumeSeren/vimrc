@@ -103,9 +103,8 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
 " unite-outline {{{3
-" Unite Plugin : OUTLINE =========
-" https://github.com/h1mesuke/unite-outline
 " outline source for unite.vim
+" https://github.com/h1mesuke/unite-outline
 " http://d.hatena.ne.jp/h1mesuke/20101107/p1
 " Call it with :unite outline
 NeoBundle 'h1mesuke/unite-outline'
@@ -173,6 +172,11 @@ NeoBundle 'tpope/vim-eunuch'
 " A Plugin to show a diff, whenever recovering a buffer
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
+
+" Vim-OrgMode {{{3
+" Text outlining and task management for Vim based on Emacs' Org-Mode
+" https://github.com/jceb/vim-orgmode
+NeoBundle 'jceb/vim-orgmode'
 
 " SearchParty {{{3
 " Extended search commands and maps for Vim
@@ -300,10 +304,45 @@ NeoBundle 'junegunn/goyo.vim'
 " https://github.com/altercation/vim-colors-solarized
 NeoBundle 'altercation/vim-colors-solarized.git'
 
+" Vividchalk {{{3
+" a colorscheme strangely reminiscent of Vibrant Ink for a
+" certain OS X editor
+" https://github.com/tpope/vim-vividchalk
+" http://www.vim.org/scripts/script.php?script_id=1891
+NeoBundle 'tpope/vim-vividchalk.git'
+
+" jellybeans.vim {{{3
+" A colorful, dark color scheme for Vim.
+" http://www.vim.org/scripts/script.php?script_id=2555
+" https://github.com/nanotech/jellybeans.vim
+NeoBundle 'nanotech/jellybeans.vim'
+
+" Vim-Portal {{{3
+" Hello and, again, this is the Portal Gun for Vim.
+" https://github.com/thinca/vim-portal
+NeoBundle 'thinca/vim-portal'
+
+" vim-threes {{{3
+" Play Threes! in Vim!
+" https://github.com/thinca/vim-threes
+NeoBundle 'thinca/vim-threes'
+
+" TagBar {{{3
+" Vim plugin that displays tags in a window, ordered by class etc.
+" https://github.com/majutsushi/tagbar
+NeoBundle 'majutsushi/tagbar'
+
+" guyzmo/notmuch
+NeoBundle "guyzmo/notmuch-abook"
+
+" Lazy specific plugins {{{2
 " Rails {{{3
 " rails.vim: Ruby on Rails power tools
 " https://github.com/tpope/vim-rails
-NeoBundle 'tpope/vim-rails.git'
+NeoBundleLazy 'tpope/vim-rails.git', {
+\ 'autoload': {
+\     'filetypes': ['ruby']
+\ }}
 
 " lua-ftplugin {{{3
 " Lua file type plug-in for the Vim text editor
@@ -400,15 +439,6 @@ NeoBundleLazy 'vim-scripts/php_getset.vim', {
 \     'filetypes':['php']
 \ }}
 
-" Textobjs {{{3
-" Text-object like motion for arguments
-NeoBundleLazy 'kana/vim-textobj-user'
-NeoBundleLazy 'osyo-manga/vim-textobj-multiblock', {
-\ 'depends': 'vim-textobj-user',
-\ 'autoload': {
-\     'mappings': [[ 'ox', '<Plug>' ]]
-\ }}
-
 " CSS color {{{3
 " Highlight colors in css files
 " NeoBundle 'skammer/vim-css-color'
@@ -459,34 +489,6 @@ NeoBundleLazy 'vim-scripts/bash-support.vim', {
 \ 'autoload': {
 \     'filetypes':['sh']
 \ }}
-
-" Vividchalk {{{3
-" a colorscheme strangely reminiscent of Vibrant Ink for a
-" certain OS X editor
-" https://github.com/tpope/vim-vividchalk
-" http://www.vim.org/scripts/script.php?script_id=1891
-NeoBundle 'tpope/vim-vividchalk.git'
-
-" jellybeans.vim {{{3
-" A colorful, dark color scheme for Vim.
-" http://www.vim.org/scripts/script.php?script_id=2555
-" https://github.com/nanotech/jellybeans.vim
-NeoBundle 'nanotech/jellybeans.vim'
-
-" Vim-Portal {{{3
-" Hello and, again, this is the Portal Gun for Vim.
-" https://github.com/thinca/vim-portal
-NeoBundle 'thinca/vim-portal'
-
-" vim-threes {{{3
-" Play Threes! in Vim!
-" https://github.com/thinca/vim-threes
-NeoBundle 'thinca/vim-threes'
-
-" TagBar {{{3
-" Vim plugin that displays tags in a window, ordered by class etc.
-" https://github.com/majutsushi/tagbar
-NeoBundle 'majutsushi/tagbar'
 
 "" Bundle samples {{{2
 "" non github repos{{{3
