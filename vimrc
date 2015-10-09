@@ -173,11 +173,6 @@ NeoBundle 'tpope/vim-eunuch'
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
 
-" Vim-OrgMode {{{3
-" Text outlining and task management for Vim based on Emacs' Org-Mode
-" https://github.com/jceb/vim-orgmode
-NeoBundle 'jceb/vim-orgmode'
-
 " SearchParty {{{3
 " Extended search commands and maps for Vim
 NeoBundle 'dahu/SearchParty'
@@ -231,11 +226,11 @@ NeoBundle 'Lokaltog/vim-easymotion'
 " <Leader><Leader>fx - make every character x in the line a target
 NeoBundle 'joequery/Stupid-EasyMotion'
 
-" vim-gitgutter {{{3
-" airblade/vim-gitgutter
-" A Vim plugin which shows a git diff in the gutter (sign column) and
-" stages/reverts hunks.
-NeoBundle 'airblade/vim-gitgutter'
+" quickfixsigns {{{3
+" Mark quickfix & location list items with signs
+" http://www.vim.org/scripts/script.php?script_id=2584
+" NeoBundle 'vim-scripts/quickfixsigns'
+NeoBundle 'tomtom/quickfixsigns_vim'
 
 " VCSCOMMAND {{{3
 " http://www.vim.org/scripts/script.php?script_id=90
@@ -255,19 +250,16 @@ NeoBundle 'joonty/vdebug.git'
 " CLI script 'ack'
 NeoBundle 'rking/ag.vim'
 
+" undotree.vim
+" The ultimate undo history visualizer for VIM
+" https://github.com/mbbill/undotree
+NeoBundle 'mbbill/undotree'
+
 " SUCKLESS {{{3
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
 " manager in Vim.
 NeoBundle 'fabi1cazenave/suckless.vim'
-
-" a.vim {{{3
-" A few of quick commands to swtich between source files and header files
-" quickly.
-NeoBundleLazy 'a.vim', {
-\ 'autoload': {
-\     'filetype': ['c', 'h']
-\ }}
 
 " Tabularize ! {{{3
 " https://github.com/godlygeek/tabular
@@ -336,6 +328,24 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle "guyzmo/notmuch-abook"
 
 " Lazy specific plugins {{{2
+" a.vim {{{3
+" A few of quick commands to swtich between source files and header files
+" quickly.
+NeoBundleLazy 'a.vim', {
+\ 'autoload': {
+\     'filetype': ['c', 'h']
+\ }}
+
+" Vim-OrgMode {{{3
+" Text outlining and task management for Vim based on Emacs' Org-Mode
+" https://github.com/jceb/vim-orgmode
+NeoBundleLazy 'jceb/vim-orgmode', {
+\ 'autoload': {
+\     'filetype': ['org']
+\ },
+\     'depends' : ['vim-scripts/utl.vim']
+\ }
+
 " Rails {{{3
 " rails.vim: Ruby on Rails power tools
 " https://github.com/tpope/vim-rails
@@ -1298,8 +1308,13 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
     \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
-" Format json selection {{{2
-map <Leader>j !python -m json.tool<CR>
+augroup linterConfiguration
+    autocmd FileType xml   setlocal  makeprg=xmllint\ -
+    autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
+    autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
+augroup END
 
 " SAVE as ROOT {{{2
 " command! W w !sudo tee "%" > /dev/null
