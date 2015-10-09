@@ -173,11 +173,6 @@ NeoBundle 'tpope/vim-eunuch'
 " http://www.vim.org/scripts/script.php?script_id=3068
 NeoBundle 'chrisbra/Recover.vim'
 
-" Vim-OrgMode {{{3
-" Text outlining and task management for Vim based on Emacs' Org-Mode
-" https://github.com/jceb/vim-orgmode
-NeoBundle 'jceb/vim-orgmode'
-
 " SearchParty {{{3
 " Extended search commands and maps for Vim
 NeoBundle 'dahu/SearchParty'
@@ -261,14 +256,6 @@ NeoBundle 'rking/ag.vim'
 " manager in Vim.
 NeoBundle 'fabi1cazenave/suckless.vim'
 
-" a.vim {{{3
-" A few of quick commands to swtich between source files and header files
-" quickly.
-NeoBundleLazy 'a.vim', {
-\ 'autoload': {
-\     'filetype': ['c', 'h']
-\ }}
-
 " Tabularize ! {{{3
 " https://github.com/godlygeek/tabular
 " Vim script for text filtering and alignment
@@ -336,6 +323,24 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle "guyzmo/notmuch-abook"
 
 " Lazy specific plugins {{{2
+" a.vim {{{3
+" A few of quick commands to swtich between source files and header files
+" quickly.
+NeoBundleLazy 'a.vim', {
+\ 'autoload': {
+\     'filetype': ['c', 'h']
+\ }}
+
+" Vim-OrgMode {{{3
+" Text outlining and task management for Vim based on Emacs' Org-Mode
+" https://github.com/jceb/vim-orgmode
+NeoBundleLazy 'jceb/vim-orgmode', {
+\ 'autoload': {
+\     'filetype': ['org']
+\ },
+\     'depends' : ['vim-scripts/utl.vim']
+\ }
+
 " Rails {{{3
 " rails.vim: Ruby on Rails power tools
 " https://github.com/tpope/vim-rails
