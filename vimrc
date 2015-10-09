@@ -226,11 +226,11 @@ NeoBundle 'Lokaltog/vim-easymotion'
 " <Leader><Leader>fx - make every character x in the line a target
 NeoBundle 'joequery/Stupid-EasyMotion'
 
-" vim-gitgutter {{{3
-" airblade/vim-gitgutter
-" A Vim plugin which shows a git diff in the gutter (sign column) and
-" stages/reverts hunks.
-NeoBundle 'airblade/vim-gitgutter'
+" quickfixsigns {{{3
+" Mark quickfix & location list items with signs
+" http://www.vim.org/scripts/script.php?script_id=2584
+" NeoBundle 'vim-scripts/quickfixsigns'
+NeoBundle 'tomtom/quickfixsigns_vim'
 
 " VCSCOMMAND {{{3
 " http://www.vim.org/scripts/script.php?script_id=90
