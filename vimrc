@@ -1303,8 +1303,13 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
     \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
-" Format json selection {{{2
-map <Leader>j !python -m json.tool<CR>
+augroup linterConfiguration
+    autocmd FileType xml   setlocal  makeprg=xmllint\ -
+    autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
+    autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
+augroup END
 
 " SAVE as ROOT {{{2
 " command! W w !sudo tee "%" > /dev/null
