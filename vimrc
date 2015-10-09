@@ -250,6 +250,11 @@ NeoBundle 'joonty/vdebug.git'
 " CLI script 'ack'
 NeoBundle 'rking/ag.vim'
 
+" undotree.vim
+" The ultimate undo history visualizer for VIM
+" https://github.com/mbbill/undotree
+NeoBundle 'mbbill/undotree'
+
 " SUCKLESS {{{3
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
