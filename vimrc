@@ -1009,31 +1009,6 @@ set title
 set listchars=tab:··,trail:¤,extends:▷,precedes:◁
 set list
 
-" HighLight 81 col {{{2
-" From «More Instantly Better Vim» - OSCON 2013
-" http://youtu.be/aHm36-na4-4
-highlight OverLength ctermbg=darkblue ctermfg=white guibg=darkblue guibg=white
-call matchadd('OverLength', '\%81v', 100)
-"=====[ Comments are important ]==================
-" Highlight TODO:
-highlight todo ctermbg=darkcyan ctermfg=white guibg=darkcyan guibg=white
-call matchadd('todo', 'TODO\|@TODO', 100)
-" Highlight MAIL:
-call matchadd('todo', 'MAIL\|mail', 100)
-" Highlight misspelled word
-highlight SpellBad cterm=underline
-" Highlight bugfix / fixme
-highlight fix ctermbg=darkred ctermfg=white guibg=darkred guibg=white
-call matchadd('fix', 'BUGFIX\|@BUGFIX\|FIXME\|@FIXME', 100)
-" Highlight author
-highlight author ctermfg=brown guibg=brown
-call matchadd('author', 'author\|@author', 100)
-
-" SHOW NON-BREAKABLE SPACE {{{2
-" colorise les nbsp
-highlight NbSp ctermbg=lightgray guibg=lightred
-match NbSp /\%xa0/
-
 " Cursor {{{2
 " SHOW CURRENT LINE :
 set cursorline
@@ -1052,6 +1027,31 @@ set guicursor+=i:blinkwait10
 set number
 " Show number relative from the cursor
 set relativenumber
+
+" HighLighting {{{2
+augroup highlight
+    " autocmd! ColorScheme *
+    " From «More Instantly Better Vim» - OSCON 2013
+    " http://youtu.be/aHm36-na4-4
+    autocmd ColorScheme * highlight OverLength ctermbg=darkblue ctermfg=white guibg=darkblue guibg=white
+    autocmd ColorScheme * call matchadd('OverLength', '\%81v', 100)
+    "=====[ Comments are important ]==================
+    " Highlight TODO:
+    autocmd ColorScheme * highlight todo ctermbg=darkcyan ctermfg=white guibg=darkcyan guibg=white
+    autocmd ColorScheme * call matchadd('todo', 'TODO\|@TODO', 100)
+    " Highlight MAIL:
+    autocmd ColorScheme * call matchadd('todo', 'MAIL\|mail', 100)
+    " Highlight misspelled word: "errreur"
+    autocmd ColorScheme * highlight SpellBad ctermfg=red guifg=red
+    " Highlight bugfix / fixme
+    autocmd ColorScheme * highlight fix ctermbg=darkred ctermfg=white guibg=darkred guibg=white
+    autocmd ColorScheme * call matchadd('fix', 'BUGFIX\|@BUGFIX\|FIXME\|@FIXME', 100)
+    " Highlight author
+    autocmd ColorScheme * highlight author ctermfg=brown guibg=brown
+    autocmd ColorScheme * call matchadd('author', 'author\|@author', 100)
+augroup END
+
+doautoall highlight ColorScheme
 
 " AutoCmd {{{1
 " Fix filetype detection {{{2
