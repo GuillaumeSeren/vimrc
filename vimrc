@@ -1005,8 +1005,8 @@ set report=0
 set title
 
 " Show Special Char {{{2
-" show tabs / nbsp / trailing spaces
-set listchars=tab:··,trail:¤,extends:▷,precedes:◁
+" show tabs / nbsp ' ' / trailing spaces
+set listchars=nbsp:¬,tab:··,trail:¤,extends:▷,precedes:◁
 set list
 
 " Cursor {{{2
