@@ -1081,8 +1081,8 @@ endif
 " AutoReLoad vimrc {{{2
 " Auto apply modification to vimrc
 if has("autocmd")
-    autocmd! bufwritepost ~/.vimrc source ~/.vimrc
-    autocmd! bufwritepost ~/.vim/vimrc source ~/.vimrc
+    autocmd bufwritepost ~/.vimrc     source ~/.vimrc
+    autocmd bufwritepost ~/.vim/vimrc source ~/.vimrc
 endif
 
 " SESSION {{{2
