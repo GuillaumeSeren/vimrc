@@ -309,16 +309,6 @@ NeoBundle 'tpope/vim-vividchalk.git'
 " https://github.com/nanotech/jellybeans.vim
 NeoBundle 'nanotech/jellybeans.vim'
 
-" Vim-Portal {{{3
-" Hello and, again, this is the Portal Gun for Vim.
-" https://github.com/thinca/vim-portal
-NeoBundle 'thinca/vim-portal'
-
-" vim-threes {{{3
-" Play Threes! in Vim!
-" https://github.com/thinca/vim-threes
-NeoBundle 'thinca/vim-threes'
-
 " TagBar {{{3
 " Vim plugin that displays tags in a window, ordered by class etc.
 " https://github.com/majutsushi/tagbar
@@ -475,10 +465,33 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \     'filetypes':['css']
 \ }}
 
+" html5.vim
+" TML5 omnicomplete and syntax
+" https://github.com/othree/html5.vim
+NeoBundleLazy 'othree/html5.vim', {
+\ 'autoload': {
+\     'filetypes':['html', 'xhtml']
+\ }}
+
+" YAJS.vim
+" Yet Another JavaScript Syntax for Vim
+" https://github.com/othree/yajs.vim
+NeoBundleLazy 'othree/yajs.vim', {
+\ 'autoload': {
+\     'filetypes':['javascript']
+\ }}
+
 " sparkup {{{3
 " A parser for a condensed HTML format
 " https://github.com/rstacruz/sparkup
 NeoBundleLazy 'rstacruz/sparkup', {
+\ 'autoload': {
+\     'filetypes':['html', 'xhtml']
+\ }}
+
+" ragtag {{{3
+" ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
+NeoBundleLazy 'tpope/vim-ragtag', {
 \ 'autoload': {
 \     'filetypes':['html', 'xhtml']
 \ }}
