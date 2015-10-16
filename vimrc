@@ -309,16 +309,6 @@ NeoBundle 'tpope/vim-vividchalk.git'
 " https://github.com/nanotech/jellybeans.vim
 NeoBundle 'nanotech/jellybeans.vim'
 
-" Vim-Portal {{{3
-" Hello and, again, this is the Portal Gun for Vim.
-" https://github.com/thinca/vim-portal
-NeoBundle 'thinca/vim-portal'
-
-" vim-threes {{{3
-" Play Threes! in Vim!
-" https://github.com/thinca/vim-threes
-NeoBundle 'thinca/vim-threes'
-
 " TagBar {{{3
 " Vim plugin that displays tags in a window, ordered by class etc.
 " https://github.com/majutsushi/tagbar
@@ -475,10 +465,33 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \     'filetypes':['css']
 \ }}
 
+" html5.vim
+" TML5 omnicomplete and syntax
+" https://github.com/othree/html5.vim
+NeoBundleLazy 'othree/html5.vim', {
+\ 'autoload': {
+\     'filetypes':['html', 'xhtml']
+\ }}
+
+" YAJS.vim
+" Yet Another JavaScript Syntax for Vim
+" https://github.com/othree/yajs.vim
+NeoBundleLazy 'othree/yajs.vim', {
+\ 'autoload': {
+\     'filetypes':['javascript']
+\ }}
+
 " sparkup {{{3
 " A parser for a condensed HTML format
 " https://github.com/rstacruz/sparkup
 NeoBundleLazy 'rstacruz/sparkup', {
+\ 'autoload': {
+\     'filetypes':['html', 'xhtml']
+\ }}
+
+" ragtag {{{3
+" ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
+NeoBundleLazy 'tpope/vim-ragtag', {
 \ 'autoload': {
 \     'filetypes':['html', 'xhtml']
 \ }}
@@ -1015,7 +1028,7 @@ set cursorline
 "SHOW CURRENT COLUMN :
 set cursorcolumn
 " SHOW CURSOR
-highlight Cursor guifg=white guibg=black
+highlight Cursor  guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
@@ -1030,22 +1043,21 @@ set relativenumber
 
 " HighLighting {{{2
 augroup highlight
-    " autocmd! ColorScheme *
     " From «More Instantly Better Vim» - OSCON 2013
     " http://youtu.be/aHm36-na4-4
+    " Highlight long lines
     autocmd ColorScheme * highlight OverLength ctermbg=darkblue ctermfg=white guibg=darkblue guibg=white
     autocmd ColorScheme * call matchadd('OverLength', '\%81v', 100)
-    "=====[ Comments are important ]==================
     " Highlight TODO:
     autocmd ColorScheme * highlight todo ctermbg=darkcyan ctermfg=white guibg=darkcyan guibg=white
     autocmd ColorScheme * call matchadd('todo', 'TODO\|@TODO', 100)
     " Highlight MAIL:
     autocmd ColorScheme * call matchadd('todo', 'MAIL\|mail', 100)
-    " Highlight misspelled word: "errreur"
+    " Highlight misspelled word: errreur
     autocmd ColorScheme * highlight SpellBad ctermfg=red guifg=red
-    " Highlight bugfix / fixme
+    " Highlight BUGFIX / FIXME
     autocmd ColorScheme * highlight fix ctermbg=darkred ctermfg=white guibg=darkred guibg=white
-    autocmd ColorScheme * call matchadd('fix', 'BUGFIX\|@BUGFIX\|FIXME\|@FIXME', 100)
+    autocmd ColorScheme * call matchadd('fix', 'BUGFIX\|@BUGFIX\|bugfix\|FIXME\|@FIXME\|fixme', 100)
     " Highlight author
     autocmd ColorScheme * highlight author ctermfg=brown guibg=brown
     autocmd ColorScheme * call matchadd('author', 'author\|@author', 100)
@@ -1108,9 +1120,6 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " CLOSING {{{2
 " ZZ now saves all files, creates a session and exits
 function! AutocloseSession()
-    " if g:SessionLoaded || !filereadable(g:SessionPath)
-    "     exec 'mksession! ' . g:SessionPath
-    " endif
     wqall
 endfunction
 noremap <silent> ZZ :call AutocloseSession()<CR>
@@ -1198,19 +1207,15 @@ nmap yS  <Plug>YSurround
 nmap yss <Plug>Yssurround
 nmap ySs <Plug>YSsurround
 nmap ySS <Plug>YSsurround
-"xmap S   <Plug>VSurround
-"xmap gS  <Plug>VgSurround
 
 " vim-commentary {{{2
 " remap for bépo
-" if exists(":Commentary")
-    xmap gc  <Plug>Commentary
-    nmap gc  <Plug>Commentary
-    omap gc  <Plug>Commentary
-    nmap gcc <Plug>CommentaryLine
-    nmap hgc <Plug>ChangeCommentary
-    nmap gcu <Plug>Commentary<Plug>Commentary
-" endif
+xmap gc  <Plug>Commentary
+nmap gc  <Plug>Commentary
+omap gc  <Plug>Commentary
+nmap gcc <Plug>CommentaryLine
+nmap hgc <Plug>ChangeCommentary
+nmap gcu <Plug>Commentary<Plug>Commentary
 
 " SearchParty {{{2
 " Extended search commands and maps for Vim
@@ -1264,9 +1269,8 @@ no <left>   :tabprevious<CR>
 no <right>  :tabnext<CR>
 
 " Remap netrw arrow {{{2
-"@FIXME: Seem's to "break" file explorer.
-"From:
-"http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
+" From:
+" http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
 augroup netrw_dvorak_fix
     autocmd!
     autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
@@ -1315,11 +1319,6 @@ augroup linterConfiguration
     autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
     autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
 augroup END
-
-" SAVE as ROOT {{{2
-" command! W w !sudo tee "%" > /dev/null
-" command! W w !sudo dd of=%
-" Use :SudoWrite
 
 " MOUSE {{{2
 " =======
