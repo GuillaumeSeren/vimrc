@@ -314,8 +314,13 @@ NeoBundle 'nanotech/jellybeans.vim'
 " https://github.com/majutsushi/tagbar
 NeoBundle 'majutsushi/tagbar'
 
-" guyzmo/notmuch
-NeoBundle "guyzmo/notmuch-abook"
+" guyzmo/notmuch {{{3
+NeoBundle 'guyzmo/notmuch-abook'
+
+" LanguageTool {{{3
+" Grammar checker for English, French, German (etc.) in Vim
+" https://github.com/vim-scripts/LanguageTool
+NeoBundle 'vim-scripts/LanguageTool'
 
 " Lazy specific plugins {{{2
 " a.vim {{{3
@@ -944,15 +949,12 @@ set linebreak
 set textwidth=80
 
 " SPELL CHECKER {{{2
-" @TODO: Remap the mapping of the spell checker
-" @TOOD: Support auto detection of the sentence language,
-"        so it can support multi language fr / us / en / etc (jpn)
-" En live pour quand vous écrivez anglais (le fr est à trouver dans les méandres du net)
-" Chiant pour programmer, mais améliorable avec des dico
-    " perso et par languages
+" Dictionaries files: http://wordlist.aspell.net/
 set spell
 " [s / ]s : saute au prochain / précédant mot avec faute.
-    " z= : affiche la liste de suggestion pour corriger.
+" z=      : affiche la liste de suggestion pour corriger.
+" zg      : Ajoute le mot au dico local.
+" zG      : Ajoute le mot au dico global.
 set spelllang=fr,en
 
 " MOVE CURSOR {{{2
