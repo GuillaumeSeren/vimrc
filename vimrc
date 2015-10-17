@@ -17,7 +17,7 @@
 " - Vim Display
 " - AutoCmd
 " - Functions
-" - Input
+" - Input remapping
 
 " Startup config {{{1
 " ===========
@@ -44,7 +44,7 @@ if !filereadable(neobundle_readme)
 endif
 
 " Plugins List {{{1
-" Load Python for NVIM {{{2
+" Load Python for NeoVim {{{2
 if has('nvim')
     runtime! plugin/python_setup.vim
 endif
@@ -955,6 +955,7 @@ set spell
 " z=      : affiche la liste de suggestion pour corriger.
 " zg      : Ajoute le mot au dico local.
 " zG      : Ajoute le mot au dico global.
+" @TODO: Test if dictionnary is available before activating it.
 set spelllang=fr,en
 
 " MOVE CURSOR {{{2
