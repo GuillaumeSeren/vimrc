@@ -315,12 +315,16 @@ NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'majutsushi/tagbar'
 
 " guyzmo/notmuch {{{3
+" Addressbook manager and vim script compatible with notmuch
 NeoBundle 'guyzmo/notmuch-abook'
 
-" LanguageTool {{{3
-" Grammar checker for English, French, German (etc.) in Vim
-" https://github.com/vim-scripts/LanguageTool
-NeoBundle 'vim-scripts/LanguageTool'
+" indentLine {{{3
+" A vim plugin to display the indention levels with thin vertical lines
+NeoBundle 'Yggdroot/indentLine'
+
+" vimagit {{{3
+" Do all your git job inside vim, totally inspired from emacs magit.
+NeoBundle 'jreybert/vimagit'
 
 " Lazy specific plugins {{{2
 " a.vim {{{3
@@ -806,6 +810,11 @@ function! g:committia_hooks.diff_open(info)
     " No fold on the committia diff screen
     set nofoldenable
 endfunction
+
+" indentLine {{{2
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui  = '#09AA08'
+let g:indentLine_char       = '│'
 
 " Vim core {{{1
 " MOUSE {{{2
