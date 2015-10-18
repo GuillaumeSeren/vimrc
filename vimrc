@@ -8,16 +8,16 @@
 
 " Summary {{{1
 " ===========
-" Let's try to split this file into several clear part
-" - Startup config
-" - Auto load / install plugin manager
-" - Plugins List
-" - Tweaking Plugins
-" - Vim core
-" - Vim Display
-" - AutoCmd
-" - Functions
-" - Input remapping
+" This file is split into several part:
+"   Startup config
+"   Auto load / install plugin manager
+"   Plugins List
+"   Tweaking Plugins
+"   Vim core
+"   Vim Display
+"   AutoCmd
+"   Functions
+"   Input bindings
 
 " Startup config {{{1
 " ===========
@@ -36,7 +36,7 @@ if !1 | finish | endif
 " Auto Install NeoBundle
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 
-" Check if bundle dir is available for new install
+" Check if bundle directory is available for new install
 if !filereadable(neobundle_readme)
     echo "Installing NeoBundle..."
     silent !mkdir -p ~/.vim/bundle
@@ -614,22 +614,6 @@ call unite#custom#profile('default', 'context', {
 " Keep actions shortcut in distinct function: s:unite_settings()
 autocmd FileType unite call s:unite_settings()
 
-" Unite mappings {{{3
-" Unite grep
-nnoremap <space>/ :Unite grep:.<cr>
-let g:unite_source_history_yank_enable = 1
-" Unite history / Yank
-nnoremap <space>y :Unite history/yank<cr>
-" Unite in buffer
-nnoremap <space>s :Unite -quick-match buffer<cr>
-" Show mapping
-nnoremap <space>m :Unite mapping<cr>
-" Show Syntastic error
-nnoremap <space>x :Error<cr>
-
-" Emulate ctrl-p behavior quite general unite (all type)
-nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
-
 " NeoComplete {{{2
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
@@ -824,7 +808,11 @@ function! g:committia_hooks.diff_open(info)
 endfunction
 
 " Vim core {{{1
-" Syntax {{{2
+" MOUSE {{{2
+" Activate the mouse
+set mouse=a
+
+" Indent {{{2
 " Automatically indent when adding a curly bracket, etc.
 set smartindent
 " Indispensable pour ne pas tout casser avec ce qui va suivre
@@ -847,9 +835,19 @@ set lazyredraw
 " Detection de l'indentation
 set cindent
 set smartindent
+
+" SPELL CHECKER {{{2
 " https://georgebrock.github.io/talks/vim-completion/
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
+" Dictionaries files: http://wordlist.aspell.net/
+set spell
+" [s / ]s : saute au prochain / précédant mot avec faute.
+" z=      : affiche la liste de suggestion pour corriger.
+" zg      : Ajoute le mot au dico local.
+" zG      : Ajoute le mot au dico global.
+" @TODO: Test if dictionnary is available before activating it.
+set spelllang=fr,en
 
 " Modeline {{{2
 set modeline modelines=5
@@ -948,16 +946,6 @@ set linebreak
 " Size of the linewrapping
 set textwidth=80
 
-" SPELL CHECKER {{{2
-" Dictionaries files: http://wordlist.aspell.net/
-set spell
-" [s / ]s : saute au prochain / précédant mot avec faute.
-" z=      : affiche la liste de suggestion pour corriger.
-" zg      : Ajoute le mot au dico local.
-" zG      : Ajoute le mot au dico global.
-" @TODO: Test if dictionnary is available before activating it.
-set spelllang=fr,en
-
 " MOVE CURSOR {{{2
 " Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
 set whichwrap=<,>,[,]
@@ -970,6 +958,15 @@ set nostartofline
 " Nombre de commandes maximale dans l'historique :
 set history=10000
 
+
+augroup linterConfiguration
+    autocmd FileType xml   setlocal  makeprg=xmllint\ -
+    autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
+    autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
+augroup END
+
 " Vim display {{{1
 " Folding {{{2
 " @TODO: Do not change status on :w keep state fold saved.
@@ -980,15 +977,15 @@ set foldmethod=marker
 " view when we open our vimrc.
 set foldlevel=0
 
-" Show command (usefull for leader) {{{2
+" Show command (useful for leader) {{{2
 set showcmd
 
-" COLORSHEME {{{2
+" colorscheme {{{2
 " set the background light or dark
 set background=dark
 let g:solarized_termtrans = 1
 colorscheme solarized
-" Change le colorsheme en mode diff
+" Change le colorscheme en mode diff
 if &diff
     colorscheme solarized
 endif
@@ -1107,6 +1104,16 @@ if has("autocmd")
                 \| exe "normal g'\"" | endif
 endif
 
+" SHEBANG {{{2
+" shebang automatique lors de l'ouverture nouveau
+" d'un fichier *.py, *.sh (bash), modifier l'entête selon les besoins :
+" shell
+:autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+" python
+:autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+" php
+:autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+
 " Functions {{{1
 " AppendModeline() {{{2
 " Append modeline after last line in buffer.
@@ -1118,15 +1125,12 @@ function! AppendModeline()
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " CLOSING {{{2
 " ZZ now saves all files, creates a session and exits
 function! AutocloseSession()
     wqall
 endfunction
-noremap <silent> ZZ :call AutocloseSession()<CR>
-
 
 " OpenTab and lcd to the file {{{2
 " Change local working dir upon tab creation
@@ -1174,18 +1178,6 @@ function! MkdirP()
 endfunction
 command! MkdirP call MkdirP()
 
-" SHEBANG {{{2
-" shebang automatique lors de l'ouverture nouveau
-" d'un fichier *.py, *.sh (bash), modifier l'entête selon les besoins :
-" shell
-:autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" python
-:autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" php
-:autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-
-nnoremap <space-a> :echom 'This is a Test !'<CR>
-
 " Input bindings {{{1
 " Searching {{{2
 " From http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
@@ -1197,9 +1189,82 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" Reselect visual block after indentation
+" Diff {{{2
+nnoremap gdo do]c
+nnoremap gdp dp]c
+
+" Reselect visual block after indentation {{{2
 vnoremap > >gv
 vnoremap < <gv
+
+" Arrow remapping {{{2
+" Disable Arrow in insert mode {{{3
+ino <down>  <Nop>
+ino <left>  <Nop>
+ino <right> <Nop>
+ino <up>    <Nop>
+
+" Disable Arrow in visual mode {{{3
+vno <down>  <Nop>
+vno <left>  <Nop>
+vno <right> <Nop>
+vno <up>    <Nop>
+
+" Remap Arrow Up/Down to move line {{{3
+" Real Vimmer forget the cross
+no <down>   ddp
+no <up>     ddkP
+
+" Remap Arrow Right / Left to switch tab {{{3
+no <left>   :tabprevious<CR>
+no <right>  :tabnext<CR>
+
+" Remap netrw arrow {{{2
+" From:
+" http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
+augroup netrw_dvorak_fix
+    autocmd!
+    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+augroup END
+
+function! Fix_netrw_maps_for_dvorak()
+    " {cr} = « gauche / droite »
+    " @TODO: Remap to more vinegar related feature, like:
+    " - c : Go back
+    " - t : Preview (ranger inspired)
+    noremap <buffer> c h
+    noremap <buffer> r l
+    " {ts} = « haut / bas »
+    noremap <buffer> t j
+    noremap <buffer> s k
+    " noremap <buffer> d h
+    " noremap <buffer> h gj
+    " noremap <buffer> t gk
+    " noremap <buffer> n l
+    " noremap <buffer> e d
+    " noremap <buffer> l n
+    " and any others...
+endfunction
+
+" Permet de sauvegarder par ctrl + s {{{2
+:nmap <c-s> :w<CR>
+" Fonctionne aussi en mode edition
+:imap <c-s> <Esc>:w<CR>a
+:imap <c-s> <Esc><c-s>
+
+" Change default leader key {{{2
+let mapleader = ","
+
+" Vim Easy Motion {{{2
+let g:EasyMotion_leader_key = '\'
+
+" Completion avec ctrl + space {{{2
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+    \ "\<lt>C-n>" :
+    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
 
 " VimSurround {{{2
 let g:surround_no_mappings= 1
@@ -1247,88 +1312,9 @@ let g:vdebug_keymap = {
 \ "eval_visual"       : "<Leader>e",
 \ }
 
-" Vim Easy Motion {{{2
-let g:EasyMotion_leader_key = '\'
-
-" Disable Arrow in insert mode {{{2
-ino <down>  <Nop>
-ino <left>  <Nop>
-ino <right> <Nop>
-ino <up>    <Nop>
-
-" Disable Arrow in visual mode {{{2
-vno <down>  <Nop>
-vno <left>  <Nop>
-vno <right> <Nop>
-vno <up>    <Nop>
-
-" Remap Arrow Up/Down to move line {{{2
-" Real Vimmer forget the cross
-no <down>   ddp
-no <up>     ddkP
-
-" Remap Arrow Right / Left to switch tab {{{2
-no <left>   :tabprevious<CR>
-no <right>  :tabnext<CR>
-
-" Remap netrw arrow {{{2
-" From:
-" http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
-augroup netrw_dvorak_fix
-    autocmd!
-    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
-augroup END
-
-function! Fix_netrw_maps_for_dvorak()
-    " {cr} = « gauche / droite »
-    " @TODO: Remap to more vinegar related feature, like:
-    " - c : Go back
-    " - t : Preview (ranger inspired)
-    noremap <buffer> c h
-    noremap <buffer> r l
-    " {ts} = « haut / bas »
-    noremap <buffer> t j
-    noremap <buffer> s k
-    " noremap <buffer> d h
-    " noremap <buffer> h gj
-    " noremap <buffer> t gk
-    " noremap <buffer> n l
-    " noremap <buffer> e d
-    " noremap <buffer> l n
-    " and any others...
-endfunction
-
-" Change default leader key {{{2
-let mapleader = ","
-
-" Permet de sauvegarder par ctrl + s {{{2
-:nmap <c-s> :w<CR>
-" Fonctionne aussi en mode edition
-:imap <c-s> <Esc>:w<CR>a
-:imap <c-s> <Esc><c-s>
-
-" Completion avec ctrl + space {{{2
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-    \ "\<lt>C-n>" :
-    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
-
-augroup linterConfiguration
-    autocmd FileType xml   setlocal  makeprg=xmllint\ -
-    autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
-    autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
-    autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
-    autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
-augroup END
-
-" MOUSE {{{2
-" =======
-" Utilise la souris pour les terminaux qui le peuvent (tous ?)
-" pratique si on est habitué à coller sous la souris et pas sous le curseur,
-" attention fonctionnement inhabituel
-set mouse=a
+" Binding leaders {{{2
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+noremap <silent> ZZ :call AutocloseSession()<CR>
 
 " REMAP KEYBOARD for bépo {{{2
 " @FIXME: Detect keyboard layout (qwerty / bépo)
