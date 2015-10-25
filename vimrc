@@ -1127,12 +1127,14 @@ endif
 " SHEBANG {{{2
 " shebang automatique lors de l'ouverture nouveau
 " d'un fichier *.py, *.sh (bash), modifier l'entête selon les besoins :
-" shell
-:autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" python
-:autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" php
-:autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+if has("autocmd")
+    " shell
+    autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+    " python
+    autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+    " php
+    autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+endif
 
 " Functions {{{1
 " AppendModeline() {{{2
