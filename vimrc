@@ -326,6 +326,11 @@ NeoBundle 'Yggdroot/indentLine'
 " Do all your git job inside vim, totally inspired from emacs magit.
 NeoBundle 'jreybert/vimagit'
 
+" restore_view {{{3
+" A plugin for automatically restoring file's cursor position and folding
+" https://github.com/vim-scripts/restore_view.vim
+NeoBundle 'vim-scripts/restore_view.vim'
+
 " Lazy specific plugins {{{2
 " a.vim {{{3
 " A few of quick commands to swtich between source files and header files
@@ -815,6 +820,9 @@ endfunction
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui  = '#09AA08'
 let g:indentLine_char       = '│'
+
+" restore_view {{{2
+set viewoptions=cursor,folds,slash,unix
 
 " Vim core {{{1
 " MOUSE {{{2
