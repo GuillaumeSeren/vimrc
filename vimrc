@@ -326,6 +326,11 @@ NeoBundle 'Yggdroot/indentLine'
 " Do all your git job inside vim, totally inspired from emacs magit.
 NeoBundle 'jreybert/vimagit'
 
+" restore_view {{{3
+" A plugin for automatically restoring file's cursor position and folding
+" https://github.com/vim-scripts/restore_view.vim
+NeoBundle 'vim-scripts/restore_view.vim'
+
 " Lazy specific plugins {{{2
 " a.vim {{{3
 " A few of quick commands to swtich between source files and header files
@@ -816,6 +821,9 @@ let g:indentLine_color_term = 239
 let g:indentLine_color_gui  = '#09AA08'
 let g:indentLine_char       = '│'
 
+" restore_view {{{2
+set viewoptions=cursor,folds,slash,unix
+
 " Vim core {{{1
 " MOUSE {{{2
 " Activate the mouse
@@ -954,6 +962,9 @@ set wrap "Wrap lines
 set linebreak
 " Size of the linewrapping
 set textwidth=80
+
+" guioption {{{2
+set guioptions-=M
 
 " MOVE CURSOR {{{2
 " Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
@@ -1116,12 +1127,14 @@ endif
 " SHEBANG {{{2
 " shebang automatique lors de l'ouverture nouveau
 " d'un fichier *.py, *.sh (bash), modifier l'entête selon les besoins :
-" shell
-:autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" python
-:autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
-" php
-:autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+if has("autocmd")
+    " shell
+    autocmd BufNewFile *.sh,*.bash 0put =\"#!/bin/bash\<nl># -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+    " python
+    autocmd BufNewFile *.py 0put=\"#!/usr/bin/env python\"|1put=\"# -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+    " php
+    autocmd BufNewFile *.php 0put=\"<?php\<nl>// -*- coding: UTF8 -*-\<nl>\<nl>\"|$
+endif
 
 " Functions {{{1
 " AppendModeline() {{{2
@@ -1198,7 +1211,7 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" Diff {{{2
+" better diff mode {{{2
 nnoremap gdo do]c
 nnoremap gdp dp]c
 
