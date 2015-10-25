@@ -963,6 +963,9 @@ set linebreak
 " Size of the linewrapping
 set textwidth=80
 
+" guioption {{{2
+set guioptions-=M
+
 " MOVE CURSOR {{{2
 " Envoyer le curseur sur la ligne suivante/précédente après usage des flèches droite/gauche en bout de ligne :
 set whichwrap=<,>,[,]
@@ -1206,7 +1209,7 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" Diff {{{2
+" better diff mode {{{2
 nnoremap gdo do]c
 nnoremap gdp dp]c
 
