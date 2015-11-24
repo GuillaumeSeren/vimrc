@@ -399,12 +399,6 @@ NeoBundleLazy 'Matt-Deacalion/vim-systemd-syntax', {
 \     'filetypes' : ['systemd']
 \ }}
 
-" Vim-Markdown {{{3
-NeoBundleLazy 'tpope/vim-markdown', {
-\ 'autoload':{
-\     'filetypes':['markdown']
-\ }}
-
 " php.vim {{{3
 " old::
 " NeoBundle 'php.vim'
@@ -1108,7 +1102,11 @@ if has("autocmd")
     au BufNewFile,BufRead *.otl             setl ft=votl
     au BufNewFile,BufRead *.jeco            setl ft=eco
     au BufNewFile,BufRead *.glsl            setl ft=c
+    au BufNewFile,BufRead *.md              setl ft=markdown
 endif
+
+" enable fenced code block syntax highlighting
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " AutoReLoad vimrc {{{2
 " Auto apply modification to vimrc
