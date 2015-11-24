@@ -1259,6 +1259,13 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
     \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
+" SearchParty {{{2
+" Extended search commands and maps for Vim
+" Remap * to #
+" This is done to prevent error when remaping for bépo
+nmap ^* <Plug>SearchPartyVisualFindNext
+nmap ^l <Plug>SearchPartyHighlightClear
+
 " SpeedDating {{{2
 " Reselect after increment decrement
 map <C-A> <Plug>SpeedDatingUpgv
