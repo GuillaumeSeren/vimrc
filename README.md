@@ -3,11 +3,6 @@ vimrc
 This is my vim configuration,
 I use it for my daily usage coding / mail / irc / blog.
 
-Keyboard
-========
-I use the french dvorak «bépo» for my keyboard and I needed to change a lot of
-the basic shortcut, good read is http://bepo.fr/wiki/Accueil.
-
 Terminal
 ========
 I use vim in a terminal so please check my configuration, if you have

@@ -399,12 +399,6 @@ NeoBundleLazy 'Matt-Deacalion/vim-systemd-syntax', {
 \     'filetypes' : ['systemd']
 \ }}
 
-" Vim-Markdown {{{3
-NeoBundleLazy 'tpope/vim-markdown', {
-\ 'autoload':{
-\     'filetypes':['markdown']
-\ }}
-
 " php.vim {{{3
 " old::
 " NeoBundle 'php.vim'
@@ -1108,7 +1102,11 @@ if has("autocmd")
     au BufNewFile,BufRead *.otl             setl ft=votl
     au BufNewFile,BufRead *.jeco            setl ft=eco
     au BufNewFile,BufRead *.glsl            setl ft=c
+    au BufNewFile,BufRead *.md              setl ft=markdown
 endif
+
+" enable fenced code block syntax highlighting
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " AutoReLoad vimrc {{{2
 " Auto apply modification to vimrc
@@ -1241,33 +1239,6 @@ no <up>     ddkP
 no <left>   :tabprevious<CR>
 no <right>  :tabnext<CR>
 
-" Remap netrw arrow {{{2
-" From:
-" http://unix.stackexchange.com/questions/31575/remapping-keys-in-vims-directory-view
-augroup netrw_dvorak_fix
-    autocmd!
-    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
-augroup END
-
-function! Fix_netrw_maps_for_dvorak()
-    " {cr} = « gauche / droite »
-    " @TODO: Remap to more vinegar related feature, like:
-    " - c : Go back
-    " - t : Preview (ranger inspired)
-    noremap <buffer> c h
-    noremap <buffer> r l
-    " {ts} = « haut / bas »
-    noremap <buffer> t j
-    noremap <buffer> s k
-    " noremap <buffer> d h
-    " noremap <buffer> h gj
-    " noremap <buffer> t gk
-    " noremap <buffer> n l
-    " noremap <buffer> e d
-    " noremap <buffer> l n
-    " and any others...
-endfunction
-
 " Permet de sauvegarder par ctrl + s {{{2
 :nmap <c-s> :w<CR>
 " Fonctionne aussi en mode edition
@@ -1287,32 +1258,6 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
     \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
     \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
-
-" VimSurround {{{2
-let g:surround_no_mappings= 1
-nmap ds  <Plug>Dsurround
-nmap hs  <Plug>Csurround
-nmap ys  <Plug>Ysurround
-nmap yS  <Plug>YSurround
-nmap yss <Plug>Yssurround
-nmap ySs <Plug>YSsurround
-nmap ySS <Plug>YSsurround
-
-" vim-commentary {{{2
-" remap for bépo
-xmap gc  <Plug>Commentary
-nmap gc  <Plug>Commentary
-omap gc  <Plug>Commentary
-nmap gcc <Plug>CommentaryLine
-nmap hgc <Plug>ChangeCommentary
-nmap gcu <Plug>Commentary<Plug>Commentary
-
-" SearchParty {{{2
-" Extended search commands and maps for Vim
-" Remap * to #
-" This is done to prevent error when remaping for bépo
-nmap ^* <Plug>SearchPartyVisualFindNext
-nmap ^l <Plug>SearchPartyHighlightClear
 
 " SpeedDating {{{2
 " Reselect after increment decrement
@@ -1337,11 +1282,3 @@ let g:vdebug_keymap = {
 " Binding leaders {{{2
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 noremap <silent> ZZ :call AutocloseSession()<CR>
-
-" REMAP KEYBOARD for bépo {{{2
-" @FIXME: Detect keyboard layout (qwerty / bépo)
-" @TODO: Move it at the end, the config must not be layout dependant.
-" I use kind dvorak-fr the «bépo» layout on my keyboard.
-source ~/.vim/vimrc.bepo
-" remap number for direct access
-source ~/.vim/vimrc.num
