@@ -27,7 +27,7 @@ if has('vim_starting')
     " Be iMproved
     set nocompatible
     " Required:
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    " set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Auto load / install plugin manager {{{1
@@ -50,148 +50,126 @@ if has('nvim')
 endif
 
 " Default plugins {{{2
-" NeoBundle base {{{3
-" 20131206: Add NeoBundle
-" 13-10-2014: NeoBundle change call to begin
-call neobundle#begin(expand('~/.vim/bundle/'))
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-" Some more customisation:
-" from: https://github.com/rkaneko/dotfiles/blob/master/.vimrc.init
-" let g:neobundle#install_max_processes = 4
-let g:neobundle#install_process_timeout = 1500
-" My Bundles here:
-" Brief help
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" VimPlug {{{3
+call plug#begin('~/.vim/plugged')
 
 " VIMPROC {{{3
 " Recommended to install
 " original repos on github
 " After install, turn shell ~/.vim/bundle/vimproc,
 " (n,g)make -f your_machines_makefile
-NeoBundle 'Shougo/vimproc', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin'  : 'make -f make_cygwin.mak',
-\     'mac'     : 'make -f make_mac.mak',
-\     'linux'   : 'make',
-\     'unix'    : 'gmake',
-\    },
-\ }
+Plug 'Shougo/vimproc', { 'do': 'make' }
 
 " UNITE {{{3
 " Unite and create user interfaces
 " http://www.vim.org/scripts/script.php?script_id=3396
 " https://github.com/Shougo/unite.vim
-NeoBundle 'Shougo/unite.vim.git'
+Plug 'Shougo/unite.vim'
 
-" NeoComplete {{{3
+" Completion {{{3
 " https://github.com/Shougo/neocomplete.vim
 " Next generation completion framework after neocomplcache
-NeoBundle 'Shougo/neocomplete'
+Plug 'Shougo/neocomplete'
 
 " NeoSnippet {{{3
 " https://github.com/Shougo/neosnippet.vim
 " neo-snippet plugin contains neocomplcache snippets source
-NeoBundle 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet'
 
 " NeoSnippet-snippets {{{3
 " https://github.com/Shougo/neosnippet-snippets
 " The standard snippets repository for neosnippet
-NeoBundle 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 
 " unite-outline {{{3
 " outline source for unite.vim
 " https://github.com/h1mesuke/unite-outline
 " http://d.hatena.ne.jp/h1mesuke/20101107/p1
 " Call it with :unite outline
-NeoBundle 'h1mesuke/unite-outline'
+Plug 'h1mesuke/unite-outline'
 
 " unite-colorscheme {{{3
 " https://github.com/ujihisa/unite-colorscheme
 " A unite.vim plugin
-NeoBundle 'ujihisa/unite-colorscheme'
+Plug 'ujihisa/unite-colorscheme'
 
-" SYNTASTIC {{{3
-" Syntax checking hacks for vim
+" Syntax checking {{{3
+" SYNTASTIC
 " https://github.com/scrooloose/syntastic
-NeoBundle 'scrooloose/syntastic.git'
+Plug 'scrooloose/syntastic'
 
 " Sensible {{{3
 " sensible.vim: Defaults everyone can agree on
 " http://www.vim.org/scripts/script.php?script_id=4391
-NeoBundle 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 
 " Fugitive {{{3
 " fugitive.vim: a Git wrapper so awesome, it should be illegal
 " https://github.com/tpope/vim-fugitive
-NeoBundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Committia {{{3
 " A Vim plugin for more pleasant editing on commit messages
-NeoBundle 'rhysd/committia.vim'
+Plug 'rhysd/committia.vim'
 
 " VimSession {{{3
 " Extended session management for Vim (:mksession on steroids)
 " https://github.com/xolox/vim-session
-NeoBundle 'xolox/vim-session.git', {
-\ 'depends' : 'xolox/vim-misc.git'
-\ }
+Plug 'xolox/vim-session' | Plug 'xolox/vim-misc'
 
 " Repeat {{{3
 " repeat.vim: enable repeating supported plugin maps with "."
 " http://www.vim.org/scripts/script.php?script_id=2136
 " https://github.com/tpope/vim-repeat
-NeoBundle 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " SpeedDating {{{3
 " speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
 " https://github.com/tpope/vim-speeddating
-NeoBundle 'tpope/vim-speeddating.git'
+Plug 'tpope/vim-speeddating'
 
 " EditorConfig {{{3
 " EditorConfig plugin for Vim http://editorconfig.org
-NeoBundle 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " Vinegar {{{3
 " vinegar.vim: combine with netrw to create a delicious salad dressing
 " https://github.com/tpope/vim-vinegar
-NeoBundle 'tpope/vim-vinegar.git'
+Plug 'tpope/vim-vinegar'
 
 " vim-eunuch {{{3
 " tpope/vim-eunuch
 " eunuch.vim: helpers for UNIX
 " http://www.vim.org/scripts/script.php?script_id=4300
 " https://github.com/tpope/vim-eunuch
-NeoBundle 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 
 " Recover.vim {{{3
 " chrisbra/Recover.vim
 " A Plugin to show a diff, whenever recovering a buffer
 " http://www.vim.org/scripts/script.php?script_id=3068
-NeoBundle 'chrisbra/Recover.vim'
+Plug 'chrisbra/Recover.vim'
 
 " SearchParty {{{3
 " Extended search commands and maps for Vim
-NeoBundle 'dahu/SearchParty'
+Plug 'dahu/SearchParty'
 
 " Surround {{{3
 " surround.vim: quoting/parenthesizing made simple
 " https://github.com/tpope/vim-surround
-NeoBundle 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Vim-commentary {{{3
 " http://www.vim.org/scripts/script.php?script_id=3695
 " tpope/vim-commentary
 " commentary.vim: comment stuff out
-NeoBundle 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 
 " VimAirline {{{3
 " lean & mean status/tabline for vim that's light as air
 " https://github.com/bling/vim-airline
-NeoBundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
 " vimwiki {{{3
 " Personal Wiki for Vim
@@ -210,12 +188,12 @@ NeoBundle 'bling/vim-airline'
 " <Backspace> -- Go back to parent(previous) wiki link
 " <Tab> -- Find next wiki link
 " <Shift-Tab> -- Find previous wiki link
-NeoBundle 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
 " EasyMotion {{{3
 " Vim motions on speed!
 " https://github.com/Lokaltog/vim-easymotion
-NeoBundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 " Stupid-EasyMotion {{{3
 " A dumbed down version of EasyMotion
@@ -224,42 +202,42 @@ NeoBundle 'Lokaltog/vim-easymotion'
 " <Leader><Leader>w  - make every word a target
 " <Leader><Leader>W  - make every space separated word a target
 " <Leader><Leader>fx - make every character x in the line a target
-NeoBundle 'joequery/Stupid-EasyMotion'
+Plug 'joequery/Stupid-EasyMotion'
 
 " quickfixsigns {{{3
 " Mark quickfix & location list items with signs
 " http://www.vim.org/scripts/script.php?script_id=2584
-" NeoBundle 'vim-scripts/quickfixsigns'
-NeoBundle 'tomtom/quickfixsigns_vim'
+" Plug 'vim-scripts/quickfixsigns'
+Plug 'tomtom/quickfixsigns_vim'
 
 " VCSCOMMAND {{{3
 " http://www.vim.org/scripts/script.php?script_id=90
 " https://code.google.com/p/vcscommand/
-NeoBundle 'vcscommand.vim'
+Plug 'vcscommand.vim'
 
 " vDebug {{{3
 " On remplace Xdebug par Vdebug apparement plus performant
 " http://www.vim.org/scripts/script.php?script_id=4170
 " https://github.com/joonty/vdebug
 " Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
-NeoBundle 'joonty/vdebug.git'
+Plug 'joonty/vdebug'
 
 " AG.VIM {{{3
 " https://github.com/rking/ag.vim
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
 " CLI script 'ack'
-NeoBundle 'rking/ag.vim'
+Plug 'rking/ag.vim'
 
 " undotree.vim
 " The ultimate undo history visualizer for VIM
 " https://github.com/mbbill/undotree
-NeoBundle 'mbbill/undotree'
+Plug 'mbbill/undotree'
 
 " SUCKLESS {{{3
 " https://github.com/fabi1cazenave/suckless.vim
 " This plugin emulates the excellent wmii <http://wmii.suckless.org/> window
 " manager in Vim.
-NeoBundle 'fabi1cazenave/suckless.vim'
+Plug 'fabi1cazenave/suckless.vim'
 
 " Tabularize ! {{{3
 " https://github.com/godlygeek/tabular
@@ -269,154 +247,137 @@ NeoBundle 'fabi1cazenave/suckless.vim'
 " tree : 3
 " select text in visual mode, then hit : Tabularize /:
 " change the : with the needed char to align
-NeoBundle 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " Characterize {{{3
 " tpope/vim-characterize
 " characterize.vim:
 " Unicode character metadata
 " http://www.vim.org/scripts/script.php?script_id=4410
-NeoBundle 'tpope/vim-characterize'
+Plug 'tpope/vim-characterize'
 
 " Vim-DevIcons {{{3
 " https://github.com/ryanoasis/vim-devicons#installation
 " adds font icons (glyphs ★♨☢) to programming languages, libraries, and web
 " developer filetypes for: NERDTree, powerline, vim-airline, ctrlp, unite,
 " lightline.vim, vimfiler, and flagship
-NeoBundle 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " goyo {{{3
 " Distraction-free writing in Vim
 " https://github.com/junegunn/goyo.vim
-NeoBundle 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 
 " vim-colors-solarized {{{3
 " precision colorscheme for the vim text editor
 " http://ethanschoonover.com/solarized
 " https://github.com/altercation/vim-colors-solarized
-NeoBundle 'altercation/vim-colors-solarized.git'
+Plug 'altercation/vim-colors-solarized'
 
 " Vividchalk {{{3
 " a colorscheme strangely reminiscent of Vibrant Ink for a
 " certain OS X editor
 " https://github.com/tpope/vim-vividchalk
 " http://www.vim.org/scripts/script.php?script_id=1891
-NeoBundle 'tpope/vim-vividchalk.git'
+Plug 'tpope/vim-vividchalk'
 
 " jellybeans.vim {{{3
 " A colorful, dark color scheme for Vim.
 " http://www.vim.org/scripts/script.php?script_id=2555
 " https://github.com/nanotech/jellybeans.vim
-NeoBundle 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim'
 
 " TagBar {{{3
 " Vim plugin that displays tags in a window, ordered by class etc.
 " https://github.com/majutsushi/tagbar
-NeoBundle 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " guyzmo/notmuch {{{3
 " Addressbook manager and vim script compatible with notmuch
-NeoBundle 'guyzmo/notmuch-abook'
+Plug 'guyzmo/notmuch-abook'
 
 " indentLine {{{3
 " A vim plugin to display the indention levels with thin vertical lines
-NeoBundle 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 
 " vimagit {{{3
 " Do all your git job inside vim, totally inspired from emacs magit.
-NeoBundle 'jreybert/vimagit'
+Plug 'jreybert/vimagit'
+
+" vim-coloresque {{{3
+Plug 'gorodinskiy/vim-coloresque'
 
 " restore_view {{{3
 " A plugin for automatically restoring file's cursor position and folding
 " https://github.com/vim-scripts/restore_view.vim
-NeoBundle 'vim-scripts/restore_view.vim'
+Plug 'vim-scripts/restore_view.vim'
+
+" FZF {{{3
+" https://github.com/junegunn/fzf
+" A command-line fuzzy finder written in Go
+Plug 'junegunn/fzf',        { 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
+
+" rainbow_parentheses.vim
+" https://github.com/kien/rainbow_parentheses.vim
+" Better Rainbow Parentheses
+Plug 'junegunn/rainbow_parentheses.vim'
+
+" dockerfile.vim
+" Syntax highlighting for Dockerfiles
+Plug 'honza/dockerfile.vim'
 
 " Lazy specific plugins {{{2
 " a.vim {{{3
 " A few of quick commands to swtich between source files and header files
 " quickly.
-NeoBundleLazy 'a.vim', {
-\ 'autoload': {
-\     'filetype': ['c', 'h']
-\ }}
+Plug 'a.vim', { 'for': ['c', 'h'] }
 
 " Vim-OrgMode {{{3
 " Text outlining and task management for Vim based on Emacs' Org-Mode
 " https://github.com/jceb/vim-orgmode
-NeoBundleLazy 'jceb/vim-orgmode', {
-\ 'autoload': {
-\     'filetype': ['org']
-\ },
-\     'depends' : ['vim-scripts/utl.vim']
-\ }
+Plug 'jceb/vim-orgmode', { 'for': 'org' } | Plug 'vim-scripts/utl.vim'
 
 " Rails {{{3
 " rails.vim: Ruby on Rails power tools
 " https://github.com/tpope/vim-rails
-NeoBundleLazy 'tpope/vim-rails.git', {
-\ 'autoload': {
-\     'filetypes': ['ruby']
-\ }}
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
 " lua-ftplugin {{{3
 " Lua file type plug-in for the Vim text editor
 " http://peterodding.com/code/vim/lua-ftplugin
 " https://github.com/xolox/vim-lua-ftplugin
-NeoBundleLazy 'xolox/vim-lua-ftplugin' , {
-\ 'autoload': {
-\     'filetypes': ['lua']
-\ },
-\     'depends' : 'xolox/vim-misc',
-\ }
+Plug 'xolox/vim-lua-ftplugin' , { 'for': 'lua' } | Plug 'xolox/vim-misc'
 
 " moonscript-vim {{{3
 " leafo/moonscript-vim
 " MoonScript support for vim http://moonscript.org
-NeoBundleLazy 'leafo/moonscript-vim' , {
-\ 'autoload': {
-\     'filetypes': ['moon']
-\     },
-\ }
+Plug 'leafo/moonscript-vim' , { 'for': 'moon' }
 
 " elzr: json {{{3
 " A better JSON for Vim: distinct highlighting of keywords vs values,
 " JSON-specific (non-JS) warnings, quote concealing. Pathogen-friendly.
 " https://github.com/elzr/vim-json
-NeoBundleLazy 'elzr/vim-json', {
-\ 'autoload' : {
-\     'filetypes' : ['javascript']
-\ }}
+Plug 'elzr/vim-json', { 'for': 'javascript' }
 
 " yaml {{{3
-NeoBundleLazy 'avakhov/vim-yaml', {
-\ 'autoload' : {
-\     'filetypes' : ['python', 'yaml']
-\ }}
+Plug 'avakhov/vim-yaml', { 'for': ['python', 'yaml'] }
 
 " vim-systemd-syntax {{{3
-NeoBundleLazy 'Matt-Deacalion/vim-systemd-syntax', {
-\ 'autoload' : {
-\     'filetypes' : ['systemd']
-\ }}
+Plug 'Matt-Deacalion/vim-systemd-syntax', { 'for': 'systemd' }
 
 " php.vim {{{3
 " old::
-" NeoBundle 'php.vim'
+" Plug 'php.vim'
 " 20141028: Change to new StanAngeloff
 " https://github.com/StanAngeloff/php.vim
-NeoBundleLazy 'StanAngeloff/php.vim', {
-\ 'autoload': {
-\     'filetypes':['php']
-\ }}
+Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 
 " Better PHP indent {{{3
 " The official VIm indent script for PHP
 " http://www.2072productions.com/to/phpindent.txt
 " https://github.com/2072/PHP-Indenting-for-VIm
-NeoBundleLazy '2072/PHP-Indenting-for-VIm', {
-\ 'autoload': {
-\     'filetypes':['php']
-\ }}
+Plug '2072/PHP-Indenting-for-VIm', { 'for': 'php' }
 
 " PHP Getter / Setter {{{3
 " php_getset.vim
@@ -442,64 +403,43 @@ NeoBundleLazy '2072/PHP-Indenting-for-VIm', {
 "      Inserts a getter and setter for the property on the current line,
 "      or the range of properties specified via a visual block or x,y
 "      range notation.  The user is not prompted.
-NeoBundleLazy 'vim-scripts/php_getset.vim', {
-\ 'autoload': {
-\     'filetypes':['php']
-\ }}
+Plug 'vim-scripts/php_getset.vim', { 'for': 'php' }
 
 " CSS color {{{3
 " Highlight colors in css files
-" NeoBundle 'skammer/vim-css-color'
+" Plug 'skammer/vim-css-color'
 " http://ap.github.io/vim-css-color/
-NeoBundleLazy 'ap/vim-css-color', {
-\ 'autoload': {
-\     'filetypes':['css']
-\ }}
+Plug 'ap/vim-css-color', { 'for': 'css' }
 
 " css.vim {{{3
 " css.vim
 " Cutting-edge vim css syntax file
 " http://www.vim.org
-NeoBundleLazy "JulesWang/css.vim", {
-\ 'autoload': {
-\     'filetypes':['css']
-\ }}
+Plug 'JulesWang/css.vim', { 'for': 'css' }
 
 " vim-css3-syntax {{{3
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`.
 " https://github.com/hail2u/vim-css3-syntax
-NeoBundleLazy 'hail2u/vim-css3-syntax', {
-\ 'autoload': {
-\     'filetypes':['css']
-\ }}
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 
 " html5.vim
 " TML5 omnicomplete and syntax
 " https://github.com/othree/html5.vim
-NeoBundleLazy 'othree/html5.vim', {
-\ 'autoload': {
-\     'filetypes':['html', 'xhtml']
-\ }}
+Plug 'othree/html5.vim', { 'for': ['html', 'xhtml'] }
 
 " YAJS.vim
 " Yet Another JavaScript Syntax for Vim
 " https://github.com/othree/yajs.vim
-NeoBundleLazy 'othree/yajs.vim', {
-\ 'autoload': {
-\     'filetypes':['javascript']
-\ }}
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " sparkup {{{3
 " A parser for a condensed HTML format
 " https://github.com/rstacruz/sparkup
-NeoBundleLazy 'rstacruz/sparkup', {
-\ 'autoload': {
-\     'filetypes':['html', 'xhtml']
-\ }}
+Plug 'rstacruz/sparkup', { 'for': ['html', 'xhtml'] }
 
 " ragtag {{{3
 " ragtag.vim: ghetto HTML/XML mappings (formerly allml.vim)
-NeoBundleLazy 'tpope/vim-ragtag', {
+Plug 'tpope/vim-ragtag', {
 \ 'autoload': {
 \     'filetypes':['html', 'xhtml']
 \ }}
@@ -508,18 +448,12 @@ NeoBundleLazy 'tpope/vim-ragtag', {
 " lervag/vim-latex
 " https://github.com/lervag/vim-latex
 " A simple and lightweight vim-plugin for editing LaTeX files.
-NeoBundleLazy 'lervag/vim-latex', {
-\ 'autoload': {
-\     'filetypes':['tex']
-\ }}
+Plug 'lervag/vim-latex', { 'for': 'tex' }
 
 " BashSupport {{{3
 " BASH IDE -- Write and run BASH-scripts using menus and hotkeys.
 " https://github.com/vim-scripts/bash-support.vim
-NeoBundleLazy 'vim-scripts/bash-support.vim', {
-\ 'autoload': {
-\     'filetypes':['sh']
-\ }}
+Plug 'vim-scripts/bash-support.vim', { 'for': 'sh' }
 
 "" Bundle samples {{{2
 "" non github repos{{{3
@@ -528,17 +462,44 @@ NeoBundleLazy 'vim-scripts/bash-support.vim', {
 "" git repos on your local machine (ie. when working on your own plugin)
 ""Bundle 'file:///Users/gmarik/path/to/plugin'
 "" Just for ex of multi repo {{{3
-""NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+""Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "
 " NeoBundle end() {{{2
-call neobundle#end()
+" call neobundle#end()
+call plug#end()
 " Required
 filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-NeoBundleCheck
+" NeoBundleCheck
 
 " Tweaking Plugins {{{1
+" Rainbow_parentheses {{{2
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
+
 " AG {{{2
 " if available use ag
 " From: http://robots.thoughtbot.com/faster-grepping-in-vim
@@ -687,13 +648,6 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
@@ -717,11 +671,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)"
     \: "\<TAB>"
 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
 " SYNTASTIC {{{2
 " Syntax checking hacks for vim
 " https://github.com/scrooloose/syntastic
@@ -732,6 +681,18 @@ let g:syntastic_aggregate_errors         = 1
 let g:syntastic_php_checkers             = ['php', 'phpcs', 'phpmd']
 " from : https://github.com/scrooloose/syntastic/wiki/PHP%3A---phpcs
 let g:syntastic_php_phpcs_args="--encoding=utf-8 --tab-width=4 --standard=PSR2"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 " Vim-Airline {{{2
 if &term=~'linux'
@@ -1121,6 +1082,11 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
                 \| exe "normal g'\"" | endif
 endif
+
+" Save buffer state {{{2
+" if has("autocmd")
+"     autocmd VimLeave * call system("echo -n $'" . escape(getreg(), "'") . "' | xsel -ib")
+" endif
 
 " SHEBANG {{{2
 " shebang automatique lors de l'ouverture nouveau
