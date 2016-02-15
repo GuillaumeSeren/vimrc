@@ -318,8 +318,8 @@ Plug 'vim-scripts/restore_view.vim'
 Plug 'junegunn/fzf',        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 
-" rainbow_parentheses.vim
-" https://github.com/kien/rainbow_parentheses.vim
+" rainbow_parentheses.vim {{{3
+" https://github.com/junegunn/rainbow_parentheses.vim
 " Better Rainbow Parentheses
 Plug 'junegunn/rainbow_parentheses.vim'
 
@@ -475,30 +475,17 @@ filetype plugin indent on
 
 " Tweaking Plugins {{{1
 " Rainbow_parentheses {{{2
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-" au VimEnter * RainbowParenthesesToggle
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
+" Activation based on file type
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType lisp,clojure,scheme RainbowParentheses
+augroup END
+
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+
+" List of colors that you do not want. ANSI code or #RRGGBB
+let g:rainbow#blacklist = [233, 234]
 
 " AG {{{2
 " if available use ag
