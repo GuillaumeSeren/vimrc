@@ -318,8 +318,8 @@ Plug 'vim-scripts/restore_view.vim'
 Plug 'junegunn/fzf',        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 
-" rainbow_parentheses.vim
-" https://github.com/kien/rainbow_parentheses.vim
+" rainbow_parentheses.vim {{{3
+" https://github.com/junegunn/rainbow_parentheses.vim
 " Better Rainbow Parentheses
 Plug 'junegunn/rainbow_parentheses.vim'
 
@@ -475,30 +475,17 @@ filetype plugin indent on
 
 " Tweaking Plugins {{{1
 " Rainbow_parentheses {{{2
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-" au VimEnter * RainbowParenthesesToggle
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
+" Activation based on file type
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType lisp,clojure,scheme RainbowParentheses
+augroup END
+
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+
+" List of colors that you do not want. ANSI code or #RRGGBB
+let g:rainbow#blacklist = [233, 234]
 
 " AG {{{2
 " if available use ag
@@ -933,12 +920,11 @@ set nostartofline
 " Nombre de commandes maximale dans l'historique :
 set history=10000
 
-
+" Manual linter configuration {{{2
 augroup linterConfiguration
     autocmd FileType xml   setlocal  makeprg=xmllint\ -
     autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
     autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
-    autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
     autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
 augroup END
 
@@ -1106,8 +1092,8 @@ endif
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
-        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d foldmethod=%s %set :",
+        \ &filetype, &tabstop, &shiftwidth, &textwidth, &foldmethod, &expandtab ? '' : 'no')
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
@@ -1255,3 +1241,5 @@ let g:vdebug_keymap = {
 " Binding leaders {{{2
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 noremap <silent> ZZ :call AutocloseSession()<CR>
+
+" vim: set ft=vim ts=4 sw=4 tw=80 foldmethod=marker et :
