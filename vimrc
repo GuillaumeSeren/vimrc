@@ -1092,8 +1092,8 @@ endif
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d %set :",
-        \ &filetype, &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = printf(" vim: set ft=%s ts=%d sw=%d tw=%d foldmethod=%s %set :",
+        \ &filetype, &tabstop, &shiftwidth, &textwidth, &foldmethod, &expandtab ? '' : 'no')
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
@@ -1241,3 +1241,5 @@ let g:vdebug_keymap = {
 " Binding leaders {{{2
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 noremap <silent> ZZ :call AutocloseSession()<CR>
+
+" vim: set ft=vim ts=4 sw=4 tw=80 foldmethod=marker et :
