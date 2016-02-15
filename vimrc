@@ -920,12 +920,11 @@ set nostartofline
 " Nombre de commandes maximale dans l'historique :
 set history=10000
 
-
+" Manual linter configuration {{{2
 augroup linterConfiguration
     autocmd FileType xml   setlocal  makeprg=xmllint\ -
     autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
     autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
-    autocmd FileType xhtml setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
     autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
 augroup END
 
