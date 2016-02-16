@@ -26,21 +26,16 @@
 if has('vim_starting')
     " Be iMproved
     set nocompatible
-    " Required:
-    " set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Auto load / install plugin manager {{{1
 if !1 | finish | endif
 
-" Auto Install NeoBundle
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-
-" Check if bundle directory is available for new install
-if !filereadable(neobundle_readme)
-    echo "Installing NeoBundle..."
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+" auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+    echo "Installing VimPlug..."
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
 endif
 
 " Plugins List {{{1
