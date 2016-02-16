@@ -924,7 +924,7 @@ set history=10000
 augroup linterConfiguration
     autocmd FileType xml   setlocal  makeprg=xmllint\ -
     autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
-    autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType html  setlocal  equalprg=tidy\ -q\ --show-errors\ 0\ --show-warnings\ 0\ --force-output\ --indent\ auto\ --indent-spaces »
     autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
 augroup END
 
