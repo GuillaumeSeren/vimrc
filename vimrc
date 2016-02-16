@@ -38,12 +38,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
-" Plugins List {{{1
-" Load Python for NeoVim {{{2
-if has('nvim')
-    runtime! plugin/python_setup.vim
-endif
-
 " Default plugins {{{2
 " VimPlug {{{3
 call plug#begin('~/.vim/plugged')
@@ -608,28 +602,6 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
@@ -806,22 +778,22 @@ set spelllang=fr,en
 " Modeline {{{2
 set modeline modelines=5
 
-"let g:git_modelines_allowed_items = [
-"    \ "textwidth",   "tw",
-"    \ "softtabstop", "sts",
-"    \ "tabstop",     "ts",
-"    \ "shiftwidth",  "sw",
-"    \ "expandtab",   "et",   "noexpandtab", "noet",
-"    \ "filetype",    "ft",
-"    \ "foldmethod",  "fdm",
-"    \ "readonly",    "ro",   "noreadonly", "noro",
-"    \ "rightleft",   "rl",   "norightleft", "norl",
-"    \ "cindent",     "cin",  "nocindent", "nocin",
-"    \ "smartindent", "si",   "nosmartindent", "nosi",
-"    \ "autoindent",  "ai",   "noautoindent", "noai",
-"    \ "spell",
-"    \ "spelllang"
-"    \ ]
+let g:git_modelines_allowed_items = [
+\ "textwidth",   "tw",
+\ "softtabstop", "sts",
+\ "tabstop",     "ts",
+\ "shiftwidth",  "sw",
+\ "expandtab",   "et",   "noexpandtab", "noet",
+\ "filetype",    "ft",
+\ "foldmethod",  "fdm",
+\ "readonly",    "ro",   "noreadonly", "noro",
+\ "rightleft",   "rl",   "norightleft", "norl",
+\ "cindent",     "cin",  "nocindent", "nocin",
+\ "smartindent", "si",   "nosmartindent", "nosi",
+\ "autoindent",  "ai",   "noautoindent", "noai",
+\ "spell",
+\ "spelllang"
+\ ]
 
 " TERM TYPE {{{2
 " Let's use screen-256
@@ -1200,10 +1172,10 @@ let g:EasyMotion_leader_key = '\'
 
 " Completion avec ctrl + space {{{2
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-    \ "\<lt>C-n>" :
-    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+\ "\<lt>C-n>" :
+\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
 " SearchParty {{{2
