@@ -1,7 +1,7 @@
 vimrc
 =====
 This is my vim configuration,
-I use it for my daily usage coding / mail / irc / blog.
+I use it for my daily usage coding / mail / note / latex / irc / blog.
 
 Terminal
 ========
@@ -11,16 +11,9 @@ https://github.com/GuillaumeSeren/urxvt-config
 
 Plugins
 =======
-As I use NeoBundle to manage the plugins, I distinct two categories (C):
+As I use VimPlug to manage the plugins, I distinct two categories (C):
 * Defaults plugins (always loaded).
 * Specifics plugins (lazy loaded on some case).
-
-Dictionnaries
-=============
-Aside as the plugins the dictionnaries are not installed by NeoBundle,
-so you have to download them yourself and put them in '~/.vim/spell',
-you can find them, here (by default I use french & english):
-http://wordlist.aspell.net/
 
 Install
 =======

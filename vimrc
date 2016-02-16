@@ -26,27 +26,16 @@
 if has('vim_starting')
     " Be iMproved
     set nocompatible
-    " Required:
-    " set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Auto load / install plugin manager {{{1
 if !1 | finish | endif
 
-" Auto Install NeoBundle
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-
-" Check if bundle directory is available for new install
-if !filereadable(neobundle_readme)
-    echo "Installing NeoBundle..."
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
-endif
-
-" Plugins List {{{1
-" Load Python for NeoVim {{{2
-if has('nvim')
-    runtime! plugin/python_setup.vim
+" auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+    echo "Installing VimPlug..."
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
 endif
 
 " Default plugins {{{2
@@ -613,28 +602,6 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
@@ -811,22 +778,22 @@ set spelllang=fr,en
 " Modeline {{{2
 set modeline modelines=5
 
-"let g:git_modelines_allowed_items = [
-"    \ "textwidth",   "tw",
-"    \ "softtabstop", "sts",
-"    \ "tabstop",     "ts",
-"    \ "shiftwidth",  "sw",
-"    \ "expandtab",   "et",   "noexpandtab", "noet",
-"    \ "filetype",    "ft",
-"    \ "foldmethod",  "fdm",
-"    \ "readonly",    "ro",   "noreadonly", "noro",
-"    \ "rightleft",   "rl",   "norightleft", "norl",
-"    \ "cindent",     "cin",  "nocindent", "nocin",
-"    \ "smartindent", "si",   "nosmartindent", "nosi",
-"    \ "autoindent",  "ai",   "noautoindent", "noai",
-"    \ "spell",
-"    \ "spelllang"
-"    \ ]
+let g:git_modelines_allowed_items = [
+\ "textwidth",   "tw",
+\ "softtabstop", "sts",
+\ "tabstop",     "ts",
+\ "shiftwidth",  "sw",
+\ "expandtab",   "et",   "noexpandtab", "noet",
+\ "filetype",    "ft",
+\ "foldmethod",  "fdm",
+\ "readonly",    "ro",   "noreadonly", "noro",
+\ "rightleft",   "rl",   "norightleft", "norl",
+\ "cindent",     "cin",  "nocindent", "nocin",
+\ "smartindent", "si",   "nosmartindent", "nosi",
+\ "autoindent",  "ai",   "noautoindent", "noai",
+\ "spell",
+\ "spelllang"
+\ ]
 
 " TERM TYPE {{{2
 " Let's use screen-256
@@ -924,7 +891,7 @@ set history=10000
 augroup linterConfiguration
     autocmd FileType xml   setlocal  makeprg=xmllint\ -
     autocmd FileType xml   setlocal  equalprg=xmllint\ --format\ -
-    autocmd FileType html  setlocal  equalprg=tidy\ -q\ -i\ -w\ 80\ -utf8\ --quote-nbsp\ no\ --output-xhtml\ yes\ --show-warnings\ no\ --show-body-only\ auto\ --tidy-mark\ no\ -
+    autocmd FileType html  setlocal  equalprg=tidy\ -q\ --show-errors\ 0\ --show-warnings\ 0\ --force-output\ --indent\ auto\ --indent-spaces »
     autocmd FileType json  setlocal  equalprg=python\ -mjson.tool
 augroup END
 
@@ -1205,10 +1172,10 @@ let g:EasyMotion_leader_key = '\'
 
 " Completion avec ctrl + space {{{2
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-    \ "\<lt>C-n>" :
-    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+\ "\<lt>C-n>" :
+\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
 " SearchParty {{{2
