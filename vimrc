@@ -649,12 +649,8 @@ if has('conceal')
 endif
 
 " Vim-Airline {{{2
-if &term=~'linux'
-  let g:airline#extensions#tabline#enabled = 1
-elseif &term=~'screen'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_powerline_fonts = 1
-endif
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " DBEXT {{{2
 " vim-scripts/dbext.vim
