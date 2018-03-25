@@ -1,7 +1,7 @@
 vimrc
 =====
-This is my vim configuration,
-I use it for my daily usage coding / mail / note / latex / irc / blog.
+This is my {neo,}vim configuration,
+I use it for my daily usage coding / mail / note / blog.
 
 Terminal
 ========
