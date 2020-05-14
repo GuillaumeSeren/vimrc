@@ -7,7 +7,7 @@
 " ---------------
 
 " Default plugin {{{1
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 " DEFAULT
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
@@ -17,6 +17,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
+" -> show a diff when recover a file
+Plug 'chrisbra/Recover.vim'
 " -> linter
 Plug 'w0rp/ale'
 " -> wiki
@@ -58,6 +60,8 @@ Plug 'vim-scripts/restore_view.vim'
 " search / finder
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+" Regex
+Plug 'othree/eregex.vim'
 " qlist
 Plug 'romainl/vim-qlist'
 " code

@@ -1,3 +1,6 @@
 backup/*
+backups/*
+sessions/*
+spell/*
 bundle/*
 tags/*
