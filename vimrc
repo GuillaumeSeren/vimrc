@@ -7,7 +7,7 @@
 " ---------------
 
 " Default plugin {{{1
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 " DEFAULT
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
