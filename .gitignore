@@ -1,6 +1,9 @@
-backup/*
-backups/*
-sessions/*
-spell/*
-bundle/*
-tags/*
+backup
+backups
+plugged
+sessions
+swap
+undos
+spell
+bundle
+tags
