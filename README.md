@@ -1,6 +1,6 @@
 vimrc
 =====
-This is my {neo,}vim configuration,
+This is my vim configuration,
 I use it for my daily usage coding / mail / note / blog.
 
 Terminal
